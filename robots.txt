@@ -3,3 +3,5 @@
 # panel admin adalah sandinya.
 User-agent: *
 Disallow: /admin/
+
+Sitemap: https://gontorcup2026.github.io/gontor-cup/sitemap.xml

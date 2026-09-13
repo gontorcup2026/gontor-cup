@@ -97,8 +97,8 @@
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
       <div><strong>Batas akhir pengumpulan: <span data-gc="tenggat_karya">Kamis, 17 September 2026</span>.</strong>
       <p class="small" style="margin:0">Karya yang masuk setelah tenggat tidak akan dinilai dewan juri.
-         Untuk Kaligrafi, yang dikumpulkan adalah naskah fisik ke alamat yang ditentukan panitia.
-         Formulir ini dipakai untuk melaporkan pengiriman.</p></div>
+         Untuk Kaligrafi, yang dinilai adalah naskah fisik yang dikirim ke alamat panitia;
+         formulir ini dipakai untuk melaporkan pengiriman sekaligus mengunggah foto karyanya.</p></div>
     </div>
 
     <div class="section-head">
@@ -259,12 +259,14 @@
                    aria-controls="k-berkas" aria-describedby="k-berkas-hint">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg>
                 <b>Seret berkas ke sini atau klik untuk memilih</b>
-                <span class="hint">JPG, PNG, PDF, atau MP4 · ikuti batas ukuran pada juknis lomba</span>
+                <span class="hint">JPG, PNG, PDF, atau MP4 &nbsp;·&nbsp; maksimal 20 MB per berkas</span>
               </div>
               <input class="sr-only" id="k-berkas" name="berkas" type="file" multiple
                      accept=".jpg,.jpeg,.png,.pdf,.mp4,.psd,.ai,.cdr,.tiff">
-              <span class="hint" id="k-berkas-hint">Peserta Desain Poster wajib menyertakan berkas
-                 master berlayer dan 2 sampai 3 tangkapan layar proses pengerjaan.</span>
+              <span class="hint" id="k-berkas-hint">Berkas langsung masuk ke folder Drive panitia,
+                 otomatis ke subfolder lomba yang Anda pilih di atas. Peserta Desain Poster wajib
+                 menyertakan berkas master berlayer dan 2 sampai 3 tangkapan layar proses pengerjaan.</span>
+              <span class="err" data-berkas-pesan hidden style="display:flex"></span>
               <div class="file-list" data-filelist></div>
             </div>
 
@@ -272,9 +274,9 @@
               <label for="k-tautan">Atau tautan Google Drive karya</label>
               <input class="input" id="k-tautan" name="tautan" type="url"
                      placeholder="https://drive.google.com/..." aria-describedby="k-tautan-hint">
-              <span class="hint" id="k-tautan-hint">Untuk video iklan dan berkas master yang besar,
-                 jalur tautan Drive lebih andal. Setel akses ke
-                 <em>siapa saja yang memiliki tautan dapat melihat</em>.</span>
+              <span class="hint" id="k-tautan-hint">Wajib dipakai untuk <strong>Visual Iklan Brand
+                 Pondok</strong> dan berkas lain di atas 20 MB, sebab unggahan langsung akan putus.
+                 Setel akses folder ke <em>siapa saja yang memiliki tautan dapat melihat</em>.</span>
               <span class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg><span></span></span>
             </div>
 
@@ -290,7 +292,10 @@
               <button type="submit" class="btn btn--gold">
                 <span class="btn__label">Kirim Karya</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
               </button>
-              <span class="small muted">Pastikan berkas sudah final sebelum dikirim.</span>
+              <span class="small muted" data-unggah-status hidden
+                    style="font-weight:700;color:var(--green-700)"></span>
+              <span class="small muted">Pastikan berkas sudah final sebelum dikirim.
+                 Jangan tutup halaman selama proses unggah berjalan.</span>
             </div>
           </form>
         </div>
@@ -310,13 +315,22 @@
         </div>
 
         <div class="card">
+          <span class="icon-badge icon-badge--gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 20a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5l2 3h7a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2z"/></svg></span>
+          <h3 style="font-size:1.06rem">Karya Disimpan di Mana?</h3>
+          <p class="muted small" style="margin:0">Berkas yang Anda unggah masuk langsung ke folder
+             Google Drive panitia, dan otomatis ditaruh di subfolder lombanya sendiri. Berkasnya
+             dinamai ulang menjadi <em>Kampus, Judul, Pembuat</em> supaya dewan juri mudah menyortir.
+             Data pendaftaran karyanya tercatat terpisah di spreadsheet panitia.</p>
+        </div>
+
+        <div class="card">
           <span class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
           <h3 style="font-size:1.06rem">Penamaan Berkas</h3>
           <ul class="muted small" style="padding-left:18px;margin:0;display:flex;flex-direction:column;gap:8px">
-            <li>Fotografi &amp; Visual Iklan: <em>Nama Peserta_Judul_Nama Pondok</em></li>
-            <li>Desain Poster: <em>Nama Peserta_Poster Gontor Cup.jpg</em></li>
-            <li>Kaligrafi: tanpa identitas pada karya; nama pondok ditulis di kertas terpisah.</li>
-            <li>Simpan berkas asli sebagai bukti keaslian karya.</li>
+            <li>Nama berkas Anda tidak perlu diatur khusus; sistem menamainya ulang saat diunggah.</li>
+            <li>Kaligrafi: jangan mencantumkan identitas apa pun pada karyanya; nama pondok ditulis
+                di kertas terpisah.</li>
+            <li>Simpan berkas asli di perangkat Anda sebagai bukti keaslian karya.</li>
           </ul>
         </div>
 

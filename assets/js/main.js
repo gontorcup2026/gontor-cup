@@ -321,6 +321,13 @@
       if (!input || !listEl) return;
 
       var files = [];
+      // Apps Script menolak badan permintaan yang terlalu besar, dan base64
+      // menggelembungkan berkas ±33%. 20 MB adalah batas aman; berkas lebih
+      // besar (terutama video iklan) harus lewat tautan Drive.
+      var MAKS = 20 * 1024 * 1024;
+
+      // Modul pengirim formulir membaca daftar ini lewat input berkasnya.
+      input._gcBerkas = files;
 
       function fmt(b) {
         if (b < 1024) return b + " B";
@@ -356,11 +363,25 @@
       }
 
       function add(fl) {
+        var terlaluBesar = [];
         Array.prototype.forEach.call(fl, function (f) {
+          if (f.size > MAKS) { terlaluBesar.push(f.name); return; }
           var dup = files.some(function (x) { return x.name === f.name && x.size === f.size; });
           if (!dup) files.push(f);
         });
         render();
+
+        var kabar = $("[data-berkas-pesan]", zone.parentNode);
+        if (kabar) {
+          if (terlaluBesar.length) {
+            kabar.textContent = "Berkas ini lebih dari 20 MB dan tidak bisa diunggah "
+              + "langsung: " + terlaluBesar.join(", ")
+              + ". Unggah ke Google Drive Anda sendiri, lalu tempel tautannya di kotak di bawah.";
+            kabar.hidden = false;
+          } else {
+            kabar.hidden = true;
+          }
+        }
       }
 
       zone.addEventListener("click", function () { input.click(); });
@@ -454,6 +475,12 @@
 
         if (summary) summary.hidden = true;
 
+        // Berkas sungguhan yang dipilih di area unggah
+        var berkas = [];
+        $$("input[type='file']", form).forEach(function (el) {
+          if (el._gcBerkas) berkas = berkas.concat(el._gcBerkas);
+        });
+
         var btn = $("[type='submit']", form);
         var label = btn ? $(".btn__label", btn) : null;
         var teksAwal = label ? label.textContent : "";
@@ -461,7 +488,7 @@
           btn.classList.add("is-loading");
           btn.disabled = true;
           btn.setAttribute("aria-busy", "true");
-          if (label) label.textContent = "Mengirim…";
+          if (label) label.textContent = berkas.length ? "Mengunggah…" : "Mengirim…";
           var sp = document.createElement("span");
           sp.className = "spinner";
           sp.setAttribute("aria-hidden", "true");
@@ -511,10 +538,6 @@
         });
         data.halaman = document.body.dataset.page || location.pathname;
 
-        var berkas = $$("[data-filelist] .file-row .name", form)
-          .map(function (n) { return n.textContent; });
-        if (berkas.length) data.berkas = berkas.join(", ");
-
         if (!window.GCApi || !window.GCApi.siap()) {
           // Sambungan Google belum disetel; jangan berpura-pura terkirim.
           setTimeout(function () {
@@ -524,9 +547,58 @@
           return;
         }
 
-        window.GCApi.kirim({ aksi: form.dataset.kirim || "daftar", data: data })
+        var aksi = form.dataset.kirim || "daftar";
+
+        /* Karya diunggah lebih dulu ke folder Drive panitia, satu per satu.
+           Tautannya baru ikut dicatat di baris Spreadsheet, supaya juri bisa
+           langsung membuka berkasnya dari sana. */
+        function unggahBerkasKarya() {
+          if (aksi !== "karya" || !berkas.length) return Promise.resolve();
+
+          var status = $("[data-unggah-status]", form);
+          var selesai = 0;
+          var tautan = [];
+
+          function lapor() {
+            if (!status) return;
+            status.hidden = false;
+            status.textContent = "Mengunggah berkas " + (selesai + 1) + " dari " +
+              berkas.length + "…";
+          }
+
+          return berkas.reduce(function (rantai, file) {
+            return rantai.then(function () {
+              lapor();
+              return window.GCApi.keBase64(file).then(function (b64) {
+                return window.GCApi.kirim({
+                  aksi: "unggahKarya",
+                  lomba: data.cabang,
+                  kampus: data.kampus,
+                  judul: data.judul,
+                  pembuat: data.pembuat,
+                  nama: file.name,
+                  tipe: file.type || "application/octet-stream",
+                  isi: b64
+                });
+              }).then(function (j) {
+                tautan.push(j.url);
+                selesai++;
+              });
+            });
+          }, Promise.resolve()).then(function () {
+            if (status) status.hidden = true;
+            data.berkas = tautan.join("\n");
+          });
+        }
+
+        unggahBerkasKarya()
+          .then(function () {
+            return window.GCApi.kirim({ aksi: aksi, data: data });
+          })
           .then(berhasil)
           .catch(function (err) {
+            var status = $("[data-unggah-status]", form);
+            if (status) status.hidden = true;
             gagal("Pengiriman gagal: " + (err && err.message ? err.message : "jaringan bermasalah") +
                   ". Coba lagi, atau kirim lewat WhatsApp panitia 0822-4580-5920.");
           });
