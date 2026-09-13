@@ -14,7 +14,7 @@
    ========================================================================= */
 window.GC = {
   // Contoh: "https://script.google.com/macros/s/AKfycb..../exec"
-  API: "",
+  API: "https://script.google.com/macros/s/AKfycbxM3AoxE9PWSici33FpQUoCU13HreVU2VmCWypxkKVSbGzvHhDVNkvq9LU1Y8FsWnwj/exec",
 
   // Nama situs untuk judul halaman admin
   NAMA: "Gontor Cup Antar Kampus 1448/2026"
