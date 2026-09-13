@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pengumpulan Karya | Gontor Cup Among Campuses</title>
+<meta name="description" content="Kirim karya kaligrafi, desain poster, fotografi, visual iklan, dan karya tulis ilmiah Gontor Cup Antar Kampus 1448/2026.">
+<meta name="theme-color" content="#0f4a30">
+<meta property="og:title" content="Pengumpulan Karya | Gontor Cup">
+<meta property="og:description" content="Kirim karya kaligrafi, desain poster, fotografi, visual iklan, dan karya tulis ilmiah Gontor Cup Antar Kampus 1448/2026.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/img/logo.png">
+<link rel="icon" href="assets/img/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Anton&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="karya.html">
+<a class="skip-link" href="#isi-utama">Lompat ke isi utama</a>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <img src="assets/img/logo.webp" alt="" width="44" height="56">
+      <span class="brand__text">
+        <span class="brand__name">Gontor Cup</span>
+        <span class="brand__sub">Among Campuses</span>
+      </span>
+    </a>
+
+    <nav class="nav" aria-label="Navigasi utama">
+      <a href="index.html">Beranda</a>
+      <a href="pendaftaran.html">Pendaftaran</a>
+      <a href="juklak.html">Juklak & Juknis</a>
+      <a href="pengumuman.html">Pengumuman</a>
+      <a href="galeri.html">Galeri</a>
+      <a href="karya.html" aria-current="page">Kumpul Karya</a>
+      <a href="unduh-foto.html">Unduh Foto</a>
+    </nav>
+
+    <a class="btn btn--gold btn--sm header-cta" href="pendaftaran.html">
+      <span class="btn__label">Daftar Sekarang</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+
+    <button type="button" class="hamburger" data-drawer-open
+            aria-controls="laci" aria-expanded="false" aria-label="Buka menu navigasi">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ============ LACI NAVIGASI SELULER ============ -->
+<div class="drawer" id="laci" data-open="false">
+  <button type="button" class="drawer__scrim" data-drawer-close tabindex="-1" aria-label="Tutup menu"></button>
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="Menu navigasi">
+    <div class="drawer__head">
+      <span class="brand__name">Menu</span>
+      <button type="button" class="drawer__close" data-drawer-close aria-label="Tutup menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <nav aria-label="Navigasi seluler">
+        <a href="index.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>Beranda</a>
+        <a href="pendaftaran.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>Pendaftaran</a>
+        <a href="juklak.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg>Juklak & Juknis</a>
+        <a href="pengumuman.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>Pengumuman</a>
+        <a href="galeri.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>Galeri</a>
+        <a href="karya.html" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg>Kumpul Karya</a>
+        <a href="unduh-foto.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>Unduh Foto</a>
+    </nav>
+    <a class="btn btn--gold btn--block" href="pendaftaran.html">
+      <span class="btn__label">Daftar Sekarang</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+</div>
+
+<main id="isi-utama">
+
+<section class="page-hero">
+  <div class="grain"></div>
+  <img class="deco" src="assets/img/orn-1.webp" alt="" data-parallax="0.05"
+       style="top:-70px;right:-60px;width:min(36vw,300px)">
+  <div class="wrap page-hero__inner">
+    <nav class="crumbs" aria-label="Remah navigasi"><a href="index.html">Beranda</a><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg><span aria-current="page">Kumpul Karya</span></nav>
+    <span class="eyebrow">Unggah Karya</span>
+    <h1 class="display">Pengumpulan Karya</h1>
+    <p class="lead">Lima lomba mengumpulkan karyanya sebelum acara: Kaligrafi, Desain Poster, Fotografi, Visual Iklan Brand Pondok, dan Karya Tulis Ilmiah. Kirim lewat halaman ini.</p>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="wrap">
+
+    <div class="alert alert--danger reveal" style="margin-bottom:44px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+      <div><strong>Batas akhir pengumpulan: <span data-gc="tenggat_karya">Kamis, 17 September 2026</span>.</strong>
+      <p class="small" style="margin:0">Karya yang masuk setelah tenggat tidak akan dinilai dewan juri.
+         Untuk Kaligrafi, yang dikumpulkan adalah naskah fisik ke alamat yang ditentukan panitia.
+         Formulir ini dipakai untuk melaporkan pengiriman.</p></div>
+    </div>
+
+    <div class="section-head">
+      <span class="eyebrow">Lima Lomba</span>
+      <h2 class="display">Yang Mengumpulkan Karya</h2>
+    </div>
+    <div class="grid g-3" style="margin-bottom:64px">
+      <div class="card reveal" data-delay="0">
+        <span class="icon-badge icon-badge--gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+        <h3 style="font-size:1.05rem">Kaligrafi</h3>
+        <p class="muted small" style="margin-bottom:14px">Kertas muqahar A3, tinta hitam, tanpa identitas diri</p>
+        <div class="row" style="gap:8px">
+          <span class="badge">Naskah fisik</span>
+          <span class="badge badge--muted">Riq'ah &amp; Diwani</span>
+        </div>
+        <span class="card__meta" style="border-top-color:var(--line-2)">
+          <a href="assets/juklak/kaligrafi.pdf" download style="display:inline-flex;align-items:center;gap:8px;text-decoration:none">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>Unduh juknis lengkap
+          </a>
+        </span>
+      </div>
+      <div class="card reveal" data-delay="70">
+        <span class="icon-badge icon-badge--gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+        <h3 style="font-size:1.05rem">Desain Poster</h3>
+        <p class="muted small" style="margin-bottom:14px">A3 300 DPI, maks. 10 MB, wajib layer terpisah</p>
+        <div class="row" style="gap:8px">
+          <span class="badge">JPG / PNG + berkas master</span>
+          <span class="badge badge--muted">Dilarang AI penuh</span>
+        </div>
+        <span class="card__meta" style="border-top-color:var(--line-2)">
+          <a href="assets/juklak/desain-poster.pdf" download style="display:inline-flex;align-items:center;gap:8px;text-decoration:none">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>Unduh juknis lengkap
+          </a>
+        </span>
+      </div>
+      <div class="card reveal" data-delay="140">
+        <span class="icon-badge icon-badge--gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+        <h3 style="font-size:1.05rem">Fotografi</h3>
+        <p class="muted small" style="margin-bottom:14px">Min. 3.000 px sisi terpanjang, maks. 10 MB</p>
+        <div class="row" style="gap:8px">
+          <span class="badge">PNG / JPEG</span>
+          <span class="badge badge--muted">Tema dinamika pondok</span>
+        </div>
+        <span class="card__meta" style="border-top-color:var(--line-2)">
+          <a href="assets/juklak/fotografi.pdf" download style="display:inline-flex;align-items:center;gap:8px;text-decoration:none">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>Unduh juknis lengkap
+          </a>
+        </span>
+      </div>
+      <div class="card reveal" data-delay="0">
+        <span class="icon-badge icon-badge--gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+        <h3 style="font-size:1.05rem">Visual Iklan Brand Pondok</h3>
+        <p class="muted small" style="margin-bottom:14px">Maks. 180 detik, 1920x1080, rasio 16:9, lanskap</p>
+        <div class="row" style="gap:8px">
+          <span class="badge">MP4</span>
+          <span class="badge badge--muted">Bahasa Arab / Inggris</span>
+        </div>
+        <span class="card__meta" style="border-top-color:var(--line-2)">
+          <a href="assets/juklak/visual-iklan.pdf" download style="display:inline-flex;align-items:center;gap:8px;text-decoration:none">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>Unduh juknis lengkap
+          </a>
+        </span>
+      </div>
+      <div class="card reveal" data-delay="70">
+        <span class="icon-badge icon-badge--gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+        <h3 style="font-size:1.05rem">Karya Tulis Ilmiah</h3>
+        <p class="muted small" style="margin-bottom:14px">Sampul sampai daftar pustaka, wajib dipresentasikan</p>
+        <div class="row" style="gap:8px">
+          <span class="badge">PDF</span>
+          <span class="badge badge--muted">Perorangan / tim 2 orang</span>
+        </div>
+        <span class="card__meta" style="border-top-color:var(--line-2)">
+          <a href="assets/juklak/kti.pdf" download style="display:inline-flex;align-items:center;gap:8px;text-decoration:none">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>Unduh juknis lengkap
+          </a>
+        </span>
+      </div>
+    </div>
+
+    <div class="split">
+      <div>
+        <div class="card card--pad-lg">
+          <span class="eyebrow">Formulir</span>
+          <h2 class="display" style="margin-bottom:8px">Kirim Karya</h2>
+          <p class="muted" style="margin-bottom:28px">Satu formulir untuk satu karya.
+             Kirim ulang formulir bila kontingen Anda mengumpulkan lebih dari satu karya.</p>
+
+          <form data-validate data-kirim="karya" novalidate>
+
+            <div class="alert alert--danger" data-gagal role="alert" hidden style="margin-bottom:var(--s-5)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+              <div><strong>Karya tidak terkirim.</strong>
+              <p class="small" style="margin:0" data-gagal-pesan></p></div>
+            </div>
+
+            <div class="alert alert--danger error-summary" data-error-summary role="alert" hidden>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+              <div><strong>Karya belum bisa dikirim.</strong>
+              <p class="small" style="margin:0">Perbaiki isian berikut lalu kirim ulang:</p><ul></ul></div>
+            </div>
+
+            <div class="alert alert--ok" data-success role="status" hidden>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="m9 12 2 2 4-4"/></svg>
+              <div><strong>Karya berhasil dikirim.</strong>
+              <p class="small" style="margin:0">Panitia mengirim tanda terima ke surel ofisial.
+                 Simpan tanda terima itu sampai pengumuman pemenang.</p></div>
+            </div>
+
+            <div class="grid g-2" style="gap:0 var(--s-4)">
+              <div class="field">
+                <label for="k-kampus">Kampus asal <span class="req">*</span></label>
+                <select class="select" id="k-kampus" name="kampus" required>
+                  <option value="">Pilih kampus</option><option value="1">Gontor Kampus 1</option><option value="2">Gontor Kampus 2</option><option value="3">Gontor Kampus 3</option><option value="4">Gontor Kampus 4</option><option value="5">Gontor Kampus 5</option>
+                </select>
+                <span class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg><span></span></span>
+              </div>
+              <div class="field">
+                <label for="k-cabang">Lomba <span class="req">*</span></label>
+                <select class="select" id="k-cabang" name="cabang" required>
+                  <option value="">Pilih lomba</option><option value="Kaligrafi">Kaligrafi</option><option value="Desain Poster">Desain Poster</option><option value="Fotografi">Fotografi</option><option value="Visual Iklan Brand Pondok">Visual Iklan Brand Pondok</option><option value="Karya Tulis Ilmiah">Karya Tulis Ilmiah</option>
+                </select>
+                <span class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg><span></span></span>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="k-judul">Judul karya <span class="req">*</span></label>
+              <input class="input" id="k-judul" name="judul" type="text" required minlength="3">
+              <span class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg><span></span></span>
+            </div>
+
+            <div class="field">
+              <label for="k-pembuat">Nama pembuat / tim <span class="req">*</span></label>
+              <input class="input" id="k-pembuat" name="pembuat" type="text" required minlength="3"
+                     autocomplete="name" aria-describedby="k-pembuat-hint">
+              <span class="hint" id="k-pembuat-hint">Untuk karya tim, tulis semua nama dipisahkan koma.</span>
+              <span class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg><span></span></span>
+            </div>
+
+            <div class="field">
+              <label for="k-surel">Surel ofisial <span class="req">*</span></label>
+              <input class="input" id="k-surel" name="surel" type="email" required autocomplete="email"
+                     placeholder="nama@gontor.ac.id" aria-describedby="k-surel-hint">
+              <span class="hint" id="k-surel-hint">Tanda terima pengumpulan dikirim ke alamat ini.</span>
+              <span class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg><span></span></span>
+            </div>
+
+            <div class="field">
+              <label for="k-deskripsi">Deskripsi singkat karya <span class="req">*</span></label>
+              <textarea class="textarea" id="k-deskripsi" name="deskripsi" required minlength="20"
+                        placeholder="Untuk fotografi, tulis deskripsi foto maksimal 100 kata sesuai juknis."></textarea>
+              <span class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg><span></span></span>
+            </div>
+
+            <div class="field">
+              <label for="k-berkas">Unggah berkas karya</label>
+              <div class="dropzone" data-dropzone tabindex="0" role="button"
+                   aria-controls="k-berkas" aria-describedby="k-berkas-hint">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg>
+                <b>Seret berkas ke sini atau klik untuk memilih</b>
+                <span class="hint">JPG, PNG, PDF, atau MP4 · ikuti batas ukuran pada juknis lomba</span>
+              </div>
+              <input class="sr-only" id="k-berkas" name="berkas" type="file" multiple
+                     accept=".jpg,.jpeg,.png,.pdf,.mp4,.psd,.ai,.cdr,.tiff">
+              <span class="hint" id="k-berkas-hint">Peserta Desain Poster wajib menyertakan berkas
+                 master berlayer dan 2 sampai 3 tangkapan layar proses pengerjaan.</span>
+              <div class="file-list" data-filelist></div>
+            </div>
+
+            <div class="field">
+              <label for="k-tautan">Atau tautan Google Drive karya</label>
+              <input class="input" id="k-tautan" name="tautan" type="url"
+                     placeholder="https://drive.google.com/..." aria-describedby="k-tautan-hint">
+              <span class="hint" id="k-tautan-hint">Untuk video iklan dan berkas master yang besar,
+                 jalur tautan Drive lebih andal. Setel akses ke
+                 <em>siapa saja yang memiliki tautan dapat melihat</em>.</span>
+              <span class="err"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg><span></span></span>
+            </div>
+
+            <div class="alert alert--info" style="margin-top:8px">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg>
+              <div><strong>Pernyataan orisinalitas</strong>
+              <p class="small" style="margin:0">Dengan mengirim formulir ini, ofisial menyatakan karya
+                 adalah buatan asli peserta, belum pernah dilombakan atau menjadi juara, tidak dihasilkan
+                 penuh oleh Generative AI, dan bersedia didiskualifikasi bila terbukti sebaliknya.</p></div>
+            </div>
+
+            <div class="form-actions">
+              <button type="submit" class="btn btn--gold">
+                <span class="btn__label">Kirim Karya</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+              </button>
+              <span class="small muted">Pastikan berkas sudah final sebelum dikirim.</span>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <aside class="stack sticky-side">
+        <div class="card">
+          <span class="icon-badge icon-badge--gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/></svg></span>
+          <h3 style="font-size:1.06rem">Batasan Penggunaan AI</h3>
+          <ul class="muted small" style="padding-left:18px;margin:0;display:flex;flex-direction:column;gap:8px">
+            <li><strong>Desain Poster:</strong> Generative AI prompt-to-image dilarang keras.
+                Fitur AI hanya boleh sebagai alat bantu ringan, maksimal 20% dari proses desain.</li>
+            <li><strong>Visual Iklan:</strong> penggunaan AI dilarang sepenuhnya.</li>
+            <li>Wajib melampirkan berkas master berlayer dan tangkapan layar proses sebagai bukti keaslian.</li>
+            <li>Tidak dapat melampirkan bukti proses berarti diskualifikasi otomatis.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/></svg></span>
+          <h3 style="font-size:1.06rem">Penamaan Berkas</h3>
+          <ul class="muted small" style="padding-left:18px;margin:0;display:flex;flex-direction:column;gap:8px">
+            <li>Fotografi &amp; Visual Iklan: <em>Nama Peserta_Judul_Nama Pondok</em></li>
+            <li>Desain Poster: <em>Nama Peserta_Poster Gontor Cup.jpg</em></li>
+            <li>Kaligrafi: tanpa identitas pada karya; nama pondok ditulis di kertas terpisah.</li>
+            <li>Simpan berkas asli sebagai bukti keaslian karya.</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <span class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg></span>
+          <h3 style="font-size:1.06rem">Hak Publikasi</h3>
+          <p class="muted small" style="margin:0">Panitia berhak memakai, mempublikasikan, dan
+             menampilkan karya untuk dokumentasi serta promosi Gontor Cup dengan tetap mencantumkan
+             nama pembuatnya. Khusus Kaligrafi, karya yang dikirim menjadi milik panitia.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section class="section section--paper2">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">Rekap</span>
+      <h2 class="display">Format &amp; Tenggat</h2>
+    </div>
+    <div class="table-wrap reveal">
+      <table>
+        <caption class="sr-only">Format berkas dan tenggat pengumpulan tiap lomba karya</caption>
+        <thead><tr><th scope="col">Lomba</th><th scope="col">Format</th>
+                   <th scope="col">Ketentuan</th><th scope="col">Kategori</th>
+                   <th scope="col">Tenggat</th></tr></thead>
+        <tbody>
+        <tr><td><strong>Kaligrafi</strong></td><td>Naskah fisik</td><td>Kertas muqahar A3, tinta hitam, tanpa identitas diri</td><td>Riq'ah &amp; Diwani</td><td class="num">Kamis, 17 September 2026</td></tr>
+        <tr><td><strong>Desain Poster</strong></td><td>JPG / PNG + berkas master</td><td>A3 300 DPI, maks. 10 MB, wajib layer terpisah</td><td>Dilarang AI penuh</td><td class="num">Kamis, 17 September 2026</td></tr>
+        <tr><td><strong>Fotografi</strong></td><td>PNG / JPEG</td><td>Min. 3.000 px sisi terpanjang, maks. 10 MB</td><td>Tema dinamika pondok</td><td class="num">Kamis, 17 September 2026</td></tr>
+        <tr><td><strong>Visual Iklan Brand Pondok</strong></td><td>MP4</td><td>Maks. 180 detik, 1920x1080, rasio 16:9, lanskap</td><td>Bahasa Arab / Inggris</td><td class="num">Kamis, 17 September 2026</td></tr>
+        <tr><td><strong>Karya Tulis Ilmiah</strong></td><td>PDF</td><td>Sampul sampai daftar pustaka, wajib dipresentasikan</td><td>Perorangan / tim 2 orang</td><td class="num">Kamis, 17 September 2026</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <img class="deco deco--soft" src="assets/img/orn-5.webp" alt=""
+       style="bottom:-40px;left:-60px;width:min(40vw,320px)">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/img/logo.webp" alt="Logo Gontor Cup" width="70" height="89">
+        <p>Gontor Cup Antar Kampus 1448/2026, ajang perlombaan Mahasiswa Guru
+           Pondok Modern Darussalam Gontor kampus dalam Jawa.</p>
+        <p class="small" style="margin-top:12px;color:var(--gold-300)">&ldquo;Nyalakan Semangat Perjuangan, Bersinar Dalam Kebersamaan&rdquo;</p>
+      </div>
+      <div>
+        <h4>Informasi</h4>
+        <ul>
+          <li><a href="pendaftaran.html">Pendaftaran Peserta</a></li>
+          <li><a href="juklak.html">Juklak &amp; Juknis</a></li>
+          <li><a href="pengumuman.html">Pengumuman</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Dokumentasi</h4>
+        <ul>
+          <li><a href="galeri.html">Galeri Per Hari</a></li>
+          <li><a href="karya.html">Pengumpulan Karya</a></li>
+          <li><a href="unduh-foto.html">Unduh Foto Kampus</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Sekretariat Panitia</h4>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span>Pondok Modern Gontor Kampus 3 Darul Ma'rifat, Kec. Gurah, Kab. Kediri, Jawa Timur 64181</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><span>Kantor panitia: Gedung Saudi lantai 1, ruang 101</span></li>
+          <li><a href="mailto:gontorcup2026@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>gontorcup2026@gmail.com</a></li>
+          <li><a href="https://wa.me/6282245805920" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>082245805920 (WhatsApp)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Panitia Gontor Cup Antar Kampus 1448, PM Gontor Kampus 3 Darul Ma’rifat.</p>
+      <p>Healthy. Strong. Dignified. &nbsp;·&nbsp;
+         <a href="admin/index.html" style="opacity:.55">Panel panitia</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- config.js: satu-satunya tempat URL Apps Script diisi.
+     konten.js hanya MENIMPA bagian yang sudah diubah panitia lewat /admin;
+     tanpa sambungan, isi bawaan di HTML inilah yang tampil. -->
+<script src="assets/js/config.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/konten.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin | Gontor Cup Antar Kampus 1448/2026</title>
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#062218">
+<link rel="icon" href="../assets/img/favicon.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Anton&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="../assets/css/style.css">
+<link rel="stylesheet" href="admin.css">
+</head>
+<body class="adm">
+
+<!-- ================= LAYAR MASUK ================= -->
+<div class="masuk" id="layar-masuk">
+  <div class="masuk__kartu">
+    <img class="masuk__logo" src="../assets/img/logo.webp" alt="Logo Gontor Cup" width="74" height="94">
+    <h1 class="display">Panel Admin</h1>
+    <p class="muted small" style="margin-bottom:24px">Gontor Cup Antar Kampus 1448/2026</p>
+
+    <div class="alert alert--warn" id="peringatan-api" hidden style="margin-bottom:20px">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+      <div>
+        <strong>Sambungan Google belum disetel.</strong>
+        <p class="small" style="margin:0">Isi <code>API</code> di
+          <code>assets/js/config.js</code> dengan URL Apps Script. Panduannya ada di
+          <code>apps-script/CARA-PASANG.md</code>.</p>
+      </div>
+    </div>
+
+    <form id="form-masuk" novalidate>
+      <div class="alert alert--danger" id="masuk-gagal" role="alert" hidden style="margin-bottom:16px">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+        <div><span id="masuk-gagal-pesan">Sandi salah.</span></div>
+      </div>
+
+      <div class="field">
+        <label for="sandi">Sandi admin</label>
+        <input class="input" id="sandi" name="sandi" type="password" required
+               autocomplete="current-password" placeholder="Masukkan sandi panitia">
+      </div>
+
+      <button type="submit" class="btn btn--gold btn--block">
+        <span class="btn__label">Masuk</span>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </button>
+    </form>
+
+    <p class="small muted" style="margin-top:20px;text-align:center">
+      <a href="../index.html" style="color:var(--green-700);font-weight:700">← Kembali ke situs</a>
+    </p>
+  </div>
+</div>
+
+<!-- ================= PANEL ADMIN ================= -->
+<div id="layar-admin" hidden>
+
+  <header class="adm-bar">
+    <div class="wrap adm-bar__isi">
+      <img src="../assets/img/logo.webp" alt="" width="34" height="43">
+      <span>
+        <span class="adm-bar__nama">Gontor Cup</span>
+        <span class="adm-bar__sub" style="display:block">Panel Admin</span>
+      </span>
+      <span class="kanan">
+        <a class="btn btn--ghost btn--sm" href="../index.html" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 3h6v6"/><path d="M10 14 21 3"/><path d="M21 14v5a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5"/></svg>
+          <span class="btn__label">Lihat situs</span>
+        </a>
+        <button type="button" class="btn btn--ghost btn--sm" id="btn-keluar">
+          <span class="btn__label">Keluar</span>
+        </button>
+      </span>
+    </div>
+  </header>
+
+  <div class="wrap">
+    <nav class="adm-tabs" role="tablist" aria-label="Bagian yang bisa diubah">
+      <button type="button" class="pill is-active" role="tab" data-panel="info"       aria-selected="true">Info Acara</button>
+      <button type="button" class="pill" role="tab" data-panel="pengumuman" aria-selected="false">Pengumuman</button>
+      <button type="button" class="pill" role="tab" data-panel="galeri"     aria-selected="false">Galeri Foto</button>
+      <button type="button" class="pill" role="tab" data-panel="drive"      aria-selected="false">Unduh Foto</button>
+      <button type="button" class="pill" role="tab" data-panel="lomba"      aria-selected="false">Juklak Lomba</button>
+      <button type="button" class="pill" role="tab" data-panel="kiriman"    aria-selected="false">Kiriman Masuk</button>
+      <button type="button" class="pill" role="tab" data-panel="setelan"    aria-selected="false">Setelan</button>
+    </nav>
+
+    <!-- ---------------- INFO ACARA ---------------- -->
+    <section class="adm-panel" data-isi="info">
+      <div class="section-head" style="margin-bottom:var(--s-5)">
+        <span class="eyebrow">Bagian 1</span>
+        <h2 class="display">Info Acara</h2>
+        <p class="lead">Tanggal, tempat, kontak, dan tanggal technical meeting.
+           Perubahan di sini langsung tampil di beranda, pendaftaran, dan footer.</p>
+      </div>
+      <div class="card card--pad-lg" id="form-info"></div>
+      <div class="adm-simpan">
+        <button type="button" class="btn btn--gold" data-simpan="info">
+          <span class="btn__label">Simpan Info Acara</span>
+        </button>
+        <span class="small muted">Tersimpan ke sheet <strong>Konten</strong>.</span>
+      </div>
+    </section>
+
+    <!-- ---------------- PENGUMUMAN ---------------- -->
+    <section class="adm-panel" data-isi="pengumuman" hidden>
+      <div class="section-head" style="margin-bottom:var(--s-5)">
+        <span class="eyebrow">Bagian 2</span>
+        <h2 class="display">Pengumuman</h2>
+        <p class="lead">Pengumuman yang ditandai <em>disematkan</em> tampil besar di bagian atas
+           halaman Pengumuman. Hanya satu yang bisa disematkan.</p>
+      </div>
+      <div id="daftar-pengumuman-adm"></div>
+      <button type="button" class="btn btn--ghost" id="tambah-pengumuman">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        <span class="btn__label">Tambah pengumuman</span>
+      </button>
+      <div class="adm-simpan">
+        <button type="button" class="btn btn--gold" data-simpan="pengumuman">
+          <span class="btn__label">Simpan Pengumuman</span>
+        </button>
+        <span class="small muted">Yang paling atas tampil paling dulu di situs.</span>
+      </div>
+    </section>
+
+    <!-- ---------------- GALERI ---------------- -->
+    <section class="adm-panel" data-isi="galeri" hidden>
+      <div class="section-head" style="margin-bottom:var(--s-5)">
+        <span class="eyebrow">Bagian 3</span>
+        <h2 class="display">Galeri Foto</h2>
+        <p class="lead">Foto diunggah ke Google Drive panitia, lalu tautannya dipasang di situs.
+           Gambar otomatis diperkecil ke 1600 px sebelum dikirim supaya unggahan tidak putus.</p>
+      </div>
+      <div id="daftar-hari-adm"></div>
+      <button type="button" class="btn btn--ghost" id="tambah-hari">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        <span class="btn__label">Tambah hari / sesi</span>
+      </button>
+      <div class="adm-simpan">
+        <button type="button" class="btn btn--gold" data-simpan="galeri">
+          <span class="btn__label">Simpan Galeri</span>
+        </button>
+        <span class="small muted">Foto sudah terunggah saat dipilih; tombol ini menyimpan susunannya.</span>
+      </div>
+    </section>
+
+    <!-- ---------------- DRIVE ---------------- -->
+    <section class="adm-panel" data-isi="drive" hidden>
+      <div class="section-head" style="margin-bottom:var(--s-5)">
+        <span class="eyebrow">Bagian 4</span>
+        <h2 class="display">Tautan Unduh Foto</h2>
+        <p class="lead">Tempelkan tautan folder Google Drive tiap kampus. Pastikan aksesnya disetel
+           <em>siapa saja yang memiliki tautan dapat melihat</em>, supaya peserta tidak perlu meminta izin.</p>
+      </div>
+      <div id="daftar-drive-adm"></div>
+      <div class="adm-simpan">
+        <button type="button" class="btn btn--gold" data-simpan="drive">
+          <span class="btn__label">Simpan Tautan Drive</span>
+        </button>
+      </div>
+    </section>
+
+    <!-- ---------------- LOMBA ---------------- -->
+    <section class="adm-panel" data-isi="lomba" hidden>
+      <div class="section-head" style="margin-bottom:var(--s-5)">
+        <span class="eyebrow">Bagian 5</span>
+        <h2 class="display">Juklak Per Lomba</h2>
+        <p class="lead">Mengubah ketentuan yang tampil di halaman Juklak &amp; Juknis.
+           Berkas PDF unduhan tidak ikut berubah. Kalau juknisnya direvisi, unggah PDF baru di bawah tiap lomba.</p>
+      </div>
+      <div class="field" style="max-width:420px">
+        <label for="cari-lomba">Cari lomba</label>
+        <input class="input" id="cari-lomba" type="search" placeholder="Ketik nama lomba…">
+      </div>
+      <div id="daftar-lomba-adm"></div>
+      <div class="adm-simpan">
+        <button type="button" class="btn btn--gold" data-simpan="lomba">
+          <span class="btn__label">Simpan Ketentuan Lomba</span>
+        </button>
+        <span class="small muted">Hanya lomba yang Anda ubah yang akan menimpa isi bawaan.</span>
+      </div>
+    </section>
+
+    <!-- ---------------- KIRIMAN ---------------- -->
+    <section class="adm-panel" data-isi="kiriman" hidden>
+      <div class="section-head" style="margin-bottom:var(--s-5)">
+        <span class="eyebrow">Bagian 6</span>
+        <h2 class="display">Kiriman Masuk</h2>
+        <p class="lead">Data pendaftaran dan karya yang dikirim lewat situs. Sumber datanya sama
+           persis dengan Spreadsheet; tabel ini hanya untuk melihat cepat.</p>
+      </div>
+      <div class="pill-nav" style="margin-bottom:20px">
+        <button type="button" class="pill is-active" data-kiriman="Pendaftaran">Pendaftaran</button>
+        <button type="button" class="pill" data-kiriman="Karya">Karya</button>
+        <button type="button" class="pill" id="muat-ulang-kiriman">Muat ulang</button>
+      </div>
+      <div id="tabel-kiriman" class="adm-tabel-kiriman"></div>
+    </section>
+
+    <!-- ---------------- SETELAN ---------------- -->
+    <section class="adm-panel" data-isi="setelan" hidden>
+      <div class="section-head" style="margin-bottom:var(--s-5)">
+        <span class="eyebrow">Bagian 7</span>
+        <h2 class="display">Setelan</h2>
+      </div>
+
+      <div class="grid g-2">
+        <div class="card">
+          <h3 style="font-size:1.05rem">Ganti Sandi Admin</h3>
+          <p class="muted small">Sandi dipakai bersama seluruh panitia yang boleh mengubah situs.
+             Ganti setelah acara selesai.</p>
+          <div class="field">
+            <label for="sandi-baru">Sandi baru</label>
+            <input class="input" id="sandi-baru" type="password" autocomplete="new-password"
+                   placeholder="Minimal 8 karakter">
+          </div>
+          <button type="button" class="btn btn--ghost" id="btn-ganti-sandi">
+            <span class="btn__label">Simpan sandi baru</span>
+          </button>
+        </div>
+
+        <div class="card">
+          <h3 style="font-size:1.05rem">Tentang Panel Ini</h3>
+          <ul class="muted small" style="padding-left:18px;margin:0;display:flex;flex-direction:column;gap:8px">
+            <li>Data disimpan di Google Spreadsheet milik
+                <strong>gontorcup2026@gmail.com</strong>.</li>
+            <li>Foto galeri disimpan di folder Google Drive akun yang sama.</li>
+            <li>Sesi masuk berlaku 8 jam, lalu perlu masuk ulang.</li>
+            <li>Halaman publik tetap tampil normal walau panel ini sedang tidak bisa dihubungi,
+                karena isi bawaannya sudah tertanam di HTML.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+
+<div class="adm-toast" id="toast" role="status" aria-live="polite" data-tampil="false"></div>
+
+<script src="../assets/js/config.js"></script>
+<script src="../assets/js/api.js"></script>
+<script src="admin.js"></script>
+</body>
+</html>

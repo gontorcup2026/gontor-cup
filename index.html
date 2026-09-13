@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Beranda | Gontor Cup Among Campuses</title>
+<meta name="description" content="Situs resmi Gontor Cup Antar Kampus 1448/2026, dengan 29 lomba dalam empat divisi. Mahasiswa Guru PMDG kampus dalam Jawa.">
+<meta name="theme-color" content="#0f4a30">
+<meta property="og:title" content="Beranda | Gontor Cup">
+<meta property="og:description" content="Situs resmi Gontor Cup Antar Kampus 1448/2026, dengan 29 lomba dalam empat divisi. Mahasiswa Guru PMDG kampus dalam Jawa.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="assets/img/logo.png">
+<link rel="icon" href="assets/img/favicon.png" type="image/png">
+<link rel="apple-touch-icon" href="assets/img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Anton&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-page="index.html">
+<a class="skip-link" href="#isi-utama">Lompat ke isi utama</a>
+
+<!-- ============ JENDELA WELCOME (tampil sekali per sesi) ============ -->
+<div class="welcome" id="welcome" role="dialog" aria-modal="true" aria-labelledby="welcome-judul" hidden>
+  <div class="grain"></div>
+  <img class="deco" src="assets/img/orn-2.webp" alt="" width="200"
+       style="top:-60px;left:-70px;width:min(38vw,300px);transform:rotate(-12deg)">
+  <img class="deco" src="assets/img/orn-4.webp" alt="" width="200"
+       style="bottom:-80px;right:-70px;width:min(40vw,330px);transform:rotate(18deg)">
+
+  <div class="welcome__inner">
+    <img class="welcome__logo" src="assets/img/logo.webp"
+         alt="Logo Gontor Cup Among Campuses" width="180" height="229">
+    <h1 class="welcome__title" id="welcome-judul">Ahlan wa Sahlan<br><span class="gold-text">di Gontor Cup</span></h1>
+    <p class="welcome__sub">Ajang silaturahim dan prestasi Mahasiswa Guru Pondok Modern
+       Darussalam Gontor. Selamat datang di pusat informasi resmi acara.</p>
+    <div class="welcome__meta">
+      <span>24 sampai 25 September 2026</span>
+      <span>Kampus 1 sampai 5 Dalam Jawa</span>
+      <span>29 Lomba · 4 Divisi</span>
+    </div>
+    <div>
+      <button type="button" class="btn btn--gold" data-welcome-enter data-welcome-close>
+        <span class="btn__label">Masuk ke Website</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </button>
+    </div>
+  </div>
+
+  <button type="button" class="welcome__skip" data-welcome-close>Lewati</button>
+</div>
+
+<!-- ============ HEADER ============ -->
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="index.html">
+      <img src="assets/img/logo.webp" alt="" width="44" height="56">
+      <span class="brand__text">
+        <span class="brand__name">Gontor Cup</span>
+        <span class="brand__sub">Among Campuses</span>
+      </span>
+    </a>
+
+    <nav class="nav" aria-label="Navigasi utama">
+      <a href="index.html" aria-current="page">Beranda</a>
+      <a href="pendaftaran.html">Pendaftaran</a>
+      <a href="juklak.html">Juklak & Juknis</a>
+      <a href="pengumuman.html">Pengumuman</a>
+      <a href="galeri.html">Galeri</a>
+      <a href="karya.html">Kumpul Karya</a>
+      <a href="unduh-foto.html">Unduh Foto</a>
+    </nav>
+
+    <a class="btn btn--gold btn--sm header-cta" href="pendaftaran.html">
+      <span class="btn__label">Daftar Sekarang</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+
+    <button type="button" class="hamburger" data-drawer-open
+            aria-controls="laci" aria-expanded="false" aria-label="Buka menu navigasi">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+    </button>
+  </div>
+</header>
+
+<!-- ============ LACI NAVIGASI SELULER ============ -->
+<div class="drawer" id="laci" data-open="false">
+  <button type="button" class="drawer__scrim" data-drawer-close tabindex="-1" aria-label="Tutup menu"></button>
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="Menu navigasi">
+    <div class="drawer__head">
+      <span class="brand__name">Menu</span>
+      <button type="button" class="drawer__close" data-drawer-close aria-label="Tutup menu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+    </div>
+    <nav aria-label="Navigasi seluler">
+        <a href="index.html" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>Beranda</a>
+        <a href="pendaftaran.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>Pendaftaran</a>
+        <a href="juklak.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg>Juklak & Juknis</a>
+        <a href="pengumuman.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>Pengumuman</a>
+        <a href="galeri.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>Galeri</a>
+        <a href="karya.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg>Kumpul Karya</a>
+        <a href="unduh-foto.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>Unduh Foto</a>
+    </nav>
+    <a class="btn btn--gold btn--block" href="pendaftaran.html">
+      <span class="btn__label">Daftar Sekarang</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+    </a>
+  </div>
+</div>
+
+<main id="isi-utama">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero__bg" style="background-image:url('assets/img/bg-hall.webp')"></div>
+  <div class="grain"></div>
+  <img class="deco" src="assets/img/orn-1.webp" alt="" data-parallax="0.07"
+       style="top:-40px;left:-90px;width:min(34vw,300px);transform:rotate(-8deg)">
+  <img class="deco" src="assets/img/orn-3.webp" alt="" data-parallax="-0.05"
+       style="bottom:-90px;right:-60px;width:min(26vw,230px)">
+
+  <div class="wrap hero__inner">
+    <p class="tagline">Healthy <i></i> Strong <i></i> Dignified</p>
+    <img class="hero__wordmark" src="assets/img/wordmark.webp"
+         alt="Gontor Cup Among Campuses" width="580" height="104" fetchpriority="high">
+    <h1 class="display" style="margin-bottom:18px">
+      <span class="gold-text">1448 / 2026</span>
+    </h1>
+    <p class="lead">Ajang perlombaan Mahasiswa Guru Pondok Modern Darussalam Gontor kampus dalam
+       Jawa. Digelar <span data-gc="hari">Kamis dan Jum'at</span>,
+       <span data-gc="tanggal">24 sampai 25 September 2026</span> di
+       <span data-gc="tempat">PM Gontor Kampus 3 Darul Ma'rifat, Gurah, Kediri</span>.</p>
+
+    <div style="margin-top:36px">
+      <div class="countdown" data-countdown="2026-09-24T07:00:00+07:00">
+        <div class="cd-box"><b data-cd="hari" class="tnum">0</b><small>Hari</small></div>
+        <div class="cd-box"><b data-cd="jam" class="tnum">00</b><small>Jam</small></div>
+        <div class="cd-box"><b data-cd="menit" class="tnum">00</b><small>Menit</small></div>
+        <div class="cd-box"><b data-cd="detik" class="tnum">00</b><small>Detik</small></div>
+      </div>
+    </div>
+
+    <div class="hero__actions">
+      <a class="btn btn--gold" href="pendaftaran.html">
+        <span class="btn__label">Daftar Kontingen</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <a class="btn btn--ghost" href="juklak.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg><span class="btn__label">Juklak &amp; Juknis</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ STATISTIK ============ -->
+<section class="section--tight" style="padding-block:0;margin-top:-42px;position:relative;z-index:2">
+  <div class="wrap">
+    <div class="stats reveal">
+      <div class="stat"><p class="stat__num">5</p><p class="stat__label">Kampus Dalam Jawa</p></div>
+      <div class="stat"><p class="stat__num">4</p><p class="stat__label">Divisi Lomba</p></div>
+      <div class="stat"><p class="stat__num">29</p><p class="stat__label">Cabang Lomba</p></div>
+      <div class="stat"><p class="stat__num">2</p><p class="stat__label">Hari Pelaksanaan</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MENU UTAMA ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">Pusat Informasi</span>
+      <h2 class="display">Semua yang Anda Butuhkan<br><span class="gold-text">di Satu Tempat</span></h2>
+      <p class="lead" style="margin-inline:auto">Dari pendaftaran sampai unduhan foto, seluruh
+         keperluan peserta dan ofisial Gontor Cup tersedia di halaman-halaman berikut.</p>
+    </div>
+    <div class="grid g-3">
+      <a class="card card--link reveal" href="pendaftaran.html" data-delay="0">
+        <span class="card__top"></span>
+        <span class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg></span>
+        <h3>Pendaftaran Peserta</h3>
+        <p class="muted">Syarat peserta, alur pendaftaran, kuota tiap lomba, dan formulir kontingen.</p>
+        <span class="card__meta">Daftar kontingen<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </a>
+      <a class="card card--link reveal" href="juklak.html" data-delay="70">
+        <span class="card__top"></span>
+        <span class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg></span>
+        <h3>Juklak &amp; Juknis</h3>
+        <p class="muted">Ketentuan resmi 29 lomba dari empat divisi, bisa diunduh per lomba.</p>
+        <span class="card__meta">Baca ketentuan<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </a>
+      <a class="card card--link reveal" href="pengumuman.html" data-delay="140">
+        <span class="card__top"></span>
+        <span class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg></span>
+        <h3>Pengumuman</h3>
+        <p class="muted">Kabar resmi panitia: tenggat karya, ketentuan teknis, dan hasil undian.</p>
+        <span class="card__meta">Lihat pengumuman<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </a>
+      <a class="card card--link reveal" href="galeri.html" data-delay="0">
+        <span class="card__top"></span>
+        <span class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg></span>
+        <h3>Galeri Per Hari</h3>
+        <p class="muted">Dokumentasi jalannya perlombaan, dipilah dari technical meeting sampai penutupan.</p>
+        <span class="card__meta">Buka galeri<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </a>
+      <a class="card card--link reveal" href="karya.html" data-delay="70">
+        <span class="card__top"></span>
+        <span class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg></span>
+        <h3>Pengumpulan Karya</h3>
+        <p class="muted">Kirim karya kaligrafi, poster, foto, video iklan, dan karya tulis ilmiah.</p>
+        <span class="card__meta">Kumpulkan karya<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </a>
+      <a class="card card--link reveal" href="unduh-foto.html" data-delay="140">
+        <span class="card__top"></span>
+        <span class="icon-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg></span>
+        <h3>Unduh Foto Kampus</h3>
+        <p class="muted">Tautan Google Drive berisi foto resolusi penuh untuk masing-masing kampus.</p>
+        <span class="card__meta">Ambil foto<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TEMA & MOTO ============ -->
+<section class="section section--dark">
+  <div class="grain"></div>
+  <img class="deco deco--soft" src="assets/img/orn-4.webp" alt=""
+       style="top:20px;right:-90px;width:min(30vw,280px)">
+  <div class="wrap center" style="position:relative;z-index:1">
+    <span class="eyebrow" style="display:inline-flex;justify-content:center">Tema Acara</span>
+    <p class="arab arab--besar" lang="ar" dir="rtl"
+       style="color:var(--gold-200);margin:0 auto 20px">مَنْ كَانَتْ بِدَايَتُهُ مُحْرِقَةً كَانَتْ نِهَايَتُهُ مُشْرِقَةً</p>
+    <p class="lead" style="margin:0 auto 28px;font-style:italic">&ldquo;Barang siapa yang permulaannya penuh perjuangan, kesudahannya akan penuh kejayaan.&rdquo;</p>
+    <p class="display" style="font-size:clamp(.85rem,1.9vw,1.25rem);color:#fff;max-width:26ch;
+              margin:0 auto;line-height:1.5">Nyalakan Semangat Perjuangan, Bersinar Dalam Kebersamaan</p>
+  </div>
+</section>
+
+<!-- ============ AGENDA ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="split">
+      <div>
+        <span class="eyebrow">Linimasa Acara</span>
+        <h2 class="display" style="margin-bottom:20px">Jalannya <span class="gold-text">Gontor Cup</span></h2>
+        <p class="lead" style="margin-bottom:36px">Catat tanggal-tanggal penting berikut supaya
+           kontingen kampus Anda tidak tertinggal satu tahap pun.</p>
+        <ol class="timeline">
+        <li class="tl-item">
+          <p class="tl-date">Sampai 17 September 2026</p>
+          <h4>Pengumpulan Karya</h4>
+          <p class="muted">Kaligrafi, Desain Poster, Fotografi, Visual Iklan, dan Karya Tulis Ilmiah dikumpulkan sebelum acara.</p>
+        </li>
+        <li class="tl-item">
+          <p class="tl-date"><span data-gc="technical_meeting">Menyusul, diumumkan panitia</span></p>
+          <h4>Technical Meeting</h4>
+          <p class="muted">Undian lawan, nomor urut tampil, penyerahan blangko pemain, dan pengesahan peserta.</p>
+        </li>
+        <li class="tl-item">
+          <p class="tl-date">Kamis, 24 September 2026</p>
+          <h4>Pembukaan &amp; Hari Pertama</h4>
+          <p class="muted">Upacara pembukaan lalu perlombaan seluruh divisi berjalan paralel di sembilan venue.</p>
+        </li>
+        <li class="tl-item">
+          <p class="tl-date">Jum'at, 25 September 2026</p>
+          <h4>Hari Kedua, Final &amp; Penutupan</h4>
+          <p class="muted">Partai puncak tiap cabang, pengumuman juara, dan penutupan rangkaian acara.</p>
+        </li>
+        </ol>
+      </div>
+      <div class="stack">
+        <div class="card">
+          <span class="icon-badge icon-badge--gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span>
+          <h3 style="font-size:1.05rem">Waktu Pelaksanaan</h3>
+          <p class="muted" style="margin:0"><span data-gc="hari">Kamis dan Jum'at</span>,
+             <span data-gc="tanggal">24 sampai 25 September 2026</span><br>
+             <span class="small">(<span data-gc="tanggal_hijriah">11 sampai 12 Rabiul Tsani 1448 H</span>)</span></p>
+        </div>
+        <div class="card">
+          <span class="icon-badge icon-badge--gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg></span>
+          <h3 style="font-size:1.05rem">Tempat Kegiatan</h3>
+          <p class="muted" style="margin:0" data-gc="tempat_panjang">Pondok Modern Gontor Kampus 3 Darul Ma'rifat, Kec. Gurah, Kab. Kediri, Jawa Timur 64181</p>
+        </div>
+        <div class="card">
+          <span class="icon-badge icon-badge--gold"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.9"/><path d="M16 3.1a4 4 0 0 1 0 7.8"/></svg></span>
+          <h3 style="font-size:1.05rem">Peserta</h3>
+          <p class="muted" style="margin:0">Mahasiswa Guru PMDG kampus dalam Jawa,
+             diselenggarakan panitia Gontor 3 Darul Ma'rifat bersama Dewan Mahasiswa seluruh kampus.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ DIVISI & LOMBA ============ -->
+<section class="section section--dark">
+  <div class="grain"></div>
+  <div class="wrap">
+    <div class="section-head">
+      <span class="eyebrow">29 Lomba</span>
+      <h2 class="display" style="color:#fff">Empat Divisi yang Dipertandingkan</h2>
+      <p class="lead">Olah Raga, Olah Rasa, Olah Fikir, dan Olah Dzikir. Keempatnya mencakup
+         kemampuan fisik, rasa, nalar, dan ruhani.</p>
+    </div>
+    <div class="grid g-2">
+      <div class="card card--dark reveal">
+        <div class="between" style="margin-bottom:14px">
+          <h3 class="display" style="margin:0">Divisi Olah Raga</h3>
+          <span class="badge badge--outline">8 lomba</span>
+        </div>
+        <p class="muted small" style="margin-bottom:16px">Delapan cabang pertandingan fisik, digelar di stadion, sport hall, dan lapangan kampus.</p>
+        <div class="row" style="gap:8px"><span class="badge badge--gold">Sepakbola</span><span class="badge badge--gold">Futsal</span><span class="badge badge--gold">Voli</span><span class="badge badge--gold">Bola Basket</span><span class="badge badge--gold">Sepak Takraw</span><span class="badge badge--gold">Bulutangkis</span><span class="badge badge--gold">Tenis Meja</span><span class="badge badge--gold">Panahan</span></div>
+      </div>
+      <div class="card card--dark reveal">
+        <div class="between" style="margin-bottom:14px">
+          <h3 class="display" style="margin:0">Divisi Olah Rasa</h3>
+          <span class="badge badge--outline">6 lomba</span>
+        </div>
+        <p class="muted small" style="margin-bottom:16px">Enam lomba seni, desain, dan media. Sebagian karyanya dikumpulkan sebelum acara.</p>
+        <div class="row" style="gap:8px"><span class="badge badge--gold">Kaligrafi</span><span class="badge badge--gold">Musik</span><span class="badge badge--gold">Pioneering</span><span class="badge badge--gold">Desain Poster</span><span class="badge badge--gold">Fotografi</span><span class="badge badge--gold">Visual Iklan Brand Pondok</span></div>
+      </div>
+      <div class="card card--dark reveal">
+        <div class="between" style="margin-bottom:14px">
+          <h3 class="display" style="margin:0">Divisi Olah Fikir</h3>
+          <span class="badge badge--outline">10 lomba</span>
+        </div>
+        <p class="muted small" style="margin-bottom:16px">Sepuluh lomba nalar dan bahasa: karya tulis, debat tiga bahasa, pidato, dan cerdas cermat.</p>
+        <div class="row" style="gap:8px"><span class="badge badge--gold">Karya Tulis Ilmiah</span><span class="badge badge--gold">Cerdas Cermat</span><span class="badge badge--gold">Cipta & Baca Puisi</span><span class="badge badge--gold">Debat Bahasa Indonesia</span><span class="badge badge--gold">Debat Bahasa Inggris</span><span class="badge badge--gold">Debat Bahasa Arab</span><span class="badge badge--gold">Fathu-l-Munjid</span><span class="badge badge--gold">Pidato Bahasa Indonesia</span><span class="badge badge--gold">Pidato Bahasa Arab</span><span class="badge badge--gold">Pidato Bahasa Inggris</span></div>
+      </div>
+      <div class="card card--dark reveal">
+        <div class="between" style="margin-bottom:14px">
+          <h3 class="display" style="margin:0">Divisi Olah Dzikir</h3>
+          <span class="badge badge--outline">5 lomba</span>
+        </div>
+        <p class="muted small" style="margin-bottom:16px">Lima lomba keagamaan: tilawah, hafalan, adzan, dan khutbah.</p>
+        <div class="row" style="gap:8px"><span class="badge badge--gold">Qiro'ah Mujawwadah</span><span class="badge badge--gold">Qiro'ah Murottalah</span><span class="badge badge--gold">Hifdzu-l-Qur'an</span><span class="badge badge--gold">Adzan</span><span class="badge badge--gold">Khutbah</span></div>
+      </div>
+    </div>
+    <div style="margin-top:32px">
+      <a class="btn btn--ghost" href="juklak.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg><span class="btn__label">Ketentuan tiap lomba</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ KAMPUS PESERTA ============ -->
+<section class="section section--paper2">
+  <div class="wrap">
+    <div class="section-head center">
+      <span class="eyebrow">Kontingen</span>
+      <h2 class="display">Lima Kampus, <span class="gold-text">Satu Keluarga</span></h2>
+    </div>
+    <div class="grid g-3">
+      <div class="campus campus--1 reveal">
+        <span class="campus__mark">1</span>
+        <div>
+          <h3 style="font-size:1.05rem">Gontor Kampus 1</h3>
+          <p class="campus__loc">Ds. Gontor, Kec. Mlarak, Ponorogo, Jawa Timur</p>
+        </div>
+      </div>
+      <div class="campus campus--2 reveal">
+        <span class="campus__mark">2</span>
+        <div>
+          <h3 style="font-size:1.05rem">Gontor Kampus 2</h3>
+          <p class="campus__loc">Ds. Madusari, Kec. Siman, Ponorogo, Jawa Timur</p>
+        </div>
+      </div>
+      <div class="campus campus--3 reveal">
+        <span class="campus__mark">3</span>
+        <div>
+          <h3 style="font-size:1.05rem">Gontor Kampus 3</h3>
+          <p class="campus__loc">Darul Ma'rifat, Ds. Sumbercangkring, Kec. Gurah, Kediri</p>
+        </div>
+      </div>
+      <div class="campus campus--4 reveal">
+        <span class="campus__mark">4</span>
+        <div>
+          <h3 style="font-size:1.05rem">Gontor Kampus 4</h3>
+          <p class="campus__loc">Darul Muttaqin, Ds. Kaligung, Kec. Blimbingsari, Banyuwangi</p>
+        </div>
+      </div>
+      <div class="campus campus--5 reveal">
+        <span class="campus__mark">5</span>
+        <div>
+          <h3 style="font-size:1.05rem">Gontor Kampus 5</h3>
+          <p class="campus__loc">Darul Qiyam, Ds. Mangunsari, Kec. Sawangan, Magelang</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PENGUMUMAN TERBARU ============ -->
+<section class="section">
+  <div class="wrap">
+    <div class="between section-head" style="max-width:none">
+      <div style="max-width:56ch">
+        <span class="eyebrow">Kabar Terbaru</span>
+        <h2 class="display">Pengumuman Panitia</h2>
+      </div>
+      <a class="btn btn--ghost btn--sm" href="pengumuman.html">
+        <span class="btn__label">Semua pengumuman</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+    </div>
+    <div class="grid g-3" id="pengumuman-ringkas">
+      <a class="card card--link reveal" href="pengumuman.html">
+        <span class="card__top"></span>
+        <div class="row" style="margin-bottom:14px">
+          <span class="badge badge--danger"><span class="badge-dot"></span>Penting</span>
+          <span class="small muted">13 September 2026</span>
+        </div>
+        <h3 style="font-size:1.1rem">Batas Akhir Pengumpulan Karya: 17 September 2026</h3>
+        <p class="muted">Lima lomba mengumpulkan karya sebelum acara. Karya yang masuk setelah tenggat tidak dinilai.</p>
+        <span class="card__meta">Baca selengkapnya<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </a>
+      <a class="card card--link reveal" href="pengumuman.html">
+        <span class="card__top"></span>
+        <div class="row" style="margin-bottom:14px">
+          <span class="badge badge--info"><span class="badge-dot"></span>Teknis</span>
+          <span class="small muted">11 September 2026</span>
+        </div>
+        <h3 style="font-size:1.1rem">Larangan Generative AI pada Desain Poster &amp; Visual Iklan</h3>
+        <p class="muted">Karya visual hasil AI prompt-to-image dilarang. Peserta poster wajib melampirkan berkas master berlayer.</p>
+        <span class="card__meta">Baca selengkapnya<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </a>
+      <a class="card card--link reveal" href="pengumuman.html">
+        <span class="card__top"></span>
+        <div class="row" style="margin-bottom:14px">
+          <span class="badge badge--gold"><span class="badge-dot"></span>Jadwal</span>
+          <span class="small muted">8 September 2026</span>
+        </div>
+        <h3 style="font-size:1.1rem">Waktu Pelaksanaan: Kamis dan Jum'at, 24 sampai 25 September 2026</h3>
+        <p class="muted">Dua hari penuh di PM Gontor Kampus 3 Darul Ma'rifat, bertepatan 11 sampai 12 Rabiul Tsani 1448 H.</p>
+        <span class="card__meta">Baca selengkapnya<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============ AJAKAN AKHIR ============ -->
+<section class="section section--dark">
+  <div class="grain"></div>
+  <img class="deco" src="assets/img/orn-2.webp" alt="" data-parallax="0.04"
+       style="bottom:-70px;left:-70px;width:min(28vw,260px)">
+  <div class="wrap center" style="position:relative;z-index:1">
+    <span class="eyebrow" style="justify-content:center;display:inline-flex">Sudah Siap?</span>
+    <h2 class="display" style="color:#fff;max-width:20ch;margin-inline:auto">
+      Daftarkan Kontingen <span class="gold-text">Kampus Anda</span>
+    </h2>
+    <p class="lead" style="margin:18px auto 32px">Pastikan seluruh peserta terdaftar sebelum
+       technical meeting. Peserta yang tidak tercantum dalam formulir tidak diperkenankan bertanding.</p>
+    <div class="row" style="justify-content:center">
+      <a class="btn btn--gold" href="pendaftaran.html">
+        <span class="btn__label">Daftar Sekarang</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+      </a>
+      <a class="btn btn--ghost" href="pengumuman.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg><span class="btn__label">Cek Pengumuman</span></a>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <img class="deco deco--soft" src="assets/img/orn-5.webp" alt=""
+       style="bottom:-40px;left:-60px;width:min(40vw,320px)">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <img src="assets/img/logo.webp" alt="Logo Gontor Cup" width="70" height="89">
+        <p>Gontor Cup Antar Kampus 1448/2026, ajang perlombaan Mahasiswa Guru
+           Pondok Modern Darussalam Gontor kampus dalam Jawa.</p>
+        <p class="small" style="margin-top:12px;color:var(--gold-300)">&ldquo;Nyalakan Semangat Perjuangan, Bersinar Dalam Kebersamaan&rdquo;</p>
+      </div>
+      <div>
+        <h4>Informasi</h4>
+        <ul>
+          <li><a href="pendaftaran.html">Pendaftaran Peserta</a></li>
+          <li><a href="juklak.html">Juklak &amp; Juknis</a></li>
+          <li><a href="pengumuman.html">Pengumuman</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Dokumentasi</h4>
+        <ul>
+          <li><a href="galeri.html">Galeri Per Hari</a></li>
+          <li><a href="karya.html">Pengumpulan Karya</a></li>
+          <li><a href="unduh-foto.html">Unduh Foto Kampus</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Sekretariat Panitia</h4>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg><span>Pondok Modern Gontor Kampus 3 Darul Ma'rifat, Kec. Gurah, Kab. Kediri, Jawa Timur 64181</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg><span>Kantor panitia: Gedung Saudi lantai 1, ruang 101</span></li>
+          <li><a href="mailto:gontorcup2026@gmail.com"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg>gontorcup2026@gmail.com</a></li>
+          <li><a href="https://wa.me/6282245805920" target="_blank" rel="noopener noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.2a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2Z"/></svg>082245805920 (WhatsApp)</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2026 Panitia Gontor Cup Antar Kampus 1448, PM Gontor Kampus 3 Darul Ma’rifat.</p>
+      <p>Healthy. Strong. Dignified. &nbsp;·&nbsp;
+         <a href="admin/index.html" style="opacity:.55">Panel panitia</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- config.js: satu-satunya tempat URL Apps Script diisi.
+     konten.js hanya MENIMPA bagian yang sudah diubah panitia lewat /admin;
+     tanpa sambungan, isi bawaan di HTML inilah yang tampil. -->
+<script src="assets/js/config.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/main.js" defer></script>
+<script src="assets/js/konten.js" defer></script>
+</body>
+</html>

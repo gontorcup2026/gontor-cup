@@ -1,0 +1,145 @@
+/* =========================================================================
+   GONTOR CUP: tambahan gaya khusus halaman admin
+   Mewarisi seluruh token & komponen dari ../assets/css/style.css
+   ========================================================================= */
+
+body.adm { background: var(--paper); }
+
+/* ---------- Layar masuk ---------- */
+.masuk {
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: var(--s-5);
+  background: var(--grad-green);
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.masuk::after {
+  content: "";
+  position: absolute; inset: 0; z-index: -1;
+  background: radial-gradient(90% 70% at 50% 30%, rgba(201,154,46,.22), transparent 65%);
+}
+.masuk__kartu {
+  width: min(100%, 420px);
+  background: var(--card);
+  border-radius: var(--r-lg);
+  padding: clamp(var(--s-5), 5vw, var(--s-7));
+  box-shadow: var(--sh-3);
+  position: relative; z-index: 1;
+}
+.masuk__logo { width: 74px; margin: 0 auto var(--s-4); }
+.masuk__kartu h1 { font-size: 1.15rem; text-align: center; }
+.masuk__kartu > p { text-align: center; }
+
+/* ---------- Kerangka panel admin ---------- */
+.adm-bar {
+  position: sticky; top: 0; z-index: var(--z-sticky);
+  background: var(--green-900); color: #eef3ef;
+  border-bottom: 3px solid transparent;
+  border-image: var(--grad-gold) 1;
+}
+.adm-bar__isi {
+  display: flex; align-items: center; gap: var(--s-4);
+  min-height: 64px;
+}
+.adm-bar img { height: 34px; width: auto; }
+.adm-bar__nama {
+  font-family: var(--f-display); font-size: .82rem;
+  text-transform: uppercase; letter-spacing: -.01em; color: #fff;
+}
+.adm-bar__sub {
+  font-size: .58rem; font-weight: 800; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--gold-300); margin-top: 3px;
+}
+.adm-bar .kanan { margin-left: auto; display: flex; gap: var(--s-2); align-items: center; }
+/* Bilah admin berlatar hijau tua: tombol hantu bawaan berwarna gelap dan
+   nyaris tak terlihat di sini, jadi dibalik menjadi terang. */
+.adm-bar .btn--ghost { --btn-fg: #eef3ef; --btn-bd: rgba(255,255,255,.3); }
+.adm-bar .btn--ghost:hover { --btn-bd: var(--gold-300); background: rgba(255,255,255,.1); }
+
+.adm-tabs {
+  display: flex; gap: var(--s-2); overflow-x: auto;
+  padding: var(--s-4) 0; scrollbar-width: thin;
+}
+.adm-tabs .pill { flex: none; }
+
+.adm-panel { padding-bottom: var(--s-9); }
+
+/* ---------- Baris data yang bisa disunting ---------- */
+.adm-item {
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--card);
+  margin-bottom: var(--s-3);
+  overflow: hidden;
+}
+.adm-item__kepala {
+  display: flex; align-items: center; gap: var(--s-3);
+  padding: var(--s-3) var(--s-4);
+  background: var(--paper-2);
+  border-bottom: 1px solid var(--line-2);
+  flex-wrap: wrap;
+}
+.adm-item__judul { font-weight: 750; flex: 1; min-width: 12ch; overflow-wrap: anywhere; }
+.adm-item__isi { padding: var(--s-4); }
+.adm-item .field { margin-bottom: var(--s-3); }
+.adm-item .field:last-child { margin-bottom: 0; }
+
+.adm-aksi { display: flex; gap: var(--s-2); flex-wrap: wrap; }
+.btn--danger { --btn-bg: transparent; --btn-fg: var(--danger); --btn-bd: rgba(165,35,31,.35); box-shadow: none; }
+.btn--danger:hover { --btn-bd: var(--danger); background: rgba(165,35,31,.07); }
+
+/* ---------- Petak foto galeri ---------- */
+.adm-foto {
+  display: grid; gap: var(--s-3);
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+}
+.adm-foto figure {
+  margin: 0; border: 1px solid var(--line); border-radius: var(--r-sm);
+  overflow: hidden; background: var(--card); display: flex; flex-direction: column;
+}
+.adm-foto img { width: 100%; aspect-ratio: 4/3; object-fit: cover; background: var(--line-2); }
+.adm-foto figcaption { padding: 8px; display: flex; flex-direction: column; gap: 6px; }
+.adm-foto input { font-size: .8rem; min-height: 38px; padding: 7px 9px; }
+.adm-foto button { min-height: 34px; font-size: .78rem; padding: 6px 10px; }
+
+/* ---------- Bilah simpan yang mengambang ---------- */
+.adm-simpan {
+  position: sticky; bottom: 0; z-index: 20;
+  display: flex; align-items: center; gap: var(--s-3); flex-wrap: wrap;
+  margin-top: var(--s-5); padding: var(--s-4);
+  background: rgba(251,250,246,.94);
+  backdrop-filter: blur(10px);
+  border: 1px solid var(--line); border-radius: var(--r);
+  box-shadow: var(--sh-2);
+}
+
+/* ---------- Pemberitahuan ---------- */
+.adm-toast {
+  position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px);
+  z-index: var(--z-modal);
+  display: flex; align-items: center; gap: 10px;
+  padding: 13px 20px; border-radius: var(--r-pill);
+  background: var(--green-800); color: #fff;
+  box-shadow: var(--sh-3); font-weight: 700; font-size: .9rem;
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--t) var(--e-out), transform var(--t) var(--e-out);
+  max-width: min(92vw, 560px);
+}
+.adm-toast[data-tampil="true"] { opacity: 1; transform: translate(-50%, 0); }
+.adm-toast[data-jenis="gagal"] { background: var(--danger); }
+.adm-toast svg { width: 18px; height: 18px; flex: none; }
+
+/* ---------- Lain-lain ---------- */
+.adm-kosong {
+  padding: var(--s-7) var(--s-5); text-align: center;
+  border: 1px dashed var(--line); border-radius: var(--r); color: var(--muted);
+}
+.adm-hint-atas { margin-bottom: var(--s-5); }
+.adm-grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 0 var(--s-4); }
+@media (max-width: 700px) { .adm-grid-2 { grid-template-columns: minmax(0,1fr); } }
+
+.adm-tabel-kiriman table { min-width: 900px; font-size: .86rem; }
+.adm-tabel-kiriman td { max-width: 34ch; overflow-wrap: anywhere; }

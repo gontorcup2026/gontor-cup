@@ -1,0 +1,5 @@
+# Panel panitia tidak perlu masuk hasil pencarian Google.
+# Ini hanya mencegah pengindeksan, BUKAN pengaman. Yang mengamankan
+# panel admin adalah sandinya.
+User-agent: *
+Disallow: /admin/
