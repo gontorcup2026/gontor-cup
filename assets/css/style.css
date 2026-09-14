@@ -668,6 +668,26 @@ section{position:relative}
 }
 .shot:hover .shot__cap,.shot:focus-visible .shot__cap{opacity:1;transform:none}
 
+/* Rangka pemuatan galeri. Seluruh isi galeri datang dari Spreadsheet lewat
+   konten.js, jadi halaman tidak punya foto bawaan untuk ditampilkan sambil
+   menunggu. Rangka abu-abu ini yang mengisi jeda itu; kelas .is-memuat
+   dipasang skrip sebaris di galeri.html dan dilepas konten.js. Tanpa
+   JavaScript kelasnya tidak pernah terpasang, jadi yang tampil keadaan
+   kosongnya. */
+#galeri-tabs .galeri-rangka{display:none}
+#galeri-tabs.is-memuat .galeri-rangka{display:block}
+#galeri-tabs.is-memuat .galeri-kosong,
+#galeri-tabs.is-memuat > .pill-nav,
+#galeri-tabs.is-memuat > [role="tabpanel"]{display:none}
+.rangka{
+  display:block;background:var(--line-2);border-radius:var(--r);
+  animation:rangka-kedip 1.5s var(--e-out) infinite;
+}
+.rangka--pill{height:44px;width:clamp(110px,26vw,170px);border-radius:999px}
+.rangka--foto{aspect-ratio:4/3}
+@keyframes rangka-kedip{0%,100%{opacity:1}50%{opacity:.45}}
+@media (prefers-reduced-motion:reduce){.rangka{animation:none}}
+
 .lightbox{
   position:fixed;inset:0;z-index:var(--z-modal);display:none;
   place-items:center;padding:clamp(var(--s-5),6vw,var(--s-8));

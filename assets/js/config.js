@@ -9,6 +9,8 @@
 
    Selama API masih kosong:
      - halaman publik tetap tampil normal memakai isi bawaan di HTML,
+       KECUALI galeri, yang memang tidak punya foto bawaan dan akan tampil
+       sebagai keadaan kosong,
      - formulir hanya menampilkan pesan berhasil tanpa mengirim ke mana pun,
      - halaman admin memberi tahu bahwa sambungan belum disetel.
    ========================================================================= */

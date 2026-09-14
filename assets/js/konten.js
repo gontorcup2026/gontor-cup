@@ -2,19 +2,28 @@
    GONTOR CUP: hidrasi isi halaman publik dari Google Spreadsheet
    =========================================================================
 
-   Halaman tetap tampil lengkap tanpa berkas ini: isi bawaan sudah ada di
-   dalam HTML. Skrip ini hanya MENIMPA bagian yang sudah diubah panitia
-   lewat halaman admin. Kalau API belum disetel atau sedang tidak bisa
-   dihubungi, isi bawaannya yang dipakai, tanpa pesan kesalahan ke pengunjung.
+   Sebagian besar halaman tetap tampil lengkap tanpa berkas ini: isi bawaannya
+   sudah ada di dalam HTML dan skrip ini hanya MENIMPA yang sudah diubah
+   panitia lewat halaman admin. KECUALI galeri — halaman itu tidak punya foto
+   bawaan sama sekali, jadi isinya sepenuhnya dari sini.
    ========================================================================= */
 (function () {
   "use strict";
 
-  var api = window.GCApi;
-  if (!api || !api.siap()) return;
-
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+
+  /* Galeri tampil sebagai rangka abu-abu sampai fungsi ini dipanggil. Harus
+     dipanggil di SETIAP jalan keluar, termasuk saat API belum disetel dan
+     saat servernya tidak bisa dihubungi — kalau tidak, rangkanya menggantung
+     selamanya. */
+  function galeriSiap() {
+    var g = $("#galeri-tabs");
+    if (g) g.classList.remove("is-memuat");
+  }
+
+  var api = window.GCApi;
+  if (!api || !api.siap()) { galeriSiap(); return; }
 
   function esc(t) {
     return String(t == null ? "" : t)
@@ -107,9 +116,16 @@
     var grup = $("#galeri-tabs");
     if (!grup || !Array.isArray(hari) || !hari.length) return;
 
-    var daftarTab = $(".pill-nav", grup);
-    var lama = $$('[role="tabpanel"]', grup);
-    lama.forEach(function (p) { p.remove(); });
+    // Buang rangka pemuatan, keadaan kosong, dan hasil pemanggilan sebelumnya.
+    $$('.galeri-rangka, .galeri-kosong, .pill-nav, [role="tabpanel"]', grup)
+      .forEach(function (el) { el.remove(); });
+
+    var daftarTab = document.createElement("div");
+    daftarTab.className = "pill-nav";
+    daftarTab.setAttribute("role", "tablist");
+    daftarTab.setAttribute("aria-label", "Pilih hari perlombaan");
+    daftarTab.style.marginBottom = "32px";
+    grup.appendChild(daftarTab);
 
     daftarTab.innerHTML = hari.map(function (h, i) {
       return '<button type="button" class="pill" role="tab" id="tab-' + esc(h.slug) + '" ' +
@@ -206,5 +222,5 @@
     try { pasangLomba(k.lomba); } catch (e) {}
   }).catch(function () {
     /* Sengaja diam: pengunjung tetap melihat isi bawaan halaman. */
-  });
+  }).then(galeriSiap);
 })();
