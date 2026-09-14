@@ -12,7 +12,7 @@
 
   var KUNCI_TOKEN = "gc-admin-token";
   var token = null;
-  var isi = { info: {}, pengumuman: [], galeri: [], drive: [], lomba: {} };
+  var isi = { info: {}, pengumuman: [], galeri: [], drive: [], lomba: {}, jadwal: [] };
 
   /* -------------------------------------------------- daftar lomba bawaan */
   var LOMBA_BAWAAN = [
@@ -163,6 +163,19 @@
       gambarGaleri();
     });
 
+    $("#tambah-hari-jadwal").addEventListener("click", function () {
+      ambilDariForm("jadwal");
+      isi.jadwal.push({ slug: "hari-" + (isi.jadwal.length + 1), label: "", tanggal: "", sesi: [] });
+      gambarJadwal();
+    });
+
+    $("#pulihkan-jadwal").addEventListener("click", function () {
+      if (!window.GC_JADWAL_BAWAAN) { toast("Jadwal bawaan tidak termuat.", "gagal"); return; }
+      isi.jadwal = salin(window.GC_JADWAL_BAWAAN);
+      gambarJadwal();
+      toast("Dikembalikan ke jadwal panitia. Klik Simpan Jadwal kalau sudah cocok.");
+    });
+
     $("#cari-lomba").addEventListener("input", function () {
       var q = this.value.toLowerCase().trim();
       $$("#daftar-lomba-adm .adm-item").forEach(function (el) {
@@ -208,10 +221,15 @@
         isi.galeri = Array.isArray(k.galeri) ? k.galeri : [];
         isi.drive = Array.isArray(k.drive) ? k.drive : [];
         isi.lomba = k.lomba || {};
+        // Belum pernah disimpan panitia: mulai dari jadwal yang tampil di situs,
+        // supaya menyunting satu jam tidak berarti mengetik ulang semuanya.
+        isi.jadwal = (Array.isArray(k.jadwal) && k.jadwal.length)
+          ? k.jadwal : salin(window.GC_JADWAL_BAWAAN || []);
         gambarSemua();
       })
       .catch(function (e) {
         toast("Gagal memuat isi: " + e.message, "gagal");
+        isi.jadwal = salin(window.GC_JADWAL_BAWAAN || []);
         gambarSemua();
       });
   }
@@ -222,7 +240,11 @@
     gambarGaleri();
     gambarDrive();
     gambarLomba();
+    gambarJadwal();
   }
+
+  /** Salinan dalam, supaya menyunting di layar tidak mengubah jadwal bawaan. */
+  function salin(x) { return JSON.parse(JSON.stringify(x)); }
 
   function simpanBagian(bagian, btn) {
     ambilDariForm(bagian);
@@ -280,6 +302,23 @@
           url: $("[name=url]", el).value.trim(),
           jumlah: $("[name=jumlah]", el).value.trim(),
           pembaruan: $("[name=pembaruan]", el).value.trim()
+        };
+      });
+    }
+    if (bagian === "jadwal") {
+      isi.jadwal = $$("#daftar-jadwal-adm .adm-item").map(function (el, i) {
+        return {
+          slug: $("[name=slug]", el).value.trim() || ("hari-" + (i + 1)),
+          label: $("[name=label]", el).value.trim(),
+          tanggal: $("[name=tanggal]", el).value.trim(),
+          sesi: $$(".adm-jadwal-baris", el).map(function (b) {
+            return {
+              jam: $("[name=jam]", b).value.trim(),
+              lomba: $("[name=lomba]", b).value.trim(),
+              babak: $("[name=babak]", b).value.trim(),
+              venue: $("[name=venue]", b).value.trim()
+            };
+          }).filter(function (x) { return x.jam || x.lomba; })
         };
       });
     }
@@ -548,6 +587,85 @@
           "</div>" +
         "</div></div>";
     }).join("");
+  }
+
+  /* ------------------------------------------------------- gambar: jadwal */
+  function gambarJadwal() {
+    var wadah = $("#daftar-jadwal-adm");
+    if (!wadah) return;
+    if (!isi.jadwal.length) {
+      wadah.innerHTML = '<div class="adm-kosong">Belum ada hari. Klik ' +
+        '<strong>Tambah hari</strong>, atau <strong>Kembalikan ke jadwal panitia</strong> ' +
+        "di bawah.</div>";
+      return;
+    }
+
+    wadah.innerHTML = isi.jadwal.map(function (h, i) {
+      var sesi = h.sesi || [];
+      return '<div class="adm-item" data-idx="' + i + '">' +
+        '<div class="adm-item__kepala">' +
+          '<span class="adm-item__judul">' + esc(h.label || "Hari " + (i + 1)) + "</span>" +
+          '<span class="badge badge--muted">' + sesi.length + " pertandingan</span>" +
+          '<span class="adm-aksi">' +
+            '<button type="button" class="btn btn--danger btn--sm" data-hapus-hari="' + i +
+              '">Hapus hari</button>' +
+          "</span>" +
+        "</div>" +
+        '<div class="adm-item__isi">' +
+          '<div class="adm-grid-2">' +
+            '<div class="field"><label>Nama tab</label>' +
+              '<input class="input" name="label" value="' + esc(h.label || "") + '" placeholder="Kamis"></div>' +
+            '<div class="field"><label>Tanggal</label>' +
+              '<input class="input" name="tanggal" value="' + esc(h.tanggal || "") +
+              '" placeholder="25 September 2026"></div>' +
+          "</div>" +
+          '<input type="hidden" name="slug" value="' + esc(h.slug || "") + '">' +
+          '<div class="adm-jadwal-tabel">' +
+            '<div class="adm-jadwal-kepala"><span>Jam</span><span>Lomba</span>' +
+              "<span>Babak</span><span>Venue</span><span></span></div>" +
+            sesi.map(function (b, j) {
+              return '<div class="adm-jadwal-baris">' +
+                '<input class="input" name="jam" value="' + esc(b.jam || "") + '" placeholder="07:00 - 07:40">' +
+                '<input class="input" name="lomba" value="' + esc(b.lomba || "") + '" placeholder="Futsal">' +
+                '<input class="input" name="babak" value="' + esc(b.babak || "") + '" placeholder="Pertandingan I">' +
+                '<input class="input" name="venue" value="' + esc(b.venue || "") + '" placeholder="Lapangan Futsal Indoor">' +
+                '<button type="button" class="btn btn--danger btn--sm" data-hapus-baris="' +
+                  i + "-" + j + '" aria-label="Hapus baris">×</button>' +
+              "</div>";
+            }).join("") +
+          "</div>" +
+          '<button type="button" class="btn btn--ghost btn--sm" data-tambah-baris="' + i + '">' +
+            '<span class="btn__label">Tambah pertandingan</span></button>' +
+        "</div></div>";
+    }).join("");
+
+    $$("[data-tambah-baris]", wadah).forEach(function (b) {
+      b.addEventListener("click", function () {
+        ambilDariForm("jadwal");
+        var i = Number(b.dataset.tambahBaris);
+        // Jam disalin dari baris terakhir: menambah lomba ke sesi yang sedang
+        // disusun jauh lebih sering daripada membuka rentang jam baru.
+        var sesi = isi.jadwal[i].sesi;
+        var akhir = sesi[sesi.length - 1];
+        sesi.push({ jam: akhir ? akhir.jam : "", lomba: "", babak: "", venue: "" });
+        gambarJadwal();
+      });
+    });
+    $$("[data-hapus-baris]", wadah).forEach(function (b) {
+      b.addEventListener("click", function () {
+        ambilDariForm("jadwal");
+        var bagian = b.dataset.hapusBaris.split("-");
+        isi.jadwal[Number(bagian[0])].sesi.splice(Number(bagian[1]), 1);
+        gambarJadwal();
+      });
+    });
+    $$("[data-hapus-hari]", wadah).forEach(function (b) {
+      b.addEventListener("click", function () {
+        ambilDariForm("jadwal");
+        isi.jadwal.splice(Number(b.dataset.hapusHari), 1);
+        gambarJadwal();
+      });
+    });
   }
 
   /* -------------------------------------------------------- gambar: lomba */

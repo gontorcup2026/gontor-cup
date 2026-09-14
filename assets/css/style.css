@@ -371,7 +371,14 @@ section{position:relative}
   transition:border-color var(--t) var(--e-out),box-shadow var(--t) var(--e-out);
 }
 .site-header.is-stuck{border-bottom-color:var(--line);box-shadow:0 6px 24px -18px rgba(6,34,24,.5)}
-.header-inner{display:flex;align-items:center;gap:var(--s-4);min-height:74px}
+/* Header sengaja boleh lebih lebar dari --wrap (1200px). Logo + delapan butir
+   menu + tombol "Daftar Sekarang" butuh 1297px; dikurung 1200px, tombolnya
+   menyembul keluar wadah dan di layar 1366px menimbulkan geseran mendatar.
+   Kalau menu ditambah lagi, UKUR lebarnya, jangan sekadar menambah butir. */
+.header-inner{
+  display:flex;align-items:center;gap:var(--s-4);min-height:74px;
+  width:min(100% - 2*var(--s-5),1320px);
+}
 
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;flex:none;margin-right:auto}
 .brand img{height:44px;width:auto}
@@ -405,7 +412,12 @@ section{position:relative}
 }
 .hamburger svg{width:22px;height:22px;color:var(--green-800)}
 
-@media (max-width:1180px){
+/* Batas ini BUKAN angka bulat yang dikira-kira: delapan butir menu + logo +
+   tombol "Daftar Sekarang" butuh 1305 px isi, dan .wrap menyisakan 64 px
+   selokan, jadi header mulai meluber di bawah ~1370 px. Dulu batasnya
+   1180 px dan headernya berdesakan di layar 1200-1300 px. Kalau menu
+   ditambah lagi, ukur ulang lebarnya, jangan sekadar menambah butir. */
+@media (max-width:1380px){
   .nav,.header-cta{display:none}
   .hamburger{display:inline-flex}
 }
@@ -637,6 +649,34 @@ section{position:relative}
   width:34px;height:34px;flex:none;display:grid;place-items:center;border-radius:var(--r-xs);
   background:rgba(201,154,46,.15);color:var(--gold-700);
   font-family:var(--f-num);font-size:1rem;
+}
+
+/* ---------- 14b. JADWAL PERTANDINGAN ---------- */
+.jadwal-slot{margin-bottom:var(--s-4)}
+.jadwal-slot__jam{
+  display:flex;align-items:center;gap:8px;margin:0 0 var(--s-4);
+  font-family:var(--f-num);font-size:1.02rem;font-weight:800;
+  letter-spacing:.02em;color:var(--green-700);
+}
+.jadwal-slot__jam svg{width:18px;height:18px;flex:none}
+.jadwal-daftar{list-style:none;padding:0;margin:0;display:flex;flex-direction:column}
+.jadwal-baris{
+  display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px;
+  padding:12px 0;border-top:1px solid var(--line-2);
+}
+.jadwal-baris:first-child{border-top:0;padding-top:0}
+.jadwal-baris__lomba{font-weight:750;color:var(--ink)}
+/* Venue didorong ke kanan pada layar lebar; saat baris membungkus di layar
+   sempit, margin otomatis itu tidak berlaku dan venue turun ke bawahnya. */
+.jadwal-baris__venue{
+  display:flex;align-items:center;gap:6px;margin-left:auto;
+  font-size:.86rem;color:var(--ink-2);
+}
+.jadwal-baris__venue svg{width:15px;height:15px;flex:none;color:var(--gold-700)}
+/* Di layar sempit venue turun ke barisnya sendiri. Tanpa aturan ini
+   margin-left:auto masih mendorongnya ke kanan, jadi rata kanan sendirian. */
+@media (max-width:540px){
+  .jadwal-baris__venue{margin-left:0;width:100%}
 }
 
 /* ---------- 15. GALERI ---------- */

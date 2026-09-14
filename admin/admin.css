@@ -143,3 +143,31 @@ body.adm { background: var(--paper); }
 
 .adm-tabel-kiriman table { min-width: 900px; font-size: .86rem; }
 .adm-tabel-kiriman td { max-width: 34ch; overflow-wrap: anywhere; }
+
+/* ---------- Tabel jadwal pertandingan ---------- */
+.adm-jadwal-tabel { margin: var(--s-4) 0; }
+.adm-jadwal-kepala,
+.adm-jadwal-baris {
+  display: grid;
+  grid-template-columns: 9rem minmax(0,1.2fr) 9rem minmax(0,1.4fr) 2.5rem;
+  gap: 8px; align-items: center;
+}
+.adm-jadwal-kepala {
+  padding: 0 0 6px; font-size: .72rem; font-weight: 800;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+}
+.adm-jadwal-baris { padding: 4px 0; }
+.adm-jadwal-baris .input { font-size: .86rem; padding: 9px 11px; }
+.adm-jadwal-baris .btn { padding: 0; min-height: 34px; font-size: 1.1rem; line-height: 1; }
+
+/* Di layar sempit tiap isian turun ke barisnya sendiri; judul kolom tidak lagi
+   berguna di susunan itu, jadi placeholder tiap kotak yang menggantikannya. */
+@media (max-width: 800px) {
+  .adm-jadwal-kepala { display: none; }
+  .adm-jadwal-baris {
+    grid-template-columns: minmax(0,1fr) 2.5rem;
+    padding: var(--s-3) 0; border-top: 1px solid var(--line-2);
+  }
+  .adm-jadwal-baris .input:nth-child(-n+4) { grid-column: 1; }
+  .adm-jadwal-baris .btn { grid-column: 2; grid-row: 1; }
+}

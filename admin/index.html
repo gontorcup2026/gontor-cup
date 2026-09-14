@@ -85,6 +85,7 @@
       <button type="button" class="pill" role="tab" data-panel="galeri"     aria-selected="false">Galeri Foto</button>
       <button type="button" class="pill" role="tab" data-panel="drive"      aria-selected="false">Unduh Foto</button>
       <button type="button" class="pill" role="tab" data-panel="lomba"      aria-selected="false">Juklak Lomba</button>
+      <button type="button" class="pill" role="tab" data-panel="jadwal"     aria-selected="false">Jadwal</button>
       <button type="button" class="pill" role="tab" data-panel="kiriman"    aria-selected="false">Kiriman Masuk</button>
       <button type="button" class="pill" role="tab" data-panel="setelan"    aria-selected="false">Setelan</button>
     </nav>
@@ -185,10 +186,34 @@
       </div>
     </section>
 
+    <!-- ---------------- JADWAL ---------------- -->
+    <section class="adm-panel" data-isi="jadwal" hidden>
+      <div class="section-head" style="margin-bottom:var(--s-5)">
+        <span class="eyebrow">Bagian 6</span>
+        <h2 class="display">Jadwal Pertandingan</h2>
+        <p class="lead">Baris yang jamnya sama persis digabung jadi satu kartu di situs,
+           dan urutannya ditentukan jamnya sendiri. Jadi tidak perlu menyusun ulang baris
+           setelah mengubah jam.</p>
+      </div>
+      <div id="daftar-jadwal-adm"></div>
+      <button type="button" class="btn btn--ghost" id="tambah-hari-jadwal">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+        <span class="btn__label">Tambah hari</span>
+      </button>
+      <div class="adm-simpan">
+        <button type="button" class="btn btn--gold" data-simpan="jadwal">
+          <span class="btn__label">Simpan Jadwal</span>
+        </button>
+        <button type="button" class="btn btn--ghost" id="pulihkan-jadwal">
+          <span class="btn__label">Kembalikan ke jadwal panitia</span>
+        </button>
+      </div>
+    </section>
+
     <!-- ---------------- KIRIMAN ---------------- -->
     <section class="adm-panel" data-isi="kiriman" hidden>
       <div class="section-head" style="margin-bottom:var(--s-5)">
-        <span class="eyebrow">Bagian 6</span>
+        <span class="eyebrow">Bagian 7</span>
         <h2 class="display">Kiriman Masuk</h2>
         <p class="lead">Data pendaftaran dan karya yang dikirim lewat situs. Sumber datanya sama
            persis dengan Spreadsheet; tabel ini hanya untuk melihat cepat.</p>
@@ -204,7 +229,7 @@
     <!-- ---------------- SETELAN ---------------- -->
     <section class="adm-panel" data-isi="setelan" hidden>
       <div class="section-head" style="margin-bottom:var(--s-5)">
-        <span class="eyebrow">Bagian 7</span>
+        <span class="eyebrow">Bagian 8</span>
         <h2 class="display">Setelan</h2>
       </div>
 
@@ -243,6 +268,7 @@
 
 <script src="../assets/js/config.js"></script>
 <script src="../assets/js/api.js"></script>
+<script src="jadwal-bawaan.js"></script>
 <script src="admin.js"></script>
 </body>
 </html>

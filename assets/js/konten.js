@@ -167,6 +167,72 @@
     document.dispatchEvent(new CustomEvent("gc:tab-diperbarui"));
   }
 
+  /* -------------------------------------------------------------- jadwal */
+  /* Baris diurutkan menurut teks jamnya, lalu yang jamnya sama persis
+     digabung jadi satu kartu. Urutan teks sudah benar karena jamnya selalu
+     "HH:MM - ..." dengan angka berimbuh nol, sehingga "07:30 - 07:40"
+     mendahului "07:30 - Selesai" dan "09:00" mendahului "15:45". */
+  function pasangJadwal(hari) {
+    var grup = $("#jadwal-tabs");
+    if (!grup || !Array.isArray(hari) || !hari.length) return;
+
+    $$('.pill-nav, [role="tabpanel"]', grup).forEach(function (el) { el.remove(); });
+
+    var daftarTab = document.createElement("div");
+    daftarTab.className = "pill-nav";
+    daftarTab.setAttribute("role", "tablist");
+    daftarTab.setAttribute("aria-label", "Pilih hari perlombaan");
+    daftarTab.style.marginBottom = "32px";
+    grup.appendChild(daftarTab);
+
+    daftarTab.innerHTML = hari.map(function (h, i) {
+      return '<button type="button" class="pill" role="tab" id="tab-' + esc(h.slug) + '" ' +
+        'aria-controls="panel-' + esc(h.slug) + '" aria-selected="' + (i === 0) + '" ' +
+        'tabindex="' + (i === 0 ? 0 : -1) + '">' + esc(h.label) +
+        '<span class="count">' + (h.sesi || []).length + "</span></button>";
+    }).join("");
+
+    hari.forEach(function (h, i) {
+      var sesi = (h.sesi || []).slice().sort(function (a, b) {
+        return String(a.jam).localeCompare(String(b.jam));
+      });
+
+      var kartu = "", jam = null, tumpuk = [];
+      function tutup() {
+        if (!tumpuk.length) return;
+        kartu += '<div class="card jadwal-slot reveal is-in">' +
+          '<p class="jadwal-slot__jam">' + ic("clock") + esc(jam) + "</p>" +
+          '<ul class="jadwal-daftar">' + tumpuk.map(function (b) {
+            return '<li class="jadwal-baris">' +
+              '<span class="jadwal-baris__lomba">' + esc(b.lomba) + "</span>" +
+              (b.babak ? '<span class="badge badge--muted">' + esc(b.babak) + "</span>" : "") +
+              '<span class="jadwal-baris__venue">' + ic("pin") + esc(b.venue) + "</span></li>";
+          }).join("") + "</ul></div>";
+        tumpuk = [];
+      }
+      sesi.forEach(function (b) {
+        if (b.jam !== jam) { tutup(); jam = b.jam; }
+        tumpuk.push(b);
+      });
+      tutup();
+
+      var panel = document.createElement("div");
+      panel.id = "panel-" + h.slug;
+      panel.setAttribute("role", "tabpanel");
+      panel.setAttribute("aria-labelledby", "tab-" + h.slug);
+      panel.setAttribute("tabindex", "0");
+      if (i) panel.hidden = true;
+      panel.innerHTML =
+        '<div class="between" style="margin-bottom:24px"><div>' +
+          '<h3 class="display" style="margin-bottom:6px">' + esc(h.label) + "</h3>" +
+          '<p class="muted small" style="margin:0">' + ic("calendar") + " " + esc(h.tanggal || "") +
+          " &nbsp;·&nbsp; " + sesi.length + " pertandingan</p></div></div>" + kartu;
+      grup.appendChild(panel);
+    });
+
+    document.dispatchEvent(new CustomEvent("gc:tab-diperbarui"));
+  }
+
   /* --------------------------------------------------------- tautan drive */
   function pasangDrive(daftar) {
     if (!Array.isArray(daftar)) return;
@@ -218,6 +284,7 @@
     try { pasangInfo(k.info); } catch (e) { /* biarkan isi bawaan */ }
     try { pasangPengumuman(k.pengumuman); } catch (e) {}
     try { pasangGaleri(k.galeri); } catch (e) {}
+    try { pasangJadwal(k.jadwal); } catch (e) {}
     try { pasangDrive(k.drive); } catch (e) {}
     try { pasangLomba(k.lomba); } catch (e) {}
   }).catch(function () {
