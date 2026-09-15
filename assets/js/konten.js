@@ -280,14 +280,67 @@
   }
 
   /* ----------------------------------------------------------------- muat */
-  api.baca().then(function (k) {
+  /* Membaca isi dari Apps Script makan 2 sampai 4 detik, kadang belasan detik
+     kalau skripnya sedang "dingin" — itu ongkos tetap Google, bukan ukuran
+     datanya (isinya cuma ±3 KB). Kalau halaman menunggu jawaban itu dulu,
+     pengunjung melihat isi LAMA yang tertanam di HTML selama beberapa detik,
+     lalu isinya berkedip berganti.
+
+     Karena itu jawaban terakhir disimpan di localStorage dan dipasang LEBIH
+     DULU, sebelum jaringan disentuh sama sekali. Panggilan ke server tetap
+     jalan di belakang layar dan hanya menggambar ulang kalau isinya memang
+     berbeda. Akibatnya: kunjungan pertama sama seperti sebelumnya, kunjungan
+     berikutnya langsung tampil.
+
+     Simpanan ini hanya salinan isi yang toh sudah publik; tidak ada data
+     pribadi di dalamnya. */
+  var KUNCI_SIMPANAN = "gc:konten:v1";
+
+  function terapkan(k) {
     try { pasangInfo(k.info); } catch (e) { /* biarkan isi bawaan */ }
     try { pasangPengumuman(k.pengumuman); } catch (e) {}
     try { pasangGaleri(k.galeri); } catch (e) {}
     try { pasangJadwal(k.jadwal); } catch (e) {}
     try { pasangDrive(k.drive); } catch (e) {}
     try { pasangLomba(k.lomba); } catch (e) {}
+    /* main.js memasang ulang bagian yang membaca nilai dari HTML (hitung
+       mundur) — nilai bawaannya sudah terlanjur dibaca saat boot. */
+    document.dispatchEvent(new CustomEvent("gc:konten-diperbarui"));
+  }
+
+  /* localStorage bisa melempar, bukan cuma kosong: mode penyamaran, kuota
+     penuh, atau situs yang ditolak menyimpan. Semua jalur di bawah harus
+     tetap berakhir dengan halaman yang normal. */
+  function bacaSimpanan() {
+    try {
+      var mentah = window.localStorage.getItem(KUNCI_SIMPANAN);
+      if (!mentah) return null;
+      var o = JSON.parse(mentah);
+      return o && o.konten ? o.konten : null;
+    } catch (e) { return null; }
+  }
+
+  function tulisSimpanan(konten) {
+    try {
+      window.localStorage.setItem(KUNCI_SIMPANAN,
+        JSON.stringify({ waktu: Date.now(), konten: konten }));
+    } catch (e) { /* tidak bisa menyimpan: cuma kehilangan percepatannya */ }
+  }
+
+  var tersimpan = bacaSimpanan();
+  var sidik = null;
+  if (tersimpan) {
+    sidik = JSON.stringify(tersimpan);
+    try { terapkan(tersimpan); } catch (e) { sidik = null; }
+    galeriSiap();
+  }
+
+  api.baca().then(function (k) {
+    var baru = JSON.stringify(k);
+    if (baru === sidik) return;          // tidak ada yang berubah, jangan gambar ulang
+    terapkan(k);
+    tulisSimpanan(k);
   }).catch(function () {
-    /* Sengaja diam: pengunjung tetap melihat isi bawaan halaman. */
+    /* Sengaja diam: pengunjung tetap melihat isi simpanan atau isi bawaan. */
   }).then(galeriSiap);
 })();

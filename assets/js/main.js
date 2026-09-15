@@ -169,9 +169,19 @@
   /* ---------------------------------------------------------------- 5
      HITUNG MUNDUR
   ------------------------------------------------------------------ */
+  var cdTimer = null;   // interval yang sedang jalan
+  var cdAsal = null;    // isi kotak sebelum tick pertama menimpanya
+
+  /* Boleh dipanggil lebih dari sekali: konten.js baru memasang tanggal dari
+     panel admin SETELAH boot(), jadi panggilan pertama masih memakai tanggal
+     bawaan di HTML. Tanpa pemasangan ulang, mengubah waktu mulai lewat panel
+     admin tidak berpengaruh apa pun di halaman. */
   function initCountdown() {
     var box = $("[data-countdown]");
     if (!box) return;
+    if (cdTimer) { clearInterval(cdTimer); cdTimer = null; }
+    if (cdAsal === null) cdAsal = box.innerHTML;
+    else box.innerHTML = cdAsal;   // pulihkan kalau sudah diganti pesan "sedang berlangsung"
     var target = new Date(box.dataset.countdown).getTime();
     if (isNaN(target)) return;
 
@@ -188,7 +198,7 @@
       if (d <= 0) {
         box.innerHTML = '<p class="lead" style="margin:0;color:var(--gold-300);font-weight:700">' +
           "Gontor Cup sedang berlangsung. Selamat bertanding!</p>";
-        clearInterval(timer);
+        clearInterval(cdTimer);
         return;
       }
       var s = Math.floor(d / 1000);
@@ -198,7 +208,7 @@
       if (cells.detik) cells.detik.textContent = pad(s % 60);
     }
     tick();
-    var timer = setInterval(tick, 1000);
+    cdTimer = setInterval(tick, 1000);
   }
 
   /* ---------------------------------------------------------------- 6
@@ -646,15 +656,20 @@
     $$("[data-filter-group]").forEach(function (group) {
       var buttons = $$("[data-filter]", group);
       var targetSel = group.dataset.filterGroup;
-      var items = $$(targetSel + " [data-kategori]");
       var kosong = $(targetSel + " ~ [data-empty]") || $("[data-empty]");
+
+      /* Kartunya dicari ULANG tiap kali tombol ditekan. konten.js mengganti
+         seluruh isi daftar dengan pengumuman dari panel admin, jadi daftar
+         yang diambil saat boot() menunjuk kartu yang sudah dibuang — dan
+         penyaringnya berhenti bekerja tanpa pesan kesalahan apa pun. */
+      function daftarKartu() { return $$(targetSel + " [data-kategori]"); }
 
       buttons.forEach(function (b) {
         b.addEventListener("click", function () {
           buttons.forEach(function (x) { x.classList.toggle("is-active", x === b); });
           var key = b.dataset.filter;
           var tampil = 0;
-          items.forEach(function (it) {
+          daftarKartu().forEach(function (it) {
             var on = key === "semua" || it.dataset.kategori === key;
             it.hidden = !on;
             if (on) tampil++;
@@ -670,6 +685,13 @@
   // belum punya penangan papan tik, jadi tab-nya dipasang ulang di sini.
   document.addEventListener("gc:tab-diperbarui", function () {
     initTabs();
+    initReveal();
+  });
+
+  // Isi dari panel admin selesai dipasang: hitung mundurnya masih memakai
+  // tanggal bawaan HTML, dan kartu yang baru belum punya animasi masuk.
+  document.addEventListener("gc:konten-diperbarui", function () {
+    initCountdown();
     initReveal();
   });
 
