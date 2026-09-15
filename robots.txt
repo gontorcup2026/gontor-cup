@@ -4,4 +4,4 @@
 User-agent: *
 Disallow: /admin/
 
-Sitemap: https://gontorcup2026.github.io/gontor-cup/sitemap.xml
+Sitemap: https://gontorcup2026.my.id/sitemap.xml
