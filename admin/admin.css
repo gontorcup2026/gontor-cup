@@ -59,11 +59,19 @@ body.adm { background: var(--paper); }
 .adm-bar .btn--ghost { --btn-fg: #eef3ef; --btn-bd: rgba(255,255,255,.3); }
 .adm-bar .btn--ghost:hover { --btn-bd: var(--gold-300); background: rgba(255,255,255,.1); }
 
+/* Sepuluh bagian sekarang, dan di layar lebar semuanya muat kalau boleh
+   membungkus ke baris kedua. Menggulir mendatar cuma dipakai di layar sempit,
+   tempat membungkus akan membuat bilahnya setinggi empat baris. Sebelumnya
+   selalu menggulir, dan bagian "Setelan" tersembunyi di luar layar padahal
+   tempatnya masih ada. */
 .adm-tabs {
-  display: flex; gap: var(--s-2); overflow-x: auto;
+  display: flex; flex-wrap: wrap; gap: var(--s-2);
   padding: var(--s-4) 0; scrollbar-width: thin;
 }
 .adm-tabs .pill { flex: none; }
+@media (max-width: 760px) {
+  .adm-tabs { flex-wrap: nowrap; overflow-x: auto; }
+}
 
 .adm-panel { padding-bottom: var(--s-9); }
 
@@ -170,4 +178,61 @@ body.adm { background: var(--paper); }
   }
   .adm-jadwal-baris .input:nth-child(-n+4) { grid-column: 1; }
   .adm-jadwal-baris .btn { grid-column: 2; grid-row: 1; }
+}
+
+/* ---------- Bagan & skor pertandingan ---------- */
+.adm-bagan-laga { padding: var(--s-3) 0; border-top: 1px solid var(--line-2); }
+.adm-bagan-laga:first-child { border-top: 0; padding-top: 0; }
+.adm-bagan-kepala {
+  display: flex; align-items: baseline; gap: var(--s-3); flex-wrap: wrap;
+  margin: 0 0 var(--s-2); font-size: .86rem;
+}
+.adm-bagan-kepala span { color: var(--muted); font-size: .8rem; }
+.adm-bagan-adu {
+  display: grid;
+  grid-template-columns: minmax(0,1fr) 4rem minmax(0,1fr) 13rem;
+  gap: 8px; align-items: center;
+}
+.adm-bagan-sisi { display: flex; align-items: center; gap: 8px; min-width: 0; }
+.adm-bagan-sisi--kanan { flex-direction: row; }
+.adm-bagan-sisi .input {
+  width: 4.2rem; flex: none; text-align: center;
+  font-size: .9rem; padding: 9px 8px;
+}
+.adm-bagan-tim { font-weight: 700; overflow-wrap: anywhere; }
+.adm-bagan-tim--nanti { font-weight: 500; font-style: italic; color: var(--muted); }
+.adm-bagan-vs {
+  text-align: center; font-size: .72rem; font-weight: 800;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--muted);
+}
+.adm-bagan-adu .select { font-size: .86rem; padding: 9px 11px; }
+.adm-bagan-tunggu { margin: 6px 0 0; font-size: .78rem; color: var(--muted); }
+
+/* Di layar sempit kotak skor tidak boleh ikut menyempit sampai angkanya
+   terpotong, jadi susunannya turun jadi satu lajur. */
+@media (max-width: 860px) {
+  .adm-bagan-adu { grid-template-columns: minmax(0,1fr); }
+  .adm-bagan-vs { text-align: left; }
+  .adm-bagan-sisi--kanan { flex-direction: row-reverse; justify-content: flex-end; }
+}
+
+/* ---------- Perolehan nilai klasemen ---------- */
+.adm-klasemen-baris {
+  display: grid; grid-template-columns: 2.6rem minmax(0,1fr) 10rem;
+  gap: var(--s-3); align-items: center;
+  padding: var(--s-3) 0; border-top: 1px solid var(--line-2);
+}
+.adm-klasemen-baris:first-child { border-top: 0; padding-top: 0; }
+.adm-klasemen-kode {
+  display: grid; place-items: center; width: 2.6rem; height: 2.6rem;
+  border-radius: var(--r-xs); background: var(--green-700); color: #fff;
+  font-family: var(--f-num); font-size: .85rem; line-height: 1;
+}
+.adm-klasemen-nama { display: flex; flex-direction: column; font-weight: 700; min-width: 0; }
+.adm-klasemen-nama small { font-weight: 500; font-size: .78rem; color: var(--muted); }
+.adm-klasemen-baris .input { text-align: right; font-family: var(--f-num); font-size: 1rem; }
+
+@media (max-width: 620px) {
+  .adm-klasemen-baris { grid-template-columns: 2.6rem minmax(0,1fr); }
+  .adm-klasemen-baris .input { grid-column: 1 / -1; text-align: left; }
 }

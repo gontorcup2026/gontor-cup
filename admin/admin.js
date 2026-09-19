@@ -12,7 +12,8 @@
 
   var KUNCI_TOKEN = "gc-admin-token";
   var token = null;
-  var isi = { info: {}, pengumuman: [], galeri: [], drive: [], lomba: {}, jadwal: [] };
+  var isi = { info: {}, pengumuman: [], galeri: [], drive: [], lomba: {}, jadwal: [],
+              bagan: {}, klasemen: {} };
 
   /* -------------------------------------------------- daftar lomba bawaan */
   var LOMBA_BAWAAN = [
@@ -225,11 +226,18 @@
         // supaya menyunting satu jam tidak berarti mengetik ulang semuanya.
         isi.jadwal = (Array.isArray(k.jadwal) && k.jadwal.length)
           ? k.jadwal : salin(window.GC_JADWAL_BAWAAN || []);
+        // Bagan tidak punya isi bawaan yang perlu disalin: yang bawaan
+        // adalah PASANGANNYA (window.GC_BAGAN), dan itu tidak pernah
+        // disimpan ke Spreadsheet. Yang disimpan cuma skor.
+        isi.bagan = (k.bagan && typeof k.bagan === "object") ? k.bagan : {};
+        isi.klasemen = (k.klasemen && typeof k.klasemen === "object") ? k.klasemen : {};
         gambarSemua();
       })
       .catch(function (e) {
         toast("Gagal memuat isi: " + e.message, "gagal");
         isi.jadwal = salin(window.GC_JADWAL_BAWAAN || []);
+        isi.bagan = {};
+        isi.klasemen = {};
         gambarSemua();
       });
   }
@@ -241,6 +249,8 @@
     gambarDrive();
     gambarLomba();
     gambarJadwal();
+    gambarKlasemen();
+    gambarBagan();
   }
 
   /** Salinan dalam, supaya menyunting di layar tidak mengubah jadwal bawaan. */
@@ -321,6 +331,35 @@
           }).filter(function (x) { return x.jam || x.lomba; })
         };
       });
+    }
+    if (bagian === "klasemen") {
+      var nilai = {};
+      $$("#daftar-klasemen-adm .adm-klasemen-baris").forEach(function (el) {
+        var v = $("[name=nilai]", el).value.trim();
+        // Kotak kosong TIDAK disimpan sebagai string kosong: yang tersimpan
+        // hanya kampus yang benar-benar sudah punya nilai, supaya halaman bisa
+        // membedakan "nol" dari "belum diisi".
+        if (v) nilai[el.dataset.kampus] = v;
+      });
+      isi.klasemen = nilai;
+    }
+    if (bagian === "bagan") {
+      var peta = {};
+      $$("#daftar-bagan-adm .adm-item").forEach(function (el) {
+        var cabang = {};
+        $$(".adm-bagan-laga", el).forEach(function (b) {
+          var kiri = $("[name=kiri]", b).value.trim();
+          var kanan = $("[name=kanan]", b).value.trim();
+          var menang = $("[name=menang]", b).value;
+          // Laga yang belum disentuh sama sekali tidak ikut disimpan, supaya
+          // yang tersimpan tetap terbaca sebagai "hasil yang sudah ada".
+          if (kiri || kanan || menang) {
+            cabang[b.dataset.laga] = { kiri: kiri, kanan: kanan, menang: menang };
+          }
+        });
+        if (Object.keys(cabang).length) peta[el.dataset.slug] = cabang;
+      });
+      isi.bagan = peta;
     }
     if (bagian === "lomba") {
       var hasil = {};
@@ -664,6 +703,161 @@
         ambilDariForm("jadwal");
         isi.jadwal.splice(Number(b.dataset.hapusHari), 1);
         gambarJadwal();
+      });
+    });
+  }
+
+  /* ----------------------------------------------------- gambar: klasemen */
+  /* Satu angka kumulatif per kampus, dari SELURUH cabang lomba. Sengaja tidak
+     dihitung dari panel Bagan & Skor: bagan hanya meliputi delapan cabang olah
+     raga, sedangkan nilai klasemen datang dari 29 lomba.
+
+     Daftar kampusnya dari window.GC_BAGAN.kampus, tempat kelima kampus ditulis
+     satu kali. Berkasnya memang bernama bagan, tetapi isinya dipakai berdua. */
+
+  function gambarKlasemen() {
+    var wadah = $("#daftar-klasemen-adm");
+    if (!wadah) return;
+    var S = strukturBagan();
+    if (!S) {
+      wadah.innerHTML = '<div class="adm-kosong">Daftar kampus tidak termuat. ' +
+        "Periksa berkas <strong>assets/js/bagan-bawaan.js</strong>.</div>";
+      return;
+    }
+
+    wadah.innerHTML = '<div class="adm-item"><div class="adm-item__isi">' +
+      S.kampus.map(function (k) {
+        var v = isi.klasemen[k.kode];
+        return '<div class="adm-klasemen-baris" data-kampus="' + esc(k.kode) + '">' +
+          '<span class="adm-klasemen-kode">' + esc(k.kode) + "</span>" +
+          '<span class="adm-klasemen-nama">' + esc(k.nama) +
+            '<small>' + esc(k.alamat || "") + "</small></span>" +
+          '<input class="input" name="nilai" inputmode="numeric" ' +
+            'aria-label="Nilai ' + esc(k.nama) + '" placeholder="Belum ada nilai" ' +
+            'value="' + esc(v === 0 || v ? v : "") + '">' +
+        "</div>";
+      }).join("") + "</div></div>";
+  }
+
+  /* -------------------------------------------------------- gambar: bagan */
+  /* Bagan datang dari window.GC_BAGAN (assets/js/bagan-bawaan.js, dihasilkan
+     tools/pages_e.py). Panel ini TIDAK bisa mengubah pasangan lawan, hanya
+     skor dan pemenangnya: pasangan adalah keputusan panitia yang tertulis di
+     berkas sumber, dan kalau bisa diubah dari dua tempat, yang satu pasti
+     menyalip yang lain tanpa ketahuan.
+
+     Yang disimpan berbentuk:
+       isi.bagan["<slug>"]["<kode laga>"] = { kiri, kanan, menang }
+     `menang` adalah KODE KAMPUS, bukan sisi kiri atau kanan, supaya tetap
+     terbaca benar kalau pasangannya kelak direvisi. */
+
+  function strukturBagan() { return window.GC_BAGAN || null; }
+
+  function baganLabel(c, kode) {
+    for (var i = 0; i < c.laga.length; i++) {
+      if (c.laga[i].kode === kode) return c.laga[i].label;
+    }
+    return kode;
+  }
+
+  function baganHasil(slug, kode) {
+    var c = isi.bagan[slug];
+    return (c && c[kode]) || null;
+  }
+
+  /** Kampus di satu sisi laga, atau null kalau laga sumbernya belum ada pemenang. */
+  function baganTim(c, laga, arah) {
+    var ref = laga[arah];
+    if (!ref) return null;
+    if (ref[0] === "tim") return ref[1];
+    var h = baganHasil(c.slug, ref[1]);
+    return (h && h.menang) || null;
+  }
+
+  function baganNamaKampus(S) {
+    var n = {};
+    S.kampus.forEach(function (k) { n[k.kode] = k.nama; });
+    return n;
+  }
+
+  function gambarBagan() {
+    var wadah = $("#daftar-bagan-adm");
+    if (!wadah) return;
+    var S = strukturBagan();
+    if (!S) {
+      wadah.innerHTML = '<div class="adm-kosong">Struktur bagan tidak termuat. ' +
+        "Periksa berkas <strong>assets/js/bagan-bawaan.js</strong>.</div>";
+      return;
+    }
+    var nama = baganNamaKampus(S);
+
+    wadah.innerHTML = S.cabang.map(function (c) {
+      var selesai = 0;
+      var baris = c.laga.map(function (laga) {
+        var kiri = baganTim(c, laga, "kiri");
+        var kanan = baganTim(c, laga, "kanan");
+        var h = baganHasil(c.slug, laga.kode) || {};
+        var menang = (h.menang === kiri || h.menang === kanan) ? h.menang : "";
+        if (menang) selesai++;
+
+        function sisi(arah, kode) {
+          var teks = kode ? (nama[kode] || kode)
+                          : "Pemenang " + baganLabel(c, laga[arah][1]);
+          var kelas = "adm-bagan-tim" + (kode ? "" : " adm-bagan-tim--nanti");
+          return '<span class="' + kelas + '">' + esc(teks) + "</span>";
+        }
+        function kotak(arah) {
+          var v = h[arah];
+          return '<input class="input" name="' + arah + '" inputmode="numeric" ' +
+            'aria-label="Skor ' + esc(arah) + '" value="' +
+            esc(v === 0 || v ? v : "") + '" placeholder="0">';
+        }
+        function pilihan(kode) {
+          if (!kode) return "";
+          return '<option value="' + esc(kode) + '"' +
+            (menang === kode ? " selected" : "") + ">" +
+            esc(nama[kode] || kode) + " menang</option>";
+        }
+
+        return '<div class="adm-bagan-laga" data-laga="' + esc(laga.kode) + '">' +
+          '<p class="adm-bagan-kepala"><strong>' + esc(laga.label) + "</strong>" +
+            "<span>" + esc(laga.hari) + ", " + esc(laga.jam) + "</span></p>" +
+          '<div class="adm-bagan-adu">' +
+            '<div class="adm-bagan-sisi">' + sisi("kiri", kiri) + kotak("kiri") + "</div>" +
+            '<span class="adm-bagan-vs">lawan</span>' +
+            '<div class="adm-bagan-sisi adm-bagan-sisi--kanan">' + kotak("kanan") + sisi("kanan", kanan) + "</div>" +
+            '<select class="select" name="menang" aria-label="Pemenang ' + esc(laga.label) + '">' +
+              '<option value="">Belum ada pemenang</option>' +
+              pilihan(kiri) + pilihan(kanan) +
+            "</select>" +
+          "</div>" +
+          ((!kiri || !kanan)
+            ? '<p class="adm-bagan-tunggu">Pemenangnya baru bisa dipilih setelah ' +
+              "pertandingan sebelumnya ditentukan.</p>"
+            : "") +
+        "</div>";
+      }).join("");
+
+      return '<div class="adm-item" data-slug="' + esc(c.slug) + '">' +
+        '<div class="adm-item__kepala">' +
+          '<span class="adm-item__judul">' + esc(c.nama) + "</span>" +
+          '<span class="badge badge--muted">' + esc(c.venue) + "</span>" +
+          (selesai === c.laga.length
+            ? '<span class="badge badge--gold">Selesai</span>'
+            : '<span class="badge">' + selesai + " dari " + c.laga.length + " terisi</span>") +
+        "</div>" +
+        '<div class="adm-item__isi">' + baris + "</div></div>";
+    }).join("");
+
+    /* Pemenang sebuah laga menentukan siapa yang tampil di laga berikutnya,
+       jadi begitu kotak itu berubah seluruh daftar digambar ulang. Kotak skor
+       TIDAK memicu gambar ulang: isinya tidak mengubah apa pun selain dirinya
+       sendiri, dan menggambar ulang saat orang sedang mengetik akan merebut
+       kursornya. */
+    $$('select[name=menang]', wadah).forEach(function (s) {
+      s.addEventListener("change", function () {
+        ambilDariForm("bagan");
+        gambarBagan();
       });
     });
   }

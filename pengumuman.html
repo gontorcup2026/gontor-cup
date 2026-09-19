@@ -36,6 +36,7 @@
       <a href="pendaftaran.html">Pendaftaran</a>
       <a href="juklak.html">Juklak & Juknis</a>
       <a href="jadwal.html">Jadwal</a>
+      <a href="bagan.html">Klasemen</a>
       <a href="pengumuman.html" aria-current="page">Pengumuman</a>
       <a href="galeri.html">Galeri</a>
       <a href="karya.html">Kumpul Karya</a>
@@ -66,6 +67,7 @@
         <a href="pendaftaran.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>Pendaftaran</a>
         <a href="juklak.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg>Juklak & Juknis</a>
         <a href="jadwal.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>Jadwal</a>
+        <a href="bagan.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="6" height="5" rx="1"/><rect x="2" y="16" width="6" height="5" rx="1"/><rect x="16" y="9" width="6" height="6" rx="1"/><path d="M8 5.5h4v6.5h4"/><path d="M8 18.5h4V12"/></svg>Klasemen</a>
         <a href="pengumuman.html" aria-current="page"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></svg>Pengumuman</a>
         <a href="galeri.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/><circle cx="12" cy="13" r="3"/></svg>Galeri</a>
         <a href="karya.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg>Kumpul Karya</a>
@@ -105,6 +107,9 @@
       <h2 class="display" style="font-size:clamp(1.15rem,2.6vw,1.9rem)" data-pin-judul>Batas Akhir Pengumpulan Karya: 17 September 2026</h2>
       <p class="lead" style="margin-bottom:20px" data-pin-isi>Empat lomba mengumpulkan karya sebelum acara: Kaligrafi, Desain Poster, Fotografi, Visual Iklan Brand Pondok, dan Karya Tulis Ilmiah. Seluruhnya ditutup pada Kamis, 17 September 2026. Karya yang masuk setelah tenggat tidak akan dinilai dewan juri.</p>
       <div class="row">
+        <a class="btn btn--gold btn--sm" href="karya.html">
+          <span class="btn__label">Kumpulkan karya sekarang</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
         <a class="btn btn--ghost btn--sm" href="juklak.html">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H19a1 1 0 0 1 1 1v18a1 1 0 0 1-1 1H6.5a1 1 0 0 1 0-5H20"/></svg><span class="btn__label">Cek ketentuannya</span>
         </a>
@@ -118,7 +123,6 @@
       </div>
       <div class="pill-nav" data-filter-group="#daftar-pengumuman" role="group" aria-label="Saring pengumuman menurut kategori">
         <button type="button" class="pill is-active" data-filter="semua">Semua</button>
-        <button type="button" class="pill" data-filter="penting">Penting</button>
         <button type="button" class="pill" data-filter="teknis">Teknis</button>
         <button type="button" class="pill" data-filter="jadwal">Jadwal</button>
         <button type="button" class="pill" data-filter="umum">Umum</button>
@@ -209,6 +213,7 @@
           <li><a href="pendaftaran.html">Pendaftaran Peserta</a></li>
           <li><a href="juklak.html">Juklak &amp; Juknis</a></li>
           <li><a href="jadwal.html">Jadwal Pertandingan</a></li>
+          <li><a href="bagan.html">Bagan &amp; Klasemen</a></li>
           <li><a href="pengumuman.html">Pengumuman</a></li>
         </ul>
       </div>

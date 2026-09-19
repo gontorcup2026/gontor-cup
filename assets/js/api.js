@@ -8,10 +8,25 @@
   var cfg = window.GC || {};
 
   /**
-   * Apps Script kadang membalas halaman HTML, bukan JSON. Paling sering
-   * karena "Who has access" belum disetel Anyone, atau URL-nya salah tempel.
-   * Tanpa penanganan ini pesannya jadi "Unexpected token '<'", yang tidak
-   * memberi tahu panitia apa pun tentang penyebabnya.
+   * Apps Script kadang membalas halaman HTML, bukan JSON. Tanpa penanganan
+   * ini pesannya jadi "Unexpected token '<'", yang tidak memberi tahu panitia
+   * apa pun tentang penyebabnya.
+   *
+   * Ada DUA sebab yang berbeda, dan keduanya butuh tindakan berbeda:
+   *
+   * 1. SEKALI DI AWAL, sebelum situs pernah berhasil: URL-nya salah tempel,
+   *    atau Web App-nya belum disetel "Who has access: Anyone".
+   * 2. SEWAKTU-WAKTU, padahal tadinya berjalan: Google sedang menolak
+   *    permintaannya, biasanya karena kuota harian Apps Script (akun biasa
+   *    cuma diberi 90 menit waktu jalan sehari) atau sesi Google di peramban
+   *    kedaluwarsa sehingga permintaannya dialihkan ke halaman masuk. Yang
+   *    kedua inilah yang bikin panel admin tiba-tiba gagal setelah lama
+   *    dibuka.
+   *
+   * Sebab kedua sering hilang sendiri, jadi permintaannya DIULANG SEKALI
+   * sebelum menyerah (lihat denganUlang di bawah), dan pesannya menyebut
+   * "coba muat ulang halaman" lebih dulu, bukan menyuruh panitia mengutak-atik
+   * config.js yang toh sudah benar.
    */
   function bacaJson(r) {
     return r.text().then(function (teks) {
@@ -19,12 +34,32 @@
         return JSON.parse(teks);
       } catch (e) {
         if (/^\s*</.test(teks)) {
-          throw new Error("server membalas halaman web, bukan data. " +
-            "Periksa URL Apps Script di config.js dan pastikan Web App disetel " +
+          var err = new Error(
+            "server membalas halaman web, bukan data. Coba muat ulang halaman " +
+            "dan masuk lagi. Kalau tetap begini, kemungkinan kuota harian Google " +
+            "Apps Script sudah habis, atau Web App-nya belum disetel " +
             "“Who has access: Anyone”");
+          err.balasanHtml = true;      // dipakai denganUlang
+          throw err;
         }
         throw new Error("balasan server tidak terbaca");
       }
+    });
+  }
+
+  /**
+   * Menjalankan sebuah permintaan, dan MENGULANGNYA SEKALI kalau yang datang
+   * halaman HTML atau jaringannya putus. Jeda 1,2 detik supaya pengalihan
+   * sesaat dari Google sempat lewat.
+   *
+   * Hanya sekali: kalau Google memang sedang menolak, mengulang terus justru
+   * mempercepat habisnya kuota, dan panitia lebih butuh tahu bahwa ada yang
+   * salah daripada menunggu lingkaran pemuatan yang tidak berhenti.
+   */
+  function denganUlang(buat) {
+    return buat().catch(function (e) {
+      if (!e || (!e.balasanHtml && e.name !== "TypeError")) throw e;
+      return new Promise(function (res) { setTimeout(res, 1200); }).then(buat);
     });
   }
 
@@ -37,12 +72,13 @@
     /** Baca isi situs (publik, tanpa sandi). */
     baca: function () {
       if (!api.siap()) return Promise.reject(new Error("belum-disetel"));
-      return fetch(cfg.API + "?aksi=konten&t=" + Date.now(), { method: "GET" })
-        .then(bacaJson)
-        .then(function (j) {
-          if (!j || !j.ok) throw new Error((j && j.pesan) || "Gagal membaca isi situs");
-          return j.konten || {};
-        });
+      return denganUlang(function () {
+        return fetch(cfg.API + "?aksi=konten&t=" + Date.now(), { method: "GET" })
+          .then(bacaJson);
+      }).then(function (j) {
+        if (!j || !j.ok) throw new Error((j && j.pesan) || "Gagal membaca isi situs");
+        return j.konten || {};
+      });
     },
 
     /**
@@ -55,16 +91,20 @@
      */
     kirim: function (muatan) {
       if (!api.siap()) return Promise.reject(new Error("belum-disetel"));
-      return fetch(cfg.API, {
-        method: "POST",
-        headers: { "Content-Type": "text/plain;charset=utf-8" },
-        body: JSON.stringify(muatan)
-      })
-        .then(bacaJson)
-        .then(function (j) {
-          if (!j || !j.ok) throw new Error((j && j.pesan) || "Permintaan ditolak server");
-          return j;
-        });
+      /* Aman diulang: seluruh aksi tulis di Code.gs menimpa baris yang sama
+         (simpanKonten_ mencari kuncinya dulu), jadi mengulang tidak membuat
+         data ganda. Yang menambah baris cuma kiriman formulir dari pengunjung,
+         dan itu tidak pernah lewat jalur yang gagal dengan balasan HTML. */
+      return denganUlang(function () {
+        return fetch(cfg.API, {
+          method: "POST",
+          headers: { "Content-Type": "text/plain;charset=utf-8" },
+          body: JSON.stringify(muatan)
+        }).then(bacaJson);
+      }).then(function (j) {
+        if (!j || !j.ok) throw new Error((j && j.pesan) || "Permintaan ditolak server");
+        return j;
+      });
     },
 
     /** Ubah File menjadi base64 tanpa awalan data: */

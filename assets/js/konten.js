@@ -279,6 +279,194 @@
     });
   }
 
+  /* --------------------------------------------------------------- bagan */
+  /* Halaman Bagan sudah memuat bagannya sendiri: pasangan lawan adalah
+     keputusan panitia yang tidak menunggu apa pun, jadi ia tertanam di HTML
+     dan tetap tampil tanpa sambungan Google. Yang dikerjakan di sini hanya
+     MENGISI kartu yang sudah ada, bukan membangunnya ulang. Itu disengaja:
+     dengan begitu tidak ada penggambar bagan kedua yang harus dijaga supaya
+     sama dengan yang di tools/pages_e.py, tidak seperti jadwal dan galeri.
+
+     Kaitnya tiga atribut: [data-bagan] tiap cabang, [data-laga] tiap
+     pertandingan, [data-sisi] tiap peserta. Struktur bagannya sendiri datang
+     dari window.GC_BAGAN (assets/js/bagan-bawaan.js, juga dihasilkan
+     pages_e.py), jadi pasangan lawan hanya ditulis di satu tempat.
+
+     Bentuk data hasil di sheet Konten, kunci "bagan":
+       { "<slug cabang>": { "<kode laga>": { kiri, kanan, menang } } }
+     `kiri` dan `kanan` adalah skor apa adanya sebagai teks (bisa "3", bisa
+     "21-18"), `menang` adalah KODE KAMPUS pemenangnya, bukan sisi kiri atau
+     kanan: kode kampus tetap sah dibaca walau panitia merevisi pasangannya. */
+
+  function labelLaga(c, kode) {
+    for (var i = 0; i < c.laga.length; i++) {
+      if (c.laga[i].kode === kode) return c.laga[i].label;
+    }
+    return kode;
+  }
+
+  function hasilLaga(hasil, slug, kode) {
+    var c = hasil[slug];
+    return (c && c[kode]) || null;
+  }
+
+  /** Kampus di satu sisi laga, atau null kalau masih menunggu laga lain. */
+  function timSisi(c, laga, arah, hasil) {
+    var ref = laga[arah];                    // ["tim","G3"] atau ["menang","m1"]
+    if (!ref) return null;
+    if (ref[0] === "tim") return ref[1];
+    var h = hasilLaga(hasil, c.slug, ref[1]);
+    return (h && h.menang) || null;
+  }
+
+  /** Pemenang laga, hanya kalau kodenya memang salah satu dari dua sisinya.
+     Data lama bisa menyebut kampus yang tidak lagi ada di pasangan itu, mis.
+     kalau panitia merevisi bagan setelah skornya terisi. Yang begitu
+     diabaikan: menandai pemenang yang tidak ikut bermain jauh lebih buruk
+     daripada menampilkan laga itu sebagai belum ada hasilnya. */
+  function pemenangSah(c, laga, hasil, kiri, kanan) {
+    var h = hasilLaga(hasil, c.slug, laga.kode);
+    if (!h || !h.menang) return null;
+    if (h.menang !== kiri && h.menang !== kanan) return null;
+    return h.menang;
+  }
+
+  function gambarCabang(S, c, hasil, nama) {
+    var wadah = $('[data-bagan="' + c.slug + '"]');
+    if (!wadah) return;
+    var juara = null;
+
+    c.laga.forEach(function (laga) {
+      var kartu = $('[data-laga="' + laga.kode + '"]', wadah);
+      if (!kartu) return;
+      var kiri = timSisi(c, laga, "kiri", hasil);
+      var kanan = timSisi(c, laga, "kanan", hasil);
+      var menang = pemenangSah(c, laga, hasil, kiri, kanan);
+      var h = hasilLaga(hasil, c.slug, laga.kode) || {};
+      if (laga.kode === "m4" && menang) juara = menang;
+
+      [["kiri", kiri], ["kanan", kanan]].forEach(function (p) {
+        var sisi = $('[data-sisi="' + p[0] + '"]', kartu);
+        if (!sisi) return;
+        var elNama = $(".laga__tim", sisi);
+        var elSkor = $(".laga__skor", sisi);
+        var kode = p[1];
+
+        if (elNama) {
+          if (kode) {
+            elNama.textContent = nama[kode] || kode;
+            elNama.classList.remove("laga__tim--nanti");
+          } else {
+            // Belum ketahuan: kembalikan ke tulisan bawaannya, jangan menebak.
+            elNama.textContent = "Pemenang " + labelLaga(c, laga[p[0]][1]);
+            elNama.classList.add("laga__tim--nanti");
+          }
+        }
+        if (elSkor) {
+          var skor = h[p[0]];
+          elSkor.textContent = (skor === 0 || skor) ? String(skor) : "\u2013";
+        }
+        sisi.classList.toggle("is-menang", !!menang && kode === menang);
+        sisi.classList.toggle("is-kalah", !!menang && !!kode && kode !== menang);
+      });
+    });
+
+    var lencana = $("[data-juara-cabang]", $('[data-bagan="' + c.slug + '"]').parentNode);
+    if (lencana) {
+      var teks = $("span", lencana);
+      if (juara) {
+        if (teks) teks.textContent = "Juara: " + (nama[juara] || juara);
+        lencana.hidden = false;
+      } else {
+        lencana.hidden = true;
+      }
+    }
+  }
+
+  /* ------------------------------------------------------------ klasemen */
+  /* Nilai klasemen TIDAK dihitung dari bagan. Ia berasal dari SELURUH cabang
+     lomba, bukan hanya delapan cabang yang berbagan, jadi panitia yang
+     memasukkannya lewat panel admin sebagai satu angka kumulatif per kampus.
+
+     Bentuk datanya di sheet Konten, kunci "klasemen":
+       { "<kode kampus>": "<nilai>" }
+     Nilainya disimpan apa adanya sebagai teks dan ditampilkan apa adanya;
+     yang diubah jadi angka hanya untuk MENGURUTKAN. Dengan begitu panitia
+     boleh menulis "1.250" atau "97,5" tanpa angkanya berubah sendiri di
+     halaman.
+
+     Daftar kampusnya diambil dari window.GC_BAGAN.kampus. Berkas itu memang
+     bernama bagan, tetapi ia satu-satunya tempat kelima kampus ditulis. */
+
+  /** Angka untuk mengurutkan, atau null kalau kotaknya memang belum diisi. */
+  function nilaiUrut(teks) {
+    if (teks === 0) return 0;
+    if (!teks) return null;
+    var bersih = String(teks).replace(/\./g, "").replace(/,/g, ".").replace(/[^\d.\-]/g, "");
+    var n = parseFloat(bersih);
+    return isNaN(n) ? null : n;
+  }
+
+  function gambarKlasemen(S, nilai) {
+    var tbody = $("[data-klasemen]");
+    if (!tbody) return;
+    nilai = nilai && typeof nilai === "object" ? nilai : {};
+
+    var baris = S.kampus.map(function (k) {
+      var mentah = nilai[k.kode];
+      return { kode: k.kode, nama: k.nama, teks: (mentah === 0 || mentah) ? String(mentah) : "",
+               urut: nilaiUrut(mentah) };
+    });
+    var terisi = baris.filter(function (b) { return b.urut !== null; }).length;
+
+    /* Kampus yang belum ada nilainya selalu di bawah, berapa pun nilai yang
+       lain. Tanpa aturan ini kotak kosong terbaca sebagai nol dan kampus yang
+       nilainya belum sempat dimasukkan tampak kalah telak. */
+    baris.sort(function (a, b) {
+      if (a.urut === null && b.urut === null) return a.kode.localeCompare(b.kode);
+      if (a.urut === null) return 1;
+      if (b.urut === null) return -1;
+      return (b.urut - a.urut) || a.kode.localeCompare(b.kode);
+    });
+
+    tbody.innerHTML = baris.map(function (b, i) {
+      // Peringkat hanya ditulis untuk kampus yang sudah punya nilai, dan sama
+      // sekali tidak ditulis selama belum ada satu nilai pun: menomori lima
+      // kampus yang semuanya kosong akan terbaca sebagai peringkat yang jadi.
+      var pos = (terisi && b.urut !== null) ? String(i + 1) : "\u2013";
+      return '<tr data-kampus="' + esc(b.kode) + '"' +
+          (terisi && i === 0 && b.urut !== null ? ' class="is-puncak"' : "") + ">" +
+        '<td class="klasemen__pos">' + pos + "</td>" +
+        '<th scope="row"><span class="klasemen__nama">' +
+          '<span class="klasemen__kode">' + esc(b.kode) + "</span>" +
+          esc(b.nama) + "</span></th>" +
+        '<td class="num klasemen__poin">' + (b.teks ? esc(b.teks) : "\u2013") + "</td>" +
+      "</tr>";
+    }).join("");
+
+    var status = $("[data-klasemen-status]");
+    if (status) {
+      status.innerHTML = ic("clock") + " <span>" + (terisi
+        ? "Nilai diperbarui panitia selama acara berlangsung."
+        : "Belum ada nilai yang dimasukkan panitia.") + "</span>";
+    }
+  }
+
+  function pasangKlasemen(nilai) {
+    var S = window.GC_BAGAN;
+    if (!S || !$("[data-klasemen]")) return;
+    gambarKlasemen(S, nilai);
+  }
+
+  function pasangBagan(hasil) {
+    var S = window.GC_BAGAN;
+    if (!S || !$("#bagan-tabs")) return;       // halaman lain, tidak ada bagan
+    hasil = hasil && typeof hasil === "object" ? hasil : {};
+    var nama = {};
+    S.kampus.forEach(function (k) { nama[k.kode] = k.nama; });
+    S.cabang.forEach(function (c) { gambarCabang(S, c, hasil, nama); });
+  }
+
   /* ----------------------------------------------------------------- muat */
   /* Membaca isi dari Apps Script makan 2 sampai 4 detik, kadang belasan detik
      kalau skripnya sedang "dingin" — itu ongkos tetap Google, bukan ukuran
@@ -303,6 +491,8 @@
     try { pasangJadwal(k.jadwal); } catch (e) {}
     try { pasangDrive(k.drive); } catch (e) {}
     try { pasangLomba(k.lomba); } catch (e) {}
+    try { pasangBagan(k.bagan); } catch (e) {}
+    try { pasangKlasemen(k.klasemen); } catch (e) {}
     /* main.js memasang ulang bagian yang membaca nilai dari HTML (hitung
        mundur) — nilai bawaannya sudah terlanjur dibaca saat boot. */
     document.dispatchEvent(new CustomEvent("gc:konten-diperbarui"));
@@ -335,12 +525,60 @@
     galeriSiap();
   }
 
-  api.baca().then(function (k) {
-    var baru = JSON.stringify(k);
-    if (baru === sidik) return;          // tidak ada yang berubah, jangan gambar ulang
-    terapkan(k);
-    tulisSimpanan(k);
-  }).catch(function () {
+  /* Dipakai sekali saat halaman dibuka, dan berulang di halaman Bagan.
+     `sidik` WAJIB ikut diperbarui di sini: tanpa itu pembandingnya selamanya
+     membandingkan dengan isi simpanan yang pertama, dan pemanggilan kedua
+     menggambar ulang seluruh halaman walau tidak ada yang berubah. */
+  function segarkan() {
+    return api.baca().then(function (k) {
+      var baru = JSON.stringify(k);
+      if (baru === sidik) return;        // tidak ada yang berubah, jangan gambar ulang
+      sidik = baru;
+      terapkan(k);
+      tulisSimpanan(k);
+    });
+  }
+
+  segarkan().catch(function () {
     /* Sengaja diam: pengunjung tetap melihat isi simpanan atau isi bawaan. */
   }).then(galeriSiap);
+
+  /* Halaman Klasemen sendirian yang isinya berubah SELAMA dibuka: panitia
+     memasukkan nilai dan skor sementara pengunjung menonton. Halaman lain
+     cukup dibaca sekali saat dibuka.
+
+     Penghitungnya berhenti saat tab tidak terlihat, lalu menyegarkan sekali
+     begitu kembali terlihat. Tanpa itu, tab yang ditinggal semalaman tetap
+     memanggil Apps Script sepanjang malam.
+
+     DUA MENIT, BUKAN SATU, dan angka ini jangan diturunkan. Satu panggilan ke
+     Apps Script diukur memakan sekitar 2 detik (diukur 19 September 2026 dari
+     situs sungguhan: 1,9 detik, balasan 3 KB). Ongkos itu ongkos tetap Google,
+     bukan ukuran datanya, dan Apps Script membatasi berapa banyak permintaan
+     boleh berjalan bersamaan. Begitu batasnya kena, ia berhenti membalas JSON
+     dan mulai membalas HALAMAN HTML, dan seluruh situs, termasuk panel admin,
+     melaporkan "server membalas halaman web, bukan data".
+
+     Saat acara berlangsung halaman ini yang paling banyak dibuka bersamaan.
+     Tiap tab yang terbuka satu jam = 30 panggilan; seratus tab = 3.000
+     panggilan per jam, seluruhnya ke satu skrip yang sama. Itu sebabnya jeda
+     ini dinaikkan, bukan diturunkan, kalau nanti ragu. */
+  if (document.body.getAttribute("data-page") === "bagan.html") {
+    var JEDA_BAGAN = 120000;
+    var jam = null;
+
+    function mulaiJam() {
+      if (!jam) jam = setInterval(function () { segarkan().catch(function () {}); }, JEDA_BAGAN);
+    }
+    function hentiJam() {
+      if (jam) { clearInterval(jam); jam = null; }
+    }
+
+    document.addEventListener("visibilitychange", function () {
+      if (document.hidden) { hentiJam(); return; }
+      segarkan().catch(function () {});
+      mulaiJam();
+    });
+    if (!document.hidden) mulaiJam();
+  }
 })();

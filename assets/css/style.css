@@ -231,6 +231,9 @@ section{position:relative}
   color:var(--gold-700);margin-bottom:var(--s-3);
 }
 .section--dark .eyebrow,.page-hero .eyebrow{color:var(--gold-300)}
+/* Eyebrow boleh berisi ikon. Tanpa ukuran, SVG memakai tinggi alaminya dan
+   tampil sebesar judulnya sendiri, bukan sebesar tulisan di sampingnya. */
+.eyebrow svg{width:15px;height:15px;flex:none}
 .section-head{max-width:70ch;margin-bottom:var(--s-7)}
 .section-head.center{margin-inline:auto;text-align:center}
 .section-head.center .eyebrow{justify-content:center}
@@ -371,13 +374,18 @@ section{position:relative}
   transition:border-color var(--t) var(--e-out),box-shadow var(--t) var(--e-out);
 }
 .site-header.is-stuck{border-bottom-color:var(--line);box-shadow:0 6px 24px -18px rgba(6,34,24,.5)}
-/* Header sengaja boleh lebih lebar dari --wrap (1200px). Logo + delapan butir
-   menu + tombol "Daftar Sekarang" butuh 1297px; dikurung 1200px, tombolnya
+/* Header sengaja boleh lebih lebar dari --wrap (1200px). Logo + SEMBILAN butir
+   menu + tombol "Daftar Sekarang" butuh 1401px; dikurung 1200px, tombolnya
    menyembul keluar wadah dan di layar 1366px menimbulkan geseran mendatar.
-   Kalau menu ditambah lagi, UKUR lebarnya, jangan sekadar menambah butir. */
+
+   UKUR ULANG BUKAN CUMA SAAT MENAMBAH BUTIR, TAPI JUGA SAAT MENGGANTI
+   TULISANNYA. Butir kelima pernah bernama "Bagan" dan butuh 1377px; diubah
+   jadi "Klasemen" saja, angkanya naik ke 1401px dan headernya meluber lagi.
+   Cara mengukurnya di peramban: jumlahkan offsetWidth .brand + .nav +
+   .header-cta berikut dua gap-nya (16px). */
 .header-inner{
   display:flex;align-items:center;gap:var(--s-4);min-height:74px;
-  width:min(100% - 2*var(--s-5),1320px);
+  width:min(100% - 2*var(--s-5),1420px);
 }
 
 .brand{display:flex;align-items:center;gap:12px;text-decoration:none;flex:none;margin-right:auto}
@@ -412,12 +420,13 @@ section{position:relative}
 }
 .hamburger svg{width:22px;height:22px;color:var(--green-800)}
 
-/* Batas ini BUKAN angka bulat yang dikira-kira: delapan butir menu + logo +
-   tombol "Daftar Sekarang" butuh 1305 px isi, dan .wrap menyisakan 64 px
-   selokan, jadi header mulai meluber di bawah ~1370 px. Dulu batasnya
-   1180 px dan headernya berdesakan di layar 1200-1300 px. Kalau menu
-   ditambah lagi, ukur ulang lebarnya, jangan sekadar menambah butir. */
-@media (max-width:1380px){
+/* Batas ini BUKAN angka bulat yang dikira-kira: SEMBILAN butir menu + logo +
+   tombol "Daftar Sekarang" butuh 1401 px isi, dan .header-inner menyisakan
+   48 px selokan, jadi navigasinya baru muat di layar 1449 px ke atas; dibulatkan
+   ke 1470 px supaya ada sisa. Dulu batasnya 1380 px untuk delapan butir, dan
+   butir kesembilan membuatnya meluber 57 px tanpa satu pun pesan kesalahan.
+   Ukur ulang tiap kali menu bertambah ATAU tulisannya berganti. */
+@media (max-width:1470px){
   .nav,.header-cta{display:none}
   .hamburger{display:inline-flex}
 }
@@ -677,6 +686,130 @@ section{position:relative}
    margin-left:auto masih mendorongnya ke kanan, jadi rata kanan sendirian. */
 @media (max-width:540px){
   .jadwal-baris__venue{margin-left:0;width:100%}
+}
+
+/* ---------- 14c. BAGAN & KLASEMEN ---------- */
+/* Klasemen: tabel biasa, tetapi kolomnya delapan dan di ponsel tidak muat.
+   Pembungkusnya yang bergulir, bukan halamannya. */
+.klasemen-bungkus{overflow-x:auto;margin:0 calc(-1 * var(--s-2)) var(--s-4)}
+/* Tiga kolom saja, jadi batas minimumnya jauh lebih kecil daripada tabel lain
+   di situs ini (560px). Dengan 320px, tabelnya muat utuh di ponsel 360px dan
+   pembungkusnya tidak perlu digulir sama sekali. */
+.klasemen{min-width:320px}
+/* Kolom nilai rata kanan, seperti tabel klasemen pada umumnya: angkanya jadi
+   sejajar satuan-puluhan-ratusan, dan tidak mengambang di tengah kolom yang
+   lebar. text-align global untuk th/td rata kiri, jadi harus ditimpa. */
+.klasemen .num{text-align:right}
+.klasemen th,.klasemen td{padding:13px var(--s-3);vertical-align:middle}
+.klasemen tbody th{
+  background:transparent;text-transform:none;letter-spacing:0;
+  font-size:.95rem;font-weight:750;color:var(--ink);white-space:nowrap;
+}
+.klasemen__pos{width:44px;text-align:center;color:var(--muted);font-variant-numeric:tabular-nums}
+td.klasemen__pos{font-family:var(--f-num);font-size:1.05rem;color:var(--green-700)}
+/* Tanda kampus dan namanya disejajarkan dengan flex di dalam SATU span,
+   bukan vertical-align pada tanda kampusnya. display:flex tidak boleh
+   dipasang langsung pada <th>: itu mencabut selnya dari model kotak tabel
+   dan kolomnya berhenti sejajar dengan kepala tabel. */
+.klasemen__nama{display:flex;align-items:center;gap:10px}
+.klasemen__kode{
+  display:grid;place-items:center;width:30px;height:30px;flex:none;
+  border-radius:var(--r-xs);background:var(--green-700);color:#fff;
+  font-family:var(--f-num);font-size:.8rem;line-height:1;letter-spacing:.02em;
+}
+.klasemen td.klasemen__poin{font-family:var(--f-num);font-size:1.05rem;color:var(--green-800)}
+/* Baris puncak hanya ditandai setelah ada hasil; kelasnya dipasang konten.js,
+   bukan tertulis di HTML bawaan. */
+.klasemen tr.is-puncak{background:rgba(201,154,46,.09)}
+.klasemen tr.is-puncak .klasemen__kode{background:var(--gold-600)}
+.klasemen tr.is-puncak td.klasemen__pos{color:var(--gold-700)}
+.klasemen__status{
+  display:flex;align-items:center;gap:8px;margin:0 0 var(--s-3);
+  font-size:.86rem;font-weight:600;color:var(--muted);
+}
+.klasemen__status svg{width:16px;height:16px;flex:none;color:var(--gold-700)}
+
+/* Kisi bagan. Lima kolom: laga, penghubung, laga, penghubung, laga. Dua baris
+   yang TINGGINYA SAMA (1fr 1fr) dan TANPA row-gap, sebab garis penghubung
+   menaruh sikunya di 25% dan 75% tinggi kisi. Begitu barisnya tidak sama
+   tinggi, atau ada gap, sikunya meleset dari tengah kartu. Jarak antar kartu
+   diberikan margin kartunya sendiri, bukan gap kisi. */
+.bagan{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 36px minmax(0,1fr) 36px minmax(0,1fr);
+  grid-template-rows:1fr 1fr;
+  align-items:center;
+}
+.laga[data-slot="awal"]{grid-column:1;grid-row:1}
+.laga[data-slot="semi-atas"]{grid-column:3;grid-row:1}
+.laga[data-slot="semi-bawah"]{grid-column:3;grid-row:2}
+.laga[data-slot="final"]{grid-column:5;grid-row:1 / 3}
+.bagan__hub:not(.bagan__hub--gabung){grid-column:2;grid-row:1}
+.bagan__hub--gabung{grid-column:4;grid-row:1 / 3}
+
+.laga{
+  margin-block:var(--s-2);padding:var(--s-4);
+  background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:var(--sh-1);
+}
+.laga--juara,.laga[data-slot="final"]{border-color:var(--gold-400);box-shadow:var(--sh-gold)}
+.laga__kepala{
+  display:flex;align-items:baseline;justify-content:space-between;gap:8px;flex-wrap:wrap;
+  margin:0 0 var(--s-3);padding-bottom:10px;border-bottom:1px solid var(--line-2);
+}
+.laga__label{
+  font-size:.7rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--gold-700);
+}
+.laga__jam{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.laga__sisi{
+  display:flex;align-items:center;gap:8px;
+  padding:9px 10px;border-radius:var(--r-sm);
+}
+.laga__sisi + .laga__sisi{margin-top:4px}
+.laga__tim{font-weight:750;color:var(--ink)}
+/* Peserta yang belum diketahui: tidak pernah menyebut nama kampus, supaya
+   tidak terbaca sebagai hasil yang sudah diputuskan. */
+.laga__tim--nanti{font-weight:600;font-style:italic;color:var(--muted)}
+.laga__bye{
+  font-size:.62rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  padding:3px 8px;border-radius:var(--r-pill);
+  background:rgba(85,99,92,.12);color:var(--muted);
+}
+.laga__skor{
+  margin-left:auto;min-width:34px;text-align:right;
+  font-family:var(--f-num);font-size:1.08rem;color:var(--muted);
+  font-variant-numeric:tabular-nums;
+}
+.laga__sisi.is-menang{background:rgba(21,99,63,.08)}
+.laga__sisi.is-menang .laga__tim{color:var(--green-700)}
+.laga__sisi.is-menang .laga__skor{color:var(--green-700)}
+.laga__sisi.is-kalah{opacity:.62}
+
+/* Garis penghubung. Hiasan murni: hubungan antar laga sudah tertulis di dalam
+   kartunya ("Pemenang Pertandingan I"), jadi menyembunyikannya di layar
+   sempit tidak menghilangkan keterangan apa pun. */
+.bagan__hub{position:relative;align-self:stretch}
+/* Garisnya lebih tua daripada --line: di atas latar --paper-2 halaman ini,
+   #e2e0d6 nyaris tidak terlihat dan bagannya terbaca sebagai kartu lepas. */
+.bagan__hub i{position:absolute;background:rgba(15,74,48,.28);display:block}
+.hub-h{height:2px}
+.hub-h--lurus{left:0;right:0;top:calc(50% - 1px)}
+.hub-h--atas{left:0;right:50%;top:calc(25% - 1px)}
+.hub-h--bawah{left:0;right:50%;top:calc(75% - 1px)}
+.hub-h--keluar{left:50%;right:0;top:calc(50% - 1px)}
+.hub-v{width:2px;left:calc(50% - 1px);top:25%;bottom:25%}
+
+.bagan-kepala{margin-bottom:var(--s-5)}
+.bagan-kepala .badge svg{width:14px;height:14px}
+.bagan__catatan{display:flex;align-items:flex-start;gap:8px;margin:var(--s-5) 0 0}
+.bagan__catatan svg{width:16px;height:16px;flex:none;margin-top:3px;color:var(--gold-700)}
+
+/* Di bawah 960 px kisinya jadi tumpukan biasa, menurut urutan DOM:
+   penyisihan, dua semifinal, final. */
+@media (max-width:960px){
+  .bagan{display:flex;flex-direction:column}
+  .bagan__hub{display:none}
 }
 
 /* ---------- 15. GALERI ---------- */
