@@ -305,58 +305,17 @@
     return kode;
   }
 
+  /* Pembaca bagan tinggal di assets/js/bagan-hitung.js, DIPAKAI BERSAMA
+     dengan panel admin. Jangan menyalinnya balik ke sini: logika ini sempat
+     ada dua salinan yang berbeda isi, dan yang di panel admin merambatkan
+     pemenang tanpa memvalidasinya lebih dulu. */
+  var B = window.GCBagan || null;
+
   function hasilLaga(hasil, slug, kode) {
     var c = hasil[slug];
     return (c && c[kode]) || null;
   }
 
-  /** Laga dalam cabang ini menurut kodenya, atau null. */
-  function lagaBerkode(c, kode) {
-    for (var i = 0; i < c.laga.length; i++) {
-      if (c.laga[i].kode === kode) return c.laga[i];
-    }
-    return null;
-  }
-
-  /** Pemenang SAH sebuah laga, atau null kalau belum ada atau tidak sah.
-
-     Dipakai timSisi, dan itu yang penting: pemenang yang tidak cocok dengan
-     pasangan lawannya harus berhenti DI SITU, tidak boleh merambat ke babak
-     berikutnya. Dulu tidak begitu, dan akibatnya kartu laganya sendiri benar
-     (tidak menandai siapa pun menang) sementara babak berikutnya memajang
-     kampus yang tidak pernah bermain di situ, malah tanpa kelas
-     `laga__tim--nanti` sehingga terbaca sebagai sudah pasti.
-
-     `dalam` cuma pengaman kalau data bagannya kelak salah sunting dan
-     melingkar; rantai sungguhannya paling dalam tiga tingkat. */
-  function pemenangLaga(c, kode, hasil, dalam) {
-    dalam = dalam || 0;
-    var laga = lagaBerkode(c, kode);
-    if (!laga || dalam > 8) return null;
-    var kiri = timSisi(c, laga, "kiri", hasil, dalam + 1);
-    var kanan = timSisi(c, laga, "kanan", hasil, dalam + 1);
-    return pemenangSah(c, laga, hasil, kiri, kanan);
-  }
-
-  /** Kampus di satu sisi laga, atau null kalau masih menunggu laga lain. */
-  function timSisi(c, laga, arah, hasil, dalam) {
-    var ref = laga[arah];                    // ["tim","G3"] atau ["menang","m1"]
-    if (!ref) return null;
-    if (ref[0] === "tim") return ref[1];
-    return pemenangLaga(c, ref[1], hasil, dalam);
-  }
-
-  /** Pemenang laga, hanya kalau kodenya memang salah satu dari dua sisinya.
-     Data lama bisa menyebut kampus yang tidak lagi ada di pasangan itu, mis.
-     kalau panitia merevisi bagan setelah skornya terisi. Yang begitu
-     diabaikan: menandai pemenang yang tidak ikut bermain jauh lebih buruk
-     daripada menampilkan laga itu sebagai belum ada hasilnya. */
-  function pemenangSah(c, laga, hasil, kiri, kanan) {
-    var h = hasilLaga(hasil, c.slug, laga.kode);
-    if (!h || !h.menang) return null;
-    if (h.menang !== kiri && h.menang !== kanan) return null;
-    return h.menang;
-  }
 
   function gambarCabang(S, c, hasil, nama) {
     var wadah = $('[data-bagan="' + c.slug + '"]');
@@ -366,9 +325,9 @@
     c.laga.forEach(function (laga) {
       var kartu = $('[data-laga="' + laga.kode + '"]', wadah);
       if (!kartu) return;
-      var kiri = timSisi(c, laga, "kiri", hasil);
-      var kanan = timSisi(c, laga, "kanan", hasil);
-      var menang = pemenangSah(c, laga, hasil, kiri, kanan);
+      var kiri = B.timSisi(c, laga, "kiri", hasil);
+      var kanan = B.timSisi(c, laga, "kanan", hasil);
+      var menang = B.pemenangSah(c, laga, hasil, kiri, kanan);
       var h = hasilLaga(hasil, c.slug, laga.kode) || {};
       if (laga.kode === "m4" && menang) juara = menang;
 
@@ -411,38 +370,53 @@
   }
 
   /* ------------------------------------------------------------ klasemen */
-  /* Nilai klasemen TIDAK dihitung dari bagan. Ia berasal dari SELURUH cabang
-     lomba, bukan hanya delapan cabang yang berbagan, jadi panitia yang
-     memasukkannya lewat panel admin sebagai satu angka kumulatif per kampus.
+  /* Poin klasemen datang dari DUA sumber yang dijumlahkan:
 
-     Bentuk datanya di sheet Konten, kunci "klasemen":
-       { "<kode kampus>": "<nilai>" }
-     Nilainya disimpan apa adanya sebagai teks dan ditampilkan apa adanya;
-     yang diubah jadi angka hanya untuk MENGURUTKAN. Dengan begitu panitia
-     boleh menulis "1.250" atau "97,5" tanpa angkanya berubah sendiri di
-     halaman.
+     1. OTOMATIS, dari bagan Olah Raga. Sepuluh bagan, poinnya dari kotak poin
+        di Bagan Lomba.pptx, dihitung bagan-hitung.js.
+     2. MANUAL, dari panel admin, untuk 21 lomba di luar Olah Raga. Bentuknya
+        di sheet Konten, kunci "klasemen": { "<kode kampus>": "<nilai>" }.
+
+     ANGKA MANUAL ITU HANYA UNTUK LOMBA SELAIN OLAH RAGA. Kalau panitia
+     mengetikkan total keseluruhan di situ, poin Olah Raga terhitung dua kali.
+     Halaman ini sengaja cuma punya satu kolom, jadi peringatannya tinggal di
+     panel admin — di sanalah angkanya diketik.
+
+     Dulu nilai manual ditampilkan APA ADANYA sebagai teks ("1.250", "97,5")
+     dan hanya diubah jadi angka untuk mengurutkan. Sekarang ia dijumlahkan
+     dengan poin Olah Raga, jadi bentuk aslinya memang tidak bisa
+     dipertahankan; yang tampil hasil penjumlahannya.
 
      Daftar kampusnya diambil dari window.GC_BAGAN.kampus. Berkas itu memang
      bernama bagan, tetapi ia satu-satunya tempat kelima kampus ditulis. */
 
-  /** Angka untuk mengurutkan, atau null kalau kotaknya memang belum diisi. */
+  /* Angka dari kotak isian panitia, atau null kalau kotaknya memang belum
+     diisi. Aturannya tinggal di bagan-hitung.js, dipakai bersama panel admin
+     — dua salinan adalah cara paling mudah membuat keduanya tidak sepakat
+     soal "kosong bukan nol". */
   function nilaiUrut(teks) {
-    if (teks === 0) return 0;
-    if (!teks) return null;
-    var bersih = String(teks).replace(/\./g, "").replace(/,/g, ".").replace(/[^\d.\-]/g, "");
-    var n = parseFloat(bersih);
-    return isNaN(n) ? null : n;
+    return B ? B.angkaKlasemen(teks) : null;
   }
 
-  function gambarKlasemen(S, nilai) {
+  function gambarKlasemen(S, nilai, poin) {
     var tbody = $("[data-klasemen]");
     if (!tbody) return;
     nilai = nilai && typeof nilai === "object" ? nilai : {};
+    poin = poin || {};
 
     var baris = S.kampus.map(function (k) {
-      var mentah = nilai[k.kode];
-      return { kode: k.kode, nama: k.nama, teks: (mentah === 0 || mentah) ? String(mentah) : "",
-               urut: nilaiUrut(mentah) };
+      var manual = nilaiUrut(nilai[k.kode]);
+      var otomatis = poin[k.kode] || 0;
+      /* Sebuah kampus dianggap PUNYA nilai kalau panitia sudah mengetikkan
+         sesuatu untuknya, atau kalau ia sudah menerima poin dari Olah Raga.
+         Poin terkecil yang bisa diterima kampus adalah 15, jadi "otomatis > 0"
+         setara dengan "sudah ikut bertanding" — tidak ada kerancuan dengan
+         nol seperti pada kotak manual yang dikosongkan. */
+      var punya = manual !== null || otomatis > 0;
+      var total = (manual || 0) + otomatis;
+      return { kode: k.kode, nama: k.nama,
+               teks: punya ? (B ? B.tulisAngka(total) : String(total)) : "",
+               urut: punya ? total : null };
     });
     var terisi = baris.filter(function (b) { return b.urut !== null; }).length;
 
@@ -479,15 +453,18 @@
     }
   }
 
-  function pasangKlasemen(nilai) {
+  function pasangKlasemen(nilai, hasilBagan) {
     var S = window.GC_BAGAN;
     if (!S || !$("[data-klasemen]")) return;
-    gambarKlasemen(S, nilai);
+    /* Tanpa bagan-hitung.js klasemen tetap tampil, hanya memakai angka manual
+       saja. Lebih baik kurang lengkap daripada tabelnya kosong. */
+    var poin = B ? B.hitungPoin(S, hasilBagan && typeof hasilBagan === "object" ? hasilBagan : {}) : {};
+    gambarKlasemen(S, nilai, poin);
   }
 
   function pasangBagan(hasil) {
     var S = window.GC_BAGAN;
-    if (!S || !$("#bagan-tabs")) return;       // halaman lain, tidak ada bagan
+    if (!S || !B || !$("#bagan-tabs")) return; // halaman lain, tidak ada bagan
     hasil = hasil && typeof hasil === "object" ? hasil : {};
     var nama = {};
     S.kampus.forEach(function (k) { nama[k.kode] = k.nama; });
@@ -519,7 +496,9 @@
     try { pasangDrive(k.drive); } catch (e) {}
     try { pasangLomba(k.lomba); } catch (e) {}
     try { pasangBagan(k.bagan); } catch (e) {}
-    try { pasangKlasemen(k.klasemen); } catch (e) {}
+    /* Sesudah pasangBagan, dan memang menerima k.bagan juga: poin Olah Raga
+       di klasemen dihitung dari hasil bagan yang sama. */
+    try { pasangKlasemen(k.klasemen, k.bagan); } catch (e) {}
     /* main.js memasang ulang bagian yang membaca nilai dari HTML (hitung
        mundur) — nilai bawaannya sudah terlanjur dibaca saat boot. */
     document.dispatchEvent(new CustomEvent("gc:konten-diperbarui"));

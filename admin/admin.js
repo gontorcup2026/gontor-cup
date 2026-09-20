@@ -708,9 +708,18 @@
   }
 
   /* ----------------------------------------------------- gambar: klasemen */
-  /* Satu angka kumulatif per kampus, dari SELURUH cabang lomba. Sengaja tidak
-     dihitung dari panel Bagan & Skor: bagan hanya meliputi delapan cabang olah
-     raga, sedangkan nilai klasemen datang dari 29 lomba.
+  /* Poin klasemen punya DUA sumber yang dijumlahkan:
+
+       Olah Raga  dihitung sendiri dari panel Bagan & Skor, memakai poin
+                  menang/kalah/bye dari Bagan Lomba.pptx. Hanya-baca di sini.
+       Lomba lain  21 lomba Olah Rasa, Olah Fikir, dan Olah Dzikir. Inilah
+                  yang diketik panitia di panel ini.
+
+     HALAMAN PUBLIK CUMA PUNYA SATU KOLOM "Poin", berisi jumlah keduanya.
+     Karena itu pemisahannya tinggal di sini: kalau panitia mengetikkan total
+     keseluruhan di kotak isian, poin Olah Raga terhitung dua kali dan tidak
+     ada apa pun di halaman yang akan menunjukkannya. Kolom "Olah Raga" dan
+     "Total" di bawah ada justru supaya kekeliruan itu kelihatan saat diketik.
 
      Daftar kampusnya dari window.GC_BAGAN.kampus, tempat kelima kampus ditulis
      satu kali. Berkasnya memang bernama bagan, tetapi isinya dipakai berdua. */
@@ -724,19 +733,47 @@
         "Periksa berkas <strong>assets/js/bagan-bawaan.js</strong>.</div>";
       return;
     }
+    var poin = window.GCBagan ? window.GCBagan.hitungPoin(S, isi.bagan) : {};
 
     wadah.innerHTML = '<div class="adm-item"><div class="adm-item__isi">' +
+      '<div class="adm-klasemen-baris adm-klasemen-baris--kepala" aria-hidden="true">' +
+        '<span></span><span></span>' +
+        '<span class="adm-klasemen-judul">Olah Raga</span>' +
+        '<span class="adm-klasemen-judul">Total</span>' +
+        '<span class="adm-klasemen-judul">Lomba lain</span>' +
+      "</div>" +
       S.kampus.map(function (k) {
         var v = isi.klasemen[k.kode];
+        var otomatis = poin[k.kode] || 0;
+        var manual = angkaKlasemen(v);
+        var punya = manual !== null || otomatis > 0;
+        var total = (manual || 0) + otomatis;
         return '<div class="adm-klasemen-baris" data-kampus="' + esc(k.kode) + '">' +
           '<span class="adm-klasemen-kode">' + esc(k.kode) + "</span>" +
           '<span class="adm-klasemen-nama">' + esc(k.nama) +
             '<small>' + esc(k.alamat || "") + "</small></span>" +
+          '<span class="adm-klasemen-auto" title="Dihitung dari Bagan &amp; Skor, ' +
+            'tidak bisa diketik di sini">' +
+            (otomatis > 0 ? esc(tulisAngka(otomatis)) : "&ndash;") + "</span>" +
+          '<span class="adm-klasemen-total">' +
+            (punya ? esc(tulisAngka(total)) : "&ndash;") + "</span>" +
           '<input class="input" name="nilai" inputmode="numeric" ' +
-            'aria-label="Nilai ' + esc(k.nama) + '" placeholder="Belum ada nilai" ' +
+            'aria-label="Poin lomba selain Olah Raga untuk ' + esc(k.nama) + '" ' +
+            'placeholder="Belum ada" ' +
             'value="' + esc(v === 0 || v ? v : "") + '">' +
         "</div>";
       }).join("") + "</div></div>";
+  }
+
+  /* Aturan "kotak kosong bukan nol" dan penulisan angka cara Indonesia
+     tinggal di bagan-hitung.js, dipakai bersama halaman publik. Jangan
+     disalin balik ke sini. */
+  function angkaKlasemen(teks) {
+    return window.GCBagan ? window.GCBagan.angkaKlasemen(teks) : null;
+  }
+
+  function tulisAngka(n) {
+    return window.GCBagan ? window.GCBagan.tulisAngka(n) : String(n);
   }
 
   /* -------------------------------------------------------- gambar: bagan */
@@ -765,13 +802,16 @@
     return (c && c[kode]) || null;
   }
 
-  /** Kampus di satu sisi laga, atau null kalau laga sumbernya belum ada pemenang. */
+  /** Kampus di satu sisi laga, atau null kalau laga sumbernya belum ada pemenang.
+
+     Diteruskan ke assets/js/bagan-hitung.js, yang DIPAKAI BERSAMA dengan
+     halaman publik. Panel ini dulu punya salinannya sendiri, dan salinan itu
+     merambatkan `menang` tanpa memeriksa apakah kampus itu memang bermain di
+     laga sumbernya — jadi babak berikutnya bisa menawarkan pemenang yang
+     tidak pernah ikut. Satu aturan, satu tempat. */
   function baganTim(c, laga, arah) {
-    var ref = laga[arah];
-    if (!ref) return null;
-    if (ref[0] === "tim") return ref[1];
-    var h = baganHasil(c.slug, ref[1]);
-    return (h && h.menang) || null;
+    if (!window.GCBagan) return null;
+    return window.GCBagan.timSisi(c, laga, arah, isi.bagan);
   }
 
   function baganNamaKampus(S) {
@@ -850,14 +890,19 @@
     }).join("");
 
     /* Pemenang sebuah laga menentukan siapa yang tampil di laga berikutnya,
-       jadi begitu kotak itu berubah seluruh daftar digambar ulang. Kotak skor
-       TIDAK memicu gambar ulang: isinya tidak mengubah apa pun selain dirinya
-       sendiri, dan menggambar ulang saat orang sedang mengetik akan merebut
-       kursornya. */
+       DAN berapa poin Olah Raga tiap kampus, jadi begitu kotak itu berubah
+       bagan maupun klasemen digambar ulang. Kotak skor TIDAK memicu gambar
+       ulang: isinya tidak mengubah apa pun selain dirinya sendiri, dan
+       menggambar ulang saat orang sedang mengetik akan merebut kursornya.
+
+       Perlu diingat panitia: poin baru benar-benar tersimpan setelah tombol
+       Simpan Skor ditekan. Angka di panel Klasemen di sini mengikuti isian di
+       layar, bukan isi yang sudah tersimpan. */
     $$('select[name=menang]', wadah).forEach(function (s) {
       s.addEventListener("change", function () {
         ambilDariForm("bagan");
         gambarBagan();
+        gambarKlasemen();
       });
     });
   }

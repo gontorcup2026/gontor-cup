@@ -111,7 +111,7 @@
             <tr>
               <th scope="col" class="klasemen__pos">#</th>
               <th scope="col">Kampus</th>
-              <th scope="col" class="num">Nilai</th>
+              <th scope="col" class="num">Poin</th>
             </tr>
           </thead>
           <tbody data-klasemen>
@@ -146,6 +146,12 @@
       <p class="klasemen__status" data-klasemen-status>
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg> Belum ada nilai yang dimasukkan panitia.
       </p>
+      <p class="small muted klasemen__sumber">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg> Poin cabang Olah Raga dihitung sendiri dari bagan di bawah,
+        memakai angka menang, kalah, dan bye yang tertulis di Bagan Lomba resmi
+        panitia. Poin lomba di luar Olah Raga dimasukkan panitia, dan kedua
+        angka itu dijumlahkan menjadi satu.
+      </p>
     </div>
 
   </div>
@@ -175,15 +181,17 @@
         <button type="button" class="pill" role="tab" id="tab-sepak-takraw" aria-controls="panel-sepak-takraw" aria-selected="false" tabindex="-1">Sepak Takraw</button>
         <button type="button" class="pill" role="tab" id="tab-voli" aria-controls="panel-voli" aria-selected="false" tabindex="-1">Voli</button>
         <button type="button" class="pill" role="tab" id="tab-bola-basket" aria-controls="panel-bola-basket" aria-selected="false" tabindex="-1">Bola Basket</button>
-        <button type="button" class="pill" role="tab" id="tab-tenis-meja" aria-controls="panel-tenis-meja" aria-selected="false" tabindex="-1">Tenis Meja</button>
-        <button type="button" class="pill" role="tab" id="tab-bulutangkis" aria-controls="panel-bulutangkis" aria-selected="false" tabindex="-1">Bulutangkis</button>
+        <button type="button" class="pill" role="tab" id="tab-tenis-meja-single" aria-controls="panel-tenis-meja-single" aria-selected="false" tabindex="-1">Tenis Meja Single</button>
+        <button type="button" class="pill" role="tab" id="tab-tenis-meja-double" aria-controls="panel-tenis-meja-double" aria-selected="false" tabindex="-1">Tenis Meja Double</button>
+        <button type="button" class="pill" role="tab" id="tab-bulutangkis-single" aria-controls="panel-bulutangkis-single" aria-selected="false" tabindex="-1">Bulutangkis Single</button>
+        <button type="button" class="pill" role="tab" id="tab-bulutangkis-double" aria-controls="panel-bulutangkis-double" aria-selected="false" tabindex="-1">Bulutangkis Double</button>
         <button type="button" class="pill" role="tab" id="tab-panahan" aria-controls="panel-panahan" aria-selected="false" tabindex="-1">Panahan</button>
       </div>
       <div id="panel-sepakbola" role="tabpanel" aria-labelledby="tab-sepakbola" tabindex="0">
         <div class="between bagan-kepala">
           <div>
             <h3 class="display" style="margin-bottom:6px">Sepakbola</h3>
-            <p class="muted small" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Lapangan Hijau Gontor 3 &nbsp;·&nbsp; 4 pertandingan &nbsp;·&nbsp; 5 kampus</p>
+            <p class="muted small" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Lapangan Hijau Gontor 3 &nbsp;·&nbsp; 4 pertandingan &nbsp;·&nbsp; 5 kampus &nbsp;·&nbsp; maksimal 150 poin</p>
           </div>
           <span class="badge badge--gold" data-juara-cabang hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg><span></span></span>
         </div>
@@ -192,6 +200,7 @@
     <p class="laga__kepala">
       <span class="laga__label">Pertandingan I</span>
       <span class="laga__jam">Kamis, 16:00 - 17:15</span>
+      <span class="laga__poin">Menang 50 poin, kalah 25</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim">Gontor 3</span>
@@ -206,6 +215,7 @@
     <p class="laga__kepala">
       <span class="laga__label">Pertandingan II</span>
       <span class="laga__jam">Jum'at, 07:00 - 08:00</span>
+      <span class="laga__poin">Menang 100 poin, kalah 25</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim">Gontor 2</span>
@@ -220,13 +230,14 @@
     <p class="laga__kepala">
       <span class="laga__label">Pertandingan III</span>
       <span class="laga__jam">Jum'at, 08:15 - 09:15</span>
+      <span class="laga__poin">Menang 50 poin, kalah 25</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim laga__tim--nanti">Pemenang Pertandingan I</span>
       <span class="laga__skor">&ndash;</span>
     </div>
     <div class="laga__sisi" data-sisi="kanan">
-      <span class="laga__tim">Gontor 1</span><span class="laga__bye" title="Langsung ke semifinal, tanpa babak penyisihan">bye</span>
+      <span class="laga__tim">Gontor 1</span><span class="laga__bye" title="Langsung ke semifinal tanpa babak penyisihan, dan mendapat 50 poin sebagai gantinya">bye +50</span>
       <span class="laga__skor">&ndash;</span>
     </div>
   </div>
@@ -234,6 +245,7 @@
     <p class="laga__kepala">
       <span class="laga__label">Final</span>
       <span class="laga__jam">Jum'at, 15:45 - 17:15</span>
+      <span class="laga__poin">Menang 50 poin, kalah 25</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim laga__tim--nanti">Pemenang Pertandingan III</span>
@@ -256,7 +268,7 @@
         <div class="between bagan-kepala">
           <div>
             <h3 class="display" style="margin-bottom:6px">Futsal</h3>
-            <p class="muted small" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Lapangan Futsal Indoor &nbsp;·&nbsp; 4 pertandingan &nbsp;·&nbsp; 5 kampus</p>
+            <p class="muted small" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Lapangan Futsal Indoor &nbsp;·&nbsp; 4 pertandingan &nbsp;·&nbsp; 5 kampus &nbsp;·&nbsp; maksimal 150 poin</p>
           </div>
           <span class="badge badge--gold" data-juara-cabang hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg><span></span></span>
         </div>
@@ -265,6 +277,7 @@
     <p class="laga__kepala">
       <span class="laga__label">Pertandingan I</span>
       <span class="laga__jam">Jum'at, 07:00 - 07:40</span>
+      <span class="laga__poin">Menang 50 poin, kalah 25</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim">Gontor 5</span>
@@ -279,6 +292,7 @@
     <p class="laga__kepala">
       <span class="laga__label">Pertandingan II</span>
       <span class="laga__jam">Jum'at, 08:00 - 08:40</span>
+      <span class="laga__poin">Menang 100 poin, kalah 25</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim">Gontor 3</span>
@@ -293,13 +307,14 @@
     <p class="laga__kepala">
       <span class="laga__label">Pertandingan III</span>
       <span class="laga__jam">Jum'at, 09:00 - 09:40</span>
+      <span class="laga__poin">Menang 50 poin, kalah 25</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim laga__tim--nanti">Pemenang Pertandingan I</span>
       <span class="laga__skor">&ndash;</span>
     </div>
     <div class="laga__sisi" data-sisi="kanan">
-      <span class="laga__tim">Gontor 2</span><span class="laga__bye" title="Langsung ke semifinal, tanpa babak penyisihan">bye</span>
+      <span class="laga__tim">Gontor 2</span><span class="laga__bye" title="Langsung ke semifinal tanpa babak penyisihan, dan mendapat 50 poin sebagai gantinya">bye +50</span>
       <span class="laga__skor">&ndash;</span>
     </div>
   </div>
@@ -307,6 +322,7 @@
     <p class="laga__kepala">
       <span class="laga__label">Final</span>
       <span class="laga__jam">Jum'at, 15:45 - 17:15</span>
+      <span class="laga__poin">Menang 50 poin, kalah 25</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim laga__tim--nanti">Pemenang Pertandingan III</span>
@@ -328,7 +344,7 @@
         <div class="between bagan-kepala">
           <div>
             <h3 class="display" style="margin-bottom:6px">Sepak Takraw</h3>
-            <p class="muted small" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Lapangan Depan Gedung Sudan &nbsp;·&nbsp; 4 pertandingan &nbsp;·&nbsp; 5 kampus</p>
+            <p class="muted small" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Lapangan Depan Gedung Sudan &nbsp;·&nbsp; 4 pertandingan &nbsp;·&nbsp; 5 kampus &nbsp;·&nbsp; maksimal 100 poin</p>
           </div>
           <span class="badge badge--gold" data-juara-cabang hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg><span></span></span>
         </div>
@@ -337,6 +353,7 @@
     <p class="laga__kepala">
       <span class="laga__label">Pertandingan I</span>
       <span class="laga__jam">Jum'at, 07:00 - 07:40</span>
+      <span class="laga__poin">Menang 25 poin, kalah 15</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim">Gontor 3</span>
@@ -351,6 +368,7 @@
     <p class="laga__kepala">
       <span class="laga__label">Pertandingan II</span>
       <span class="laga__jam">Jum'at, 08:00 - 08:40</span>
+      <span class="laga__poin">Menang 50 poin, kalah 15</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim">Gontor 1</span>
@@ -365,13 +383,14 @@
     <p class="laga__kepala">
       <span class="laga__label">Pertandingan III</span>
       <span class="laga__jam">Jum'at, 09:00 - 09:40</span>
+      <span class="laga__poin">Menang 25 poin, kalah 15</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim laga__tim--nanti">Pemenang Pertandingan I</span>
       <span class="laga__skor">&ndash;</span>
     </div>
     <div class="laga__sisi" data-sisi="kanan">
-      <span class="laga__tim">Gontor 2</span><span class="laga__bye" title="Langsung ke semifinal, tanpa babak penyisihan">bye</span>
+      <span class="laga__tim">Gontor 2</span><span class="laga__bye" title="Langsung ke semifinal tanpa babak penyisihan, dan mendapat 25 poin sebagai gantinya">bye +25</span>
       <span class="laga__skor">&ndash;</span>
     </div>
   </div>
@@ -379,6 +398,7 @@
     <p class="laga__kepala">
       <span class="laga__label">Final</span>
       <span class="laga__jam">Jum'at, 15:45 - 17:15</span>
+      <span class="laga__poin">Menang 50 poin, kalah 25</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim laga__tim--nanti">Pemenang Pertandingan III</span>
@@ -400,7 +420,7 @@
         <div class="between bagan-kepala">
           <div>
             <h3 class="display" style="margin-bottom:6px">Voli</h3>
-            <p class="muted small" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Lapangan Depan Gedung Syiria &nbsp;·&nbsp; 4 pertandingan &nbsp;·&nbsp; 5 kampus</p>
+            <p class="muted small" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Lapangan Depan Gedung Syiria &nbsp;·&nbsp; 4 pertandingan &nbsp;·&nbsp; 5 kampus &nbsp;·&nbsp; maksimal 150 poin</p>
           </div>
           <span class="badge badge--gold" data-juara-cabang hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg><span></span></span>
         </div>
@@ -409,6 +429,7 @@
     <p class="laga__kepala">
       <span class="laga__label">Pertandingan I</span>
       <span class="laga__jam">Jum'at, 07:00 - 07:40</span>
+      <span class="laga__poin">Menang 50 poin, kalah 25</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim">Gontor 1</span>
@@ -423,6 +444,7 @@
     <p class="laga__kepala">
       <span class="laga__label">Pertandingan II</span>
       <span class="laga__jam">Jum'at, 08:00 - 08:40</span>
+      <span class="laga__poin">Menang 100 poin, kalah 25</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim">Gontor 3</span>
@@ -437,13 +459,14 @@
     <p class="laga__kepala">
       <span class="laga__label">Pertandingan III</span>
       <span class="laga__jam">Jum'at, 09:00 - 09:40</span>
+      <span class="laga__poin">Menang 50 poin, kalah 25</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim laga__tim--nanti">Pemenang Pertandingan I</span>
       <span class="laga__skor">&ndash;</span>
     </div>
     <div class="laga__sisi" data-sisi="kanan">
-      <span class="laga__tim">Gontor 4</span><span class="laga__bye" title="Langsung ke semifinal, tanpa babak penyisihan">bye</span>
+      <span class="laga__tim">Gontor 4</span><span class="laga__bye" title="Langsung ke semifinal tanpa babak penyisihan, dan mendapat 50 poin sebagai gantinya">bye +50</span>
       <span class="laga__skor">&ndash;</span>
     </div>
   </div>
@@ -451,6 +474,7 @@
     <p class="laga__kepala">
       <span class="laga__label">Final</span>
       <span class="laga__jam">Jum'at, 15:45 - 17:15</span>
+      <span class="laga__poin">Menang 50 poin, kalah 25</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim laga__tim--nanti">Pemenang Pertandingan III</span>
@@ -472,7 +496,7 @@
         <div class="between bagan-kepala">
           <div>
             <h3 class="display" style="margin-bottom:6px">Bola Basket</h3>
-            <p class="muted small" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Lapangan Depan Gedung Sudan &nbsp;·&nbsp; 4 pertandingan &nbsp;·&nbsp; 5 kampus</p>
+            <p class="muted small" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Lapangan Depan Gedung Sudan &nbsp;·&nbsp; 4 pertandingan &nbsp;·&nbsp; 5 kampus &nbsp;·&nbsp; maksimal 150 poin</p>
           </div>
           <span class="badge badge--gold" data-juara-cabang hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg><span></span></span>
         </div>
@@ -481,6 +505,7 @@
     <p class="laga__kepala">
       <span class="laga__label">Pertandingan I</span>
       <span class="laga__jam">Jum'at, 07:00 - 07:40</span>
+      <span class="laga__poin">Menang 50 poin, kalah 25</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim">Gontor 5</span>
@@ -495,6 +520,7 @@
     <p class="laga__kepala">
       <span class="laga__label">Pertandingan II</span>
       <span class="laga__jam">Jum'at, 08:00 - 08:40</span>
+      <span class="laga__poin">Menang 100 poin, kalah 25</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim">Gontor 3</span>
@@ -509,13 +535,14 @@
     <p class="laga__kepala">
       <span class="laga__label">Pertandingan III</span>
       <span class="laga__jam">Jum'at, 09:00 - 09:40</span>
+      <span class="laga__poin">Menang 50 poin, kalah 25</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim laga__tim--nanti">Pemenang Pertandingan I</span>
       <span class="laga__skor">&ndash;</span>
     </div>
     <div class="laga__sisi" data-sisi="kanan">
-      <span class="laga__tim">Gontor 2</span><span class="laga__bye" title="Langsung ke semifinal, tanpa babak penyisihan">bye</span>
+      <span class="laga__tim">Gontor 2</span><span class="laga__bye" title="Langsung ke semifinal tanpa babak penyisihan, dan mendapat 50 poin sebagai gantinya">bye +50</span>
       <span class="laga__skor">&ndash;</span>
     </div>
   </div>
@@ -523,6 +550,7 @@
     <p class="laga__kepala">
       <span class="laga__label">Final</span>
       <span class="laga__jam">Jum'at, 15:45 - 17:15</span>
+      <span class="laga__poin">Menang 50 poin, kalah 25</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim laga__tim--nanti">Pemenang Pertandingan III</span>
@@ -540,19 +568,20 @@
   </div>
 </div>
       </div>
-      <div id="panel-tenis-meja" role="tabpanel" aria-labelledby="tab-tenis-meja" hidden tabindex="0">
+      <div id="panel-tenis-meja-single" role="tabpanel" aria-labelledby="tab-tenis-meja-single" hidden tabindex="0">
         <div class="between bagan-kepala">
           <div>
-            <h3 class="display" style="margin-bottom:6px">Tenis Meja</h3>
-            <p class="muted small" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Gedung Sport Hall &nbsp;·&nbsp; 4 pertandingan &nbsp;·&nbsp; 5 kampus</p>
+            <h3 class="display" style="margin-bottom:6px">Tenis Meja Single</h3>
+            <p class="muted small" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Gedung Sport Hall &nbsp;·&nbsp; 4 pertandingan &nbsp;·&nbsp; 5 kampus &nbsp;·&nbsp; maksimal 100 poin</p>
           </div>
           <span class="badge badge--gold" data-juara-cabang hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg><span></span></span>
         </div>
-<div class="bagan" data-bagan="tenis-meja">
+<div class="bagan" data-bagan="tenis-meja-single">
   <div class="laga" data-slot="awal" data-laga="m1">
     <p class="laga__kepala">
       <span class="laga__label">Pertandingan I</span>
       <span class="laga__jam">Jum'at, 07:00 - 07:40</span>
+      <span class="laga__poin">Menang 25 poin, kalah 15</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim">Gontor 1</span>
@@ -567,6 +596,7 @@
     <p class="laga__kepala">
       <span class="laga__label">Pertandingan II</span>
       <span class="laga__jam">Jum'at, 08:00 - 08:40</span>
+      <span class="laga__poin">Menang 50 poin, kalah 15</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim">Gontor 4</span>
@@ -581,13 +611,14 @@
     <p class="laga__kepala">
       <span class="laga__label">Pertandingan III</span>
       <span class="laga__jam">Jum'at, 09:00 - 09:40</span>
+      <span class="laga__poin">Menang 25 poin, kalah 15</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim laga__tim--nanti">Pemenang Pertandingan I</span>
       <span class="laga__skor">&ndash;</span>
     </div>
     <div class="laga__sisi" data-sisi="kanan">
-      <span class="laga__tim">Gontor 2</span><span class="laga__bye" title="Langsung ke semifinal, tanpa babak penyisihan">bye</span>
+      <span class="laga__tim">Gontor 2</span><span class="laga__bye" title="Langsung ke semifinal tanpa babak penyisihan, dan mendapat 25 poin sebagai gantinya">bye +25</span>
       <span class="laga__skor">&ndash;</span>
     </div>
   </div>
@@ -595,6 +626,7 @@
     <p class="laga__kepala">
       <span class="laga__label">Final</span>
       <span class="laga__jam">Jum'at, 15:45 - 17:15</span>
+      <span class="laga__poin">Menang 50 poin, kalah 25</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim laga__tim--nanti">Pemenang Pertandingan III</span>
@@ -611,21 +643,99 @@
     <i class="hub-v"></i><i class="hub-h hub-h--keluar"></i>
   </div>
 </div>
-      <p class="small muted bagan__catatan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg> Bagan yang sama dipakai nomor Single dan nomor Double.</p>
+      <p class="small muted bagan__catatan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg> Nomor Single dan Double memakai undian yang sama, sebab panitia menggambar satu bagan untuk cabang ini. Skor dan juaranya terpisah.</p>
       </div>
-      <div id="panel-bulutangkis" role="tabpanel" aria-labelledby="tab-bulutangkis" hidden tabindex="0">
+      <div id="panel-tenis-meja-double" role="tabpanel" aria-labelledby="tab-tenis-meja-double" hidden tabindex="0">
         <div class="between bagan-kepala">
           <div>
-            <h3 class="display" style="margin-bottom:6px">Bulutangkis</h3>
-            <p class="muted small" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Gedung Sport Hall &nbsp;·&nbsp; 4 pertandingan &nbsp;·&nbsp; 5 kampus</p>
+            <h3 class="display" style="margin-bottom:6px">Tenis Meja Double</h3>
+            <p class="muted small" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Gedung Sport Hall &nbsp;·&nbsp; 4 pertandingan &nbsp;·&nbsp; 5 kampus &nbsp;·&nbsp; maksimal 100 poin</p>
           </div>
           <span class="badge badge--gold" data-juara-cabang hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg><span></span></span>
         </div>
-<div class="bagan" data-bagan="bulutangkis">
+<div class="bagan" data-bagan="tenis-meja-double">
   <div class="laga" data-slot="awal" data-laga="m1">
     <p class="laga__kepala">
       <span class="laga__label">Pertandingan I</span>
       <span class="laga__jam">Jum'at, 07:00 - 07:40</span>
+      <span class="laga__poin">Menang 25 poin, kalah 15</span>
+    </p>
+    <div class="laga__sisi" data-sisi="kiri">
+      <span class="laga__tim">Gontor 1</span>
+      <span class="laga__skor">&ndash;</span>
+    </div>
+    <div class="laga__sisi" data-sisi="kanan">
+      <span class="laga__tim">Gontor 3</span>
+      <span class="laga__skor">&ndash;</span>
+    </div>
+  </div>
+  <div class="laga" data-slot="semi-bawah" data-laga="m2">
+    <p class="laga__kepala">
+      <span class="laga__label">Pertandingan II</span>
+      <span class="laga__jam">Jum'at, 08:00 - 08:40</span>
+      <span class="laga__poin">Menang 50 poin, kalah 15</span>
+    </p>
+    <div class="laga__sisi" data-sisi="kiri">
+      <span class="laga__tim">Gontor 4</span>
+      <span class="laga__skor">&ndash;</span>
+    </div>
+    <div class="laga__sisi" data-sisi="kanan">
+      <span class="laga__tim">Gontor 5</span>
+      <span class="laga__skor">&ndash;</span>
+    </div>
+  </div>
+  <div class="laga" data-slot="semi-atas" data-laga="m3">
+    <p class="laga__kepala">
+      <span class="laga__label">Pertandingan III</span>
+      <span class="laga__jam">Jum'at, 09:00 - 09:40</span>
+      <span class="laga__poin">Menang 25 poin, kalah 15</span>
+    </p>
+    <div class="laga__sisi" data-sisi="kiri">
+      <span class="laga__tim laga__tim--nanti">Pemenang Pertandingan I</span>
+      <span class="laga__skor">&ndash;</span>
+    </div>
+    <div class="laga__sisi" data-sisi="kanan">
+      <span class="laga__tim">Gontor 2</span><span class="laga__bye" title="Langsung ke semifinal tanpa babak penyisihan, dan mendapat 25 poin sebagai gantinya">bye +25</span>
+      <span class="laga__skor">&ndash;</span>
+    </div>
+  </div>
+  <div class="laga" data-slot="final" data-laga="m4">
+    <p class="laga__kepala">
+      <span class="laga__label">Final</span>
+      <span class="laga__jam">Jum'at, 15:45 - 17:15</span>
+      <span class="laga__poin">Menang 50 poin, kalah 25</span>
+    </p>
+    <div class="laga__sisi" data-sisi="kiri">
+      <span class="laga__tim laga__tim--nanti">Pemenang Pertandingan III</span>
+      <span class="laga__skor">&ndash;</span>
+    </div>
+    <div class="laga__sisi" data-sisi="kanan">
+      <span class="laga__tim laga__tim--nanti">Pemenang Pertandingan II</span>
+      <span class="laga__skor">&ndash;</span>
+    </div>
+  </div>
+  <div class="bagan__hub" aria-hidden="true"><i class="hub-h hub-h--lurus"></i></div>
+  <div class="bagan__hub bagan__hub--gabung" aria-hidden="true">
+    <i class="hub-h hub-h--atas"></i><i class="hub-h hub-h--bawah"></i>
+    <i class="hub-v"></i><i class="hub-h hub-h--keluar"></i>
+  </div>
+</div>
+      <p class="small muted bagan__catatan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg> Nomor Single dan Double memakai undian yang sama, sebab panitia menggambar satu bagan untuk cabang ini. Skor dan juaranya terpisah.</p>
+      </div>
+      <div id="panel-bulutangkis-single" role="tabpanel" aria-labelledby="tab-bulutangkis-single" hidden tabindex="0">
+        <div class="between bagan-kepala">
+          <div>
+            <h3 class="display" style="margin-bottom:6px">Bulutangkis Single</h3>
+            <p class="muted small" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Gedung Sport Hall &nbsp;·&nbsp; 4 pertandingan &nbsp;·&nbsp; 5 kampus &nbsp;·&nbsp; maksimal 100 poin</p>
+          </div>
+          <span class="badge badge--gold" data-juara-cabang hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg><span></span></span>
+        </div>
+<div class="bagan" data-bagan="bulutangkis-single">
+  <div class="laga" data-slot="awal" data-laga="m1">
+    <p class="laga__kepala">
+      <span class="laga__label">Pertandingan I</span>
+      <span class="laga__jam">Jum'at, 07:00 - 07:40</span>
+      <span class="laga__poin">Menang 25 poin, kalah 15</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim">Gontor 5</span>
@@ -640,6 +750,7 @@
     <p class="laga__kepala">
       <span class="laga__label">Pertandingan II</span>
       <span class="laga__jam">Jum'at, 08:00 - 08:40</span>
+      <span class="laga__poin">Menang 50 poin, kalah 15</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim">Gontor 1</span>
@@ -654,13 +765,14 @@
     <p class="laga__kepala">
       <span class="laga__label">Pertandingan III</span>
       <span class="laga__jam">Jum'at, 09:00 - 09:40</span>
+      <span class="laga__poin">Menang 25 poin, kalah 15</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim laga__tim--nanti">Pemenang Pertandingan I</span>
       <span class="laga__skor">&ndash;</span>
     </div>
     <div class="laga__sisi" data-sisi="kanan">
-      <span class="laga__tim">Gontor 3</span><span class="laga__bye" title="Langsung ke semifinal, tanpa babak penyisihan">bye</span>
+      <span class="laga__tim">Gontor 3</span><span class="laga__bye" title="Langsung ke semifinal tanpa babak penyisihan, dan mendapat 25 poin sebagai gantinya">bye +25</span>
       <span class="laga__skor">&ndash;</span>
     </div>
   </div>
@@ -668,6 +780,7 @@
     <p class="laga__kepala">
       <span class="laga__label">Final</span>
       <span class="laga__jam">Jum'at, 15:45 - 17:15</span>
+      <span class="laga__poin">Menang 50 poin, kalah 25</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim laga__tim--nanti">Pemenang Pertandingan III</span>
@@ -684,13 +797,90 @@
     <i class="hub-v"></i><i class="hub-h hub-h--keluar"></i>
   </div>
 </div>
-      <p class="small muted bagan__catatan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg> Bagan yang sama dipakai nomor Single dan nomor Double.</p>
+      <p class="small muted bagan__catatan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg> Nomor Single dan Double memakai undian yang sama, sebab panitia menggambar satu bagan untuk cabang ini. Skor dan juaranya terpisah.</p>
+      </div>
+      <div id="panel-bulutangkis-double" role="tabpanel" aria-labelledby="tab-bulutangkis-double" hidden tabindex="0">
+        <div class="between bagan-kepala">
+          <div>
+            <h3 class="display" style="margin-bottom:6px">Bulutangkis Double</h3>
+            <p class="muted small" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Gedung Sport Hall &nbsp;·&nbsp; 4 pertandingan &nbsp;·&nbsp; 5 kampus &nbsp;·&nbsp; maksimal 100 poin</p>
+          </div>
+          <span class="badge badge--gold" data-juara-cabang hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg><span></span></span>
+        </div>
+<div class="bagan" data-bagan="bulutangkis-double">
+  <div class="laga" data-slot="awal" data-laga="m1">
+    <p class="laga__kepala">
+      <span class="laga__label">Pertandingan I</span>
+      <span class="laga__jam">Jum'at, 07:00 - 07:40</span>
+      <span class="laga__poin">Menang 25 poin, kalah 15</span>
+    </p>
+    <div class="laga__sisi" data-sisi="kiri">
+      <span class="laga__tim">Gontor 5</span>
+      <span class="laga__skor">&ndash;</span>
+    </div>
+    <div class="laga__sisi" data-sisi="kanan">
+      <span class="laga__tim">Gontor 2</span>
+      <span class="laga__skor">&ndash;</span>
+    </div>
+  </div>
+  <div class="laga" data-slot="semi-bawah" data-laga="m2">
+    <p class="laga__kepala">
+      <span class="laga__label">Pertandingan II</span>
+      <span class="laga__jam">Jum'at, 08:00 - 08:40</span>
+      <span class="laga__poin">Menang 50 poin, kalah 15</span>
+    </p>
+    <div class="laga__sisi" data-sisi="kiri">
+      <span class="laga__tim">Gontor 1</span>
+      <span class="laga__skor">&ndash;</span>
+    </div>
+    <div class="laga__sisi" data-sisi="kanan">
+      <span class="laga__tim">Gontor 4</span>
+      <span class="laga__skor">&ndash;</span>
+    </div>
+  </div>
+  <div class="laga" data-slot="semi-atas" data-laga="m3">
+    <p class="laga__kepala">
+      <span class="laga__label">Pertandingan III</span>
+      <span class="laga__jam">Jum'at, 09:00 - 09:40</span>
+      <span class="laga__poin">Menang 25 poin, kalah 15</span>
+    </p>
+    <div class="laga__sisi" data-sisi="kiri">
+      <span class="laga__tim laga__tim--nanti">Pemenang Pertandingan I</span>
+      <span class="laga__skor">&ndash;</span>
+    </div>
+    <div class="laga__sisi" data-sisi="kanan">
+      <span class="laga__tim">Gontor 3</span><span class="laga__bye" title="Langsung ke semifinal tanpa babak penyisihan, dan mendapat 25 poin sebagai gantinya">bye +25</span>
+      <span class="laga__skor">&ndash;</span>
+    </div>
+  </div>
+  <div class="laga" data-slot="final" data-laga="m4">
+    <p class="laga__kepala">
+      <span class="laga__label">Final</span>
+      <span class="laga__jam">Jum'at, 15:45 - 17:15</span>
+      <span class="laga__poin">Menang 50 poin, kalah 25</span>
+    </p>
+    <div class="laga__sisi" data-sisi="kiri">
+      <span class="laga__tim laga__tim--nanti">Pemenang Pertandingan III</span>
+      <span class="laga__skor">&ndash;</span>
+    </div>
+    <div class="laga__sisi" data-sisi="kanan">
+      <span class="laga__tim laga__tim--nanti">Pemenang Pertandingan II</span>
+      <span class="laga__skor">&ndash;</span>
+    </div>
+  </div>
+  <div class="bagan__hub" aria-hidden="true"><i class="hub-h hub-h--lurus"></i></div>
+  <div class="bagan__hub bagan__hub--gabung" aria-hidden="true">
+    <i class="hub-h hub-h--atas"></i><i class="hub-h hub-h--bawah"></i>
+    <i class="hub-v"></i><i class="hub-h hub-h--keluar"></i>
+  </div>
+</div>
+      <p class="small muted bagan__catatan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg> Nomor Single dan Double memakai undian yang sama, sebab panitia menggambar satu bagan untuk cabang ini. Skor dan juaranya terpisah.</p>
       </div>
       <div id="panel-panahan" role="tabpanel" aria-labelledby="tab-panahan" hidden tabindex="0">
         <div class="between bagan-kepala">
           <div>
             <h3 class="display" style="margin-bottom:6px">Panahan</h3>
-            <p class="muted small" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Lapangan BAAK &nbsp;·&nbsp; 4 pertandingan &nbsp;·&nbsp; 5 kampus</p>
+            <p class="muted small" style="margin:0"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg> Lapangan BAAK &nbsp;·&nbsp; 4 pertandingan &nbsp;·&nbsp; 5 kampus &nbsp;·&nbsp; maksimal 100 poin</p>
           </div>
           <span class="badge badge--gold" data-juara-cabang hidden><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg><span></span></span>
         </div>
@@ -699,6 +889,7 @@
     <p class="laga__kepala">
       <span class="laga__label">Pertandingan I</span>
       <span class="laga__jam">Jum'at, 07:00 - 07:10</span>
+      <span class="laga__poin">Menang 25 poin, kalah 15</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim">Gontor 5</span>
@@ -713,6 +904,7 @@
     <p class="laga__kepala">
       <span class="laga__label">Pertandingan II</span>
       <span class="laga__jam">Jum'at, 07:10 - 07:20</span>
+      <span class="laga__poin">Menang 50 poin, kalah 15</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim">Gontor 3</span>
@@ -727,13 +919,14 @@
     <p class="laga__kepala">
       <span class="laga__label">Pertandingan III</span>
       <span class="laga__jam">Jum'at, 07:20 - 07:30</span>
+      <span class="laga__poin">Menang 25 poin, kalah 15</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim laga__tim--nanti">Pemenang Pertandingan I</span>
       <span class="laga__skor">&ndash;</span>
     </div>
     <div class="laga__sisi" data-sisi="kanan">
-      <span class="laga__tim">Gontor 1</span><span class="laga__bye" title="Langsung ke semifinal, tanpa babak penyisihan">bye</span>
+      <span class="laga__tim">Gontor 1</span><span class="laga__bye" title="Langsung ke semifinal tanpa babak penyisihan, dan mendapat 25 poin sebagai gantinya">bye +25</span>
       <span class="laga__skor">&ndash;</span>
     </div>
   </div>
@@ -741,6 +934,7 @@
     <p class="laga__kepala">
       <span class="laga__label">Final</span>
       <span class="laga__jam">Jum'at, 07:30 - 07:40</span>
+      <span class="laga__poin">Menang 50 poin, kalah 25</span>
     </p>
     <div class="laga__sisi" data-sisi="kiri">
       <span class="laga__tim laga__tim--nanti">Pemenang Pertandingan III</span>
@@ -814,6 +1008,7 @@
 </footer>
 
 <script src="assets/js/bagan-bawaan.js"></script>
+<script src="assets/js/bagan-hitung.js"></script>
 <!-- config.js: satu-satunya tempat URL Apps Script diisi.
      konten.js hanya MENIMPA bagian yang sudah diubah panitia lewat /admin;
      tanpa sambungan, isi bawaan di HTML inilah yang tampil. -->

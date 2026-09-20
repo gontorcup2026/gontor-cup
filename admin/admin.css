@@ -217,12 +217,30 @@ body.adm { background: var(--paper); }
 }
 
 /* ---------- Perolehan nilai klasemen ---------- */
+/* Lima kolom: kode, nama, poin Olah Raga (otomatis), total, kotak isian.
+   Kotak isiannya sengaja PALING KANAN walau ia satu-satunya yang bisa
+   diketik: urutannya mengikuti cara angkanya terbentuk, otomatis dulu lalu
+   yang diketik, dengan totalnya di antara keduanya supaya kekeliruan
+   "mengetik total keseluruhan" langsung terlihat sebagai angka yang melonjak. */
 .adm-klasemen-baris {
-  display: grid; grid-template-columns: 2.6rem minmax(0,1fr) 10rem;
+  display: grid; grid-template-columns: 2.6rem minmax(0,1fr) 5rem 5rem 9rem;
   gap: var(--s-3); align-items: center;
   padding: var(--s-3) 0; border-top: 1px solid var(--line-2);
 }
 .adm-klasemen-baris:first-child { border-top: 0; padding-top: 0; }
+/* Baris kepala hanya penanda kolom; pembaca layar sudah mendapat keterangan
+   lengkap dari aria-label tiap kotak isian, jadi ia aria-hidden. */
+.adm-klasemen-baris--kepala { padding-bottom: 0; }
+.adm-klasemen-judul {
+  font-size: .68rem; font-weight: 800; letter-spacing: .08em;
+  text-transform: uppercase; color: var(--muted); text-align: right;
+}
+.adm-klasemen-auto, .adm-klasemen-total {
+  text-align: right; font-family: var(--f-num); font-size: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+.adm-klasemen-auto { color: var(--muted); }
+.adm-klasemen-total { font-weight: 800; color: var(--green-700); }
 .adm-klasemen-kode {
   display: grid; place-items: center; width: 2.6rem; height: 2.6rem;
   border-radius: var(--r-xs); background: var(--green-700); color: #fff;
@@ -232,7 +250,22 @@ body.adm { background: var(--paper); }
 .adm-klasemen-nama small { font-weight: 500; font-size: .78rem; color: var(--muted); }
 .adm-klasemen-baris .input { text-align: right; font-family: var(--f-num); font-size: 1rem; }
 
+/* Di layar sempit kelima kolom tidak muat. Kode dan nama tetap berdampingan,
+   dua angka turun ke barisnya sendiri, kotak isian mengambil baris penuh.
+   Baris kepala disembunyikan: tanpa kisi yang sejajar ia tidak menandai apa
+   pun, dan angkanya sudah diberi label sendiri lewat ::before. */
 @media (max-width: 620px) {
   .adm-klasemen-baris { grid-template-columns: 2.6rem minmax(0,1fr); }
+  .adm-klasemen-baris--kepala { display: none; }
+  .adm-klasemen-auto, .adm-klasemen-total {
+    grid-column: 1 / -1; display: flex; justify-content: space-between;
+    font-size: .9rem;
+  }
+  .adm-klasemen-auto::before { content: "Olah Raga"; }
+  .adm-klasemen-total::before { content: "Total"; }
+  .adm-klasemen-auto::before, .adm-klasemen-total::before {
+    font-family: var(--f-body); font-size: .78rem; font-weight: 700;
+    letter-spacing: .04em; text-transform: uppercase; color: var(--muted);
+  }
   .adm-klasemen-baris .input { grid-column: 1 / -1; text-align: left; }
 }

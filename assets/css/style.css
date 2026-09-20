@@ -728,6 +728,10 @@ td.klasemen__pos{font-family:var(--f-num);font-size:1.05rem;color:var(--green-70
   font-size:.86rem;font-weight:600;color:var(--muted);
 }
 .klasemen__status svg{width:16px;height:16px;flex:none;color:var(--gold-700)}
+/* Keterangan dari mana angka di kolom Poin berasal. Ikonnya rata atas, bukan
+   tengah: teksnya beberapa baris. */
+.klasemen__sumber{display:flex;align-items:flex-start;gap:8px;margin:0}
+.klasemen__sumber svg{width:15px;height:15px;flex:none;margin-top:3px}
 
 /* Kisi bagan. Lima kolom: laga, penghubung, laga, penghubung, laga. Dua baris
    yang TINGGINYA SAMA (1fr 1fr) dan TANPA row-gap, sebab garis penghubung
@@ -762,6 +766,14 @@ td.klasemen__pos{font-family:var(--f-num);font-size:1.05rem;color:var(--green-70
   color:var(--gold-700);
 }
 .laga__jam{font-size:.78rem;color:var(--muted);font-variant-numeric:tabular-nums}
+/* Poin menang/kalah, angkanya dari Bagan Lomba.pptx. Diberi BARIS SENDIRI
+   lewat flex-basis:100% supaya label dan jam tetap berdampingan seperti
+   sebelumnya; tanpa itu ketiganya berebut lebar di kartu sesempit ini dan
+   jamnya terlempar ke bawah sendirian. */
+.laga__poin{
+  flex-basis:100%;font-size:.72rem;color:var(--muted);
+  font-variant-numeric:tabular-nums;
+}
 .laga__sisi{
   display:flex;align-items:center;gap:8px;
   padding:9px 10px;border-radius:var(--r-sm);

@@ -55,7 +55,11 @@ window.GC_BAGAN = {
             "G4"
           ],
           "jam": "16:00 - 17:15",
-          "hari": "Kamis"
+          "hari": "Kamis",
+          "poin": {
+            "menang": 50,
+            "kalah": 25
+          }
         },
         {
           "kode": "m2",
@@ -70,7 +74,11 @@ window.GC_BAGAN = {
             "G5"
           ],
           "jam": "07:00 - 08:00",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 100,
+            "kalah": 25
+          }
         },
         {
           "kode": "m3",
@@ -85,7 +93,11 @@ window.GC_BAGAN = {
             "G1"
           ],
           "jam": "08:15 - 09:15",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 50,
+            "kalah": 25
+          }
         },
         {
           "kode": "m4",
@@ -100,9 +112,15 @@ window.GC_BAGAN = {
             "m2"
           ],
           "jam": "15:45 - 17:15",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 50,
+            "kalah": 25
+          }
         }
-      ]
+      ],
+      "poin_bye": 50,
+      "poin_total": 150
     },
     {
       "slug": "futsal",
@@ -131,7 +149,11 @@ window.GC_BAGAN = {
             "G1"
           ],
           "jam": "07:00 - 07:40",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 50,
+            "kalah": 25
+          }
         },
         {
           "kode": "m2",
@@ -146,7 +168,11 @@ window.GC_BAGAN = {
             "G4"
           ],
           "jam": "08:00 - 08:40",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 100,
+            "kalah": 25
+          }
         },
         {
           "kode": "m3",
@@ -161,7 +187,11 @@ window.GC_BAGAN = {
             "G2"
           ],
           "jam": "09:00 - 09:40",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 50,
+            "kalah": 25
+          }
         },
         {
           "kode": "m4",
@@ -176,9 +206,15 @@ window.GC_BAGAN = {
             "m2"
           ],
           "jam": "15:45 - 17:15",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 50,
+            "kalah": 25
+          }
         }
-      ]
+      ],
+      "poin_bye": 50,
+      "poin_total": 150
     },
     {
       "slug": "sepak-takraw",
@@ -207,7 +243,11 @@ window.GC_BAGAN = {
             "G5"
           ],
           "jam": "07:00 - 07:40",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 25,
+            "kalah": 15
+          }
         },
         {
           "kode": "m2",
@@ -222,7 +262,11 @@ window.GC_BAGAN = {
             "G4"
           ],
           "jam": "08:00 - 08:40",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 50,
+            "kalah": 15
+          }
         },
         {
           "kode": "m3",
@@ -237,7 +281,11 @@ window.GC_BAGAN = {
             "G2"
           ],
           "jam": "09:00 - 09:40",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 25,
+            "kalah": 15
+          }
         },
         {
           "kode": "m4",
@@ -252,9 +300,15 @@ window.GC_BAGAN = {
             "m2"
           ],
           "jam": "15:45 - 17:15",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 50,
+            "kalah": 25
+          }
         }
-      ]
+      ],
+      "poin_bye": 25,
+      "poin_total": 100
     },
     {
       "slug": "voli",
@@ -283,7 +337,11 @@ window.GC_BAGAN = {
             "G2"
           ],
           "jam": "07:00 - 07:40",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 50,
+            "kalah": 25
+          }
         },
         {
           "kode": "m2",
@@ -298,7 +356,11 @@ window.GC_BAGAN = {
             "G5"
           ],
           "jam": "08:00 - 08:40",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 100,
+            "kalah": 25
+          }
         },
         {
           "kode": "m3",
@@ -313,7 +375,11 @@ window.GC_BAGAN = {
             "G4"
           ],
           "jam": "09:00 - 09:40",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 50,
+            "kalah": 25
+          }
         },
         {
           "kode": "m4",
@@ -328,9 +394,15 @@ window.GC_BAGAN = {
             "m2"
           ],
           "jam": "15:45 - 17:15",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 50,
+            "kalah": 25
+          }
         }
-      ]
+      ],
+      "poin_bye": 50,
+      "poin_total": 150
     },
     {
       "slug": "bola-basket",
@@ -359,7 +431,11 @@ window.GC_BAGAN = {
             "G4"
           ],
           "jam": "07:00 - 07:40",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 50,
+            "kalah": 25
+          }
         },
         {
           "kode": "m2",
@@ -374,7 +450,11 @@ window.GC_BAGAN = {
             "G1"
           ],
           "jam": "08:00 - 08:40",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 100,
+            "kalah": 25
+          }
         },
         {
           "kode": "m3",
@@ -389,7 +469,11 @@ window.GC_BAGAN = {
             "G2"
           ],
           "jam": "09:00 - 09:40",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 50,
+            "kalah": 25
+          }
         },
         {
           "kode": "m4",
@@ -404,13 +488,19 @@ window.GC_BAGAN = {
             "m2"
           ],
           "jam": "15:45 - 17:15",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 50,
+            "kalah": 25
+          }
         }
-      ]
+      ],
+      "poin_bye": 50,
+      "poin_total": 150
     },
     {
-      "slug": "tenis-meja",
-      "nama": "Tenis Meja",
+      "slug": "tenis-meja-single",
+      "nama": "Tenis Meja Single",
       "venue": "Gedung Sport Hall",
       "bye": "G2",
       "slot": [
@@ -420,7 +510,7 @@ window.GC_BAGAN = {
         "G4",
         "G5"
       ],
-      "catatan": "Bagan yang sama dipakai nomor Single dan nomor Double.",
+      "catatan": "Nomor Single dan Double memakai undian yang sama, sebab panitia menggambar satu bagan untuk cabang ini. Skor dan juaranya terpisah.",
       "laga": [
         {
           "kode": "m1",
@@ -435,7 +525,11 @@ window.GC_BAGAN = {
             "G3"
           ],
           "jam": "07:00 - 07:40",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 25,
+            "kalah": 15
+          }
         },
         {
           "kode": "m2",
@@ -450,7 +544,11 @@ window.GC_BAGAN = {
             "G5"
           ],
           "jam": "08:00 - 08:40",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 50,
+            "kalah": 15
+          }
         },
         {
           "kode": "m3",
@@ -465,7 +563,11 @@ window.GC_BAGAN = {
             "G2"
           ],
           "jam": "09:00 - 09:40",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 25,
+            "kalah": 15
+          }
         },
         {
           "kode": "m4",
@@ -480,13 +582,113 @@ window.GC_BAGAN = {
             "m2"
           ],
           "jam": "15:45 - 17:15",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 50,
+            "kalah": 25
+          }
         }
-      ]
+      ],
+      "poin_bye": 25,
+      "poin_total": 100
     },
     {
-      "slug": "bulutangkis",
-      "nama": "Bulutangkis",
+      "slug": "tenis-meja-double",
+      "nama": "Tenis Meja Double",
+      "venue": "Gedung Sport Hall",
+      "bye": "G2",
+      "slot": [
+        "G1",
+        "G3",
+        "G2",
+        "G4",
+        "G5"
+      ],
+      "catatan": "Nomor Single dan Double memakai undian yang sama, sebab panitia menggambar satu bagan untuk cabang ini. Skor dan juaranya terpisah.",
+      "laga": [
+        {
+          "kode": "m1",
+          "label": "Pertandingan I",
+          "ronde": "penyisihan",
+          "kiri": [
+            "tim",
+            "G1"
+          ],
+          "kanan": [
+            "tim",
+            "G3"
+          ],
+          "jam": "07:00 - 07:40",
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 25,
+            "kalah": 15
+          }
+        },
+        {
+          "kode": "m2",
+          "label": "Pertandingan II",
+          "ronde": "semifinal",
+          "kiri": [
+            "tim",
+            "G4"
+          ],
+          "kanan": [
+            "tim",
+            "G5"
+          ],
+          "jam": "08:00 - 08:40",
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 50,
+            "kalah": 15
+          }
+        },
+        {
+          "kode": "m3",
+          "label": "Pertandingan III",
+          "ronde": "semifinal",
+          "kiri": [
+            "menang",
+            "m1"
+          ],
+          "kanan": [
+            "tim",
+            "G2"
+          ],
+          "jam": "09:00 - 09:40",
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 25,
+            "kalah": 15
+          }
+        },
+        {
+          "kode": "m4",
+          "label": "Final",
+          "ronde": "final",
+          "kiri": [
+            "menang",
+            "m3"
+          ],
+          "kanan": [
+            "menang",
+            "m2"
+          ],
+          "jam": "15:45 - 17:15",
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 50,
+            "kalah": 25
+          }
+        }
+      ],
+      "poin_bye": 25,
+      "poin_total": 100
+    },
+    {
+      "slug": "bulutangkis-single",
+      "nama": "Bulutangkis Single",
       "venue": "Gedung Sport Hall",
       "bye": "G3",
       "slot": [
@@ -496,7 +698,7 @@ window.GC_BAGAN = {
         "G1",
         "G4"
       ],
-      "catatan": "Bagan yang sama dipakai nomor Single dan nomor Double.",
+      "catatan": "Nomor Single dan Double memakai undian yang sama, sebab panitia menggambar satu bagan untuk cabang ini. Skor dan juaranya terpisah.",
       "laga": [
         {
           "kode": "m1",
@@ -511,7 +713,11 @@ window.GC_BAGAN = {
             "G2"
           ],
           "jam": "07:00 - 07:40",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 25,
+            "kalah": 15
+          }
         },
         {
           "kode": "m2",
@@ -526,7 +732,11 @@ window.GC_BAGAN = {
             "G4"
           ],
           "jam": "08:00 - 08:40",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 50,
+            "kalah": 15
+          }
         },
         {
           "kode": "m3",
@@ -541,7 +751,11 @@ window.GC_BAGAN = {
             "G3"
           ],
           "jam": "09:00 - 09:40",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 25,
+            "kalah": 15
+          }
         },
         {
           "kode": "m4",
@@ -556,9 +770,109 @@ window.GC_BAGAN = {
             "m2"
           ],
           "jam": "15:45 - 17:15",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 50,
+            "kalah": 25
+          }
         }
-      ]
+      ],
+      "poin_bye": 25,
+      "poin_total": 100
+    },
+    {
+      "slug": "bulutangkis-double",
+      "nama": "Bulutangkis Double",
+      "venue": "Gedung Sport Hall",
+      "bye": "G3",
+      "slot": [
+        "G5",
+        "G2",
+        "G3",
+        "G1",
+        "G4"
+      ],
+      "catatan": "Nomor Single dan Double memakai undian yang sama, sebab panitia menggambar satu bagan untuk cabang ini. Skor dan juaranya terpisah.",
+      "laga": [
+        {
+          "kode": "m1",
+          "label": "Pertandingan I",
+          "ronde": "penyisihan",
+          "kiri": [
+            "tim",
+            "G5"
+          ],
+          "kanan": [
+            "tim",
+            "G2"
+          ],
+          "jam": "07:00 - 07:40",
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 25,
+            "kalah": 15
+          }
+        },
+        {
+          "kode": "m2",
+          "label": "Pertandingan II",
+          "ronde": "semifinal",
+          "kiri": [
+            "tim",
+            "G1"
+          ],
+          "kanan": [
+            "tim",
+            "G4"
+          ],
+          "jam": "08:00 - 08:40",
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 50,
+            "kalah": 15
+          }
+        },
+        {
+          "kode": "m3",
+          "label": "Pertandingan III",
+          "ronde": "semifinal",
+          "kiri": [
+            "menang",
+            "m1"
+          ],
+          "kanan": [
+            "tim",
+            "G3"
+          ],
+          "jam": "09:00 - 09:40",
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 25,
+            "kalah": 15
+          }
+        },
+        {
+          "kode": "m4",
+          "label": "Final",
+          "ronde": "final",
+          "kiri": [
+            "menang",
+            "m3"
+          ],
+          "kanan": [
+            "menang",
+            "m2"
+          ],
+          "jam": "15:45 - 17:15",
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 50,
+            "kalah": 25
+          }
+        }
+      ],
+      "poin_bye": 25,
+      "poin_total": 100
     },
     {
       "slug": "panahan",
@@ -587,7 +901,11 @@ window.GC_BAGAN = {
             "G2"
           ],
           "jam": "07:00 - 07:10",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 25,
+            "kalah": 15
+          }
         },
         {
           "kode": "m2",
@@ -602,7 +920,11 @@ window.GC_BAGAN = {
             "G4"
           ],
           "jam": "07:10 - 07:20",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 50,
+            "kalah": 15
+          }
         },
         {
           "kode": "m3",
@@ -617,7 +939,11 @@ window.GC_BAGAN = {
             "G1"
           ],
           "jam": "07:20 - 07:30",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 25,
+            "kalah": 15
+          }
         },
         {
           "kode": "m4",
@@ -632,9 +958,15 @@ window.GC_BAGAN = {
             "m2"
           ],
           "jam": "07:30 - 07:40",
-          "hari": "Jum'at"
+          "hari": "Jum'at",
+          "poin": {
+            "menang": 50,
+            "kalah": 25
+          }
         }
-      ]
+      ],
+      "poin_bye": 25,
+      "poin_total": 100
     }
   ]
 };

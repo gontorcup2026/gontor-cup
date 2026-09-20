@@ -217,16 +217,27 @@
       <div class="section-head" style="margin-bottom:var(--s-5)">
         <span class="eyebrow">Bagian 7</span>
         <h2 class="display">Perolehan Nilai Sementara</h2>
-        <p class="lead">Satu angka kumulatif untuk tiap kampus, dari seluruh cabang lomba.
-           Tabel di halaman Klasemen mengurutkan sendiri dari nilai terbesar, jadi urutan
-           di bawah ini tidak perlu diatur.</p>
+        <p class="lead">Isi poin lomba <strong>selain Olah Raga</strong> untuk tiap kampus.
+           Poin Olah Raga dihitung sendiri dari Bagan &amp; Skor dan ditampilkan di kolom
+           sebelahnya. Tabel di halaman Klasemen mengurutkan sendiri dari poin terbesar,
+           jadi urutan di bawah ini tidak perlu diatur.</p>
+      </div>
+      <div class="alert alert--warn" style="margin-bottom:var(--s-5)">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0Z"/><path d="M12 9v4M12 17h.01"/></svg>
+        <div><strong>Jangan menjumlahkan poin Olah Raga sendiri di sini.</strong>
+        <p class="small" style="margin:0">Poin sepuluh nomor Olah Raga sudah dihitung
+           otomatis dari Bagan &amp; Skor, memakai angka menang, kalah, dan bye dari Bagan
+           Lomba panitia. Kotak isian di bawah hanya untuk 21 lomba Olah Rasa, Olah Fikir,
+           dan Olah Dzikir. Kalau total keseluruhan diketik di situ, poin Olah Raga
+           terhitung <strong>dua kali</strong>, dan halaman tidak akan menunjukkannya.</p></div>
       </div>
       <div class="alert alert--info" style="margin-bottom:var(--s-5)">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
         <div><strong>Kotak yang dikosongkan berarti belum ada nilai.</strong>
-        <p class="small" style="margin:0">Di halaman, kampus tanpa nilai ditampilkan dengan
-           tanda pisah dan ditaruh paling bawah, bukan dihitung sebagai nol. Selama belum ada
-           satu nilai pun, nomor peringkatnya juga tidak ditampilkan.</p></div>
+        <p class="small" style="margin:0">Di halaman, kampus tanpa poin sama sekali
+           ditampilkan dengan tanda pisah dan ditaruh paling bawah, bukan dihitung sebagai
+           nol. Selama belum ada satu poin pun, nomor peringkatnya juga tidak ditampilkan.
+           Poin bye baru dihitung setelah Pertandingan I cabang itu ada pemenangnya.</p></div>
       </div>
       <div id="daftar-klasemen-adm"></div>
       <div class="adm-simpan">
@@ -266,7 +277,7 @@
     <!-- ---------------- KIRIMAN ---------------- -->
     <section class="adm-panel" data-isi="kiriman" hidden>
       <div class="section-head" style="margin-bottom:var(--s-5)">
-        <span class="eyebrow">Bagian 7</span>
+        <span class="eyebrow">Bagian 9</span>
         <h2 class="display">Kiriman Masuk</h2>
         <p class="lead">Data pendaftaran dan karya yang dikirim lewat situs. Sumber datanya sama
            persis dengan Spreadsheet; tabel ini hanya untuk melihat cepat.</p>
@@ -282,7 +293,7 @@
     <!-- ---------------- SETELAN ---------------- -->
     <section class="adm-panel" data-isi="setelan" hidden>
       <div class="section-head" style="margin-bottom:var(--s-5)">
-        <span class="eyebrow">Bagian 8</span>
+        <span class="eyebrow">Bagian 10</span>
         <h2 class="display">Setelan</h2>
       </div>
 
@@ -323,6 +334,11 @@
 <script src="../assets/js/api.js"></script>
 <script src="jadwal-bawaan.js"></script>
 <script src="../assets/js/bagan-bawaan.js"></script>
+<!-- bagan-hitung.js DIPAKAI BERSAMA dengan halaman publik. Panel ini wajib
+     memakai yang sama, bukan salinannya sendiri: kalau keduanya berbeda,
+     poin yang ditampilkan di sini bisa tidak sama dengan yang dilihat
+     pengunjung untuk data yang sama persis. -->
+<script src="../assets/js/bagan-hitung.js"></script>
 <script src="admin.js"></script>
 </body>
 </html>
