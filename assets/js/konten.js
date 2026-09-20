@@ -310,13 +310,40 @@
     return (c && c[kode]) || null;
   }
 
+  /** Laga dalam cabang ini menurut kodenya, atau null. */
+  function lagaBerkode(c, kode) {
+    for (var i = 0; i < c.laga.length; i++) {
+      if (c.laga[i].kode === kode) return c.laga[i];
+    }
+    return null;
+  }
+
+  /** Pemenang SAH sebuah laga, atau null kalau belum ada atau tidak sah.
+
+     Dipakai timSisi, dan itu yang penting: pemenang yang tidak cocok dengan
+     pasangan lawannya harus berhenti DI SITU, tidak boleh merambat ke babak
+     berikutnya. Dulu tidak begitu, dan akibatnya kartu laganya sendiri benar
+     (tidak menandai siapa pun menang) sementara babak berikutnya memajang
+     kampus yang tidak pernah bermain di situ, malah tanpa kelas
+     `laga__tim--nanti` sehingga terbaca sebagai sudah pasti.
+
+     `dalam` cuma pengaman kalau data bagannya kelak salah sunting dan
+     melingkar; rantai sungguhannya paling dalam tiga tingkat. */
+  function pemenangLaga(c, kode, hasil, dalam) {
+    dalam = dalam || 0;
+    var laga = lagaBerkode(c, kode);
+    if (!laga || dalam > 8) return null;
+    var kiri = timSisi(c, laga, "kiri", hasil, dalam + 1);
+    var kanan = timSisi(c, laga, "kanan", hasil, dalam + 1);
+    return pemenangSah(c, laga, hasil, kiri, kanan);
+  }
+
   /** Kampus di satu sisi laga, atau null kalau masih menunggu laga lain. */
-  function timSisi(c, laga, arah, hasil) {
+  function timSisi(c, laga, arah, hasil, dalam) {
     var ref = laga[arah];                    // ["tim","G3"] atau ["menang","m1"]
     if (!ref) return null;
     if (ref[0] === "tim") return ref[1];
-    var h = hasilLaga(hasil, c.slug, ref[1]);
-    return (h && h.menang) || null;
+    return pemenangLaga(c, ref[1], hasil, dalam);
   }
 
   /** Pemenang laga, hanya kalau kodenya memang salah satu dari dua sisinya.
