@@ -257,7 +257,17 @@
   function salin(x) { return JSON.parse(JSON.stringify(x)); }
 
   function simpanBagian(bagian, btn) {
-    ambilDariForm(bagian);
+    // ambilDariForm() menyentuh puluhan widget; satu widget yang tak ada saja
+    // sudah cukup membuatnya melempar SEBELUM api.kirim() dipanggil. Tanpa
+    // penjaga ini galatnya cuma masuk console: panitia melihat tombol Simpan
+    // yang diklik dan tidak terjadi apa-apa - tidak tersimpan, tidak ada
+    // pesan gagal. Sudah menggigit di panel Klasemen (baris kepala).
+    try {
+      ambilDariForm(bagian);
+    } catch (e) {
+      toast("Isian tidak bisa dibaca: " + (e && e.message ? e.message : e), "gagal");
+      throw e;
+    }
     sibuk(btn, true);
     api.kirim({ aksi: "simpan", token: token, bagian: bagian, data: isi[bagian] })
       .then(function (j) { sibuk(btn, false); toast(j.pesan || "Tersimpan"); })
@@ -334,13 +344,22 @@
     }
     if (bagian === "klasemen") {
       var nilai = {};
-      $$("#daftar-klasemen-adm .adm-klasemen-baris").forEach(function (el) {
-        var v = $("[name=nilai]", el).value.trim();
-        // Kotak kosong TIDAK disimpan sebagai string kosong: yang tersimpan
-        // hanya kampus yang benar-benar sudah punya nilai, supaya halaman bisa
-        // membedakan "nol" dari "belum diisi".
-        if (v) nilai[el.dataset.kampus] = v;
-      });
+      // Baris KEPALA memakai class `.adm-klasemen-baris` yang sama supaya ikut
+      // memakai kisi kolomnya, tetapi ia cuma berisi <span> judul - tidak ada
+      // [name=nilai] di dalamnya. Kalau ia ikut terpilih, `.value` di bawah
+      // dibaca dari null, ambilDariForm() berhenti di situ, dan api.kirim()
+      // tidak pernah dipanggil: poinnya gagal tersimpan tanpa satu pun pesan.
+      // Karena itu ia dikecualikan di selector, DAN kotaknya tetap diperiksa.
+      $$("#daftar-klasemen-adm .adm-klasemen-baris:not(.adm-klasemen-baris--kepala)")
+        .forEach(function (el) {
+          var kotak = $("[name=nilai]", el);
+          if (!kotak) return;
+          var v = kotak.value.trim();
+          // Kotak kosong TIDAK disimpan sebagai string kosong: yang tersimpan
+          // hanya kampus yang benar-benar sudah punya nilai, supaya halaman bisa
+          // membedakan "nol" dari "belum diisi".
+          if (v) nilai[el.dataset.kampus] = v;
+        });
       isi.klasemen = nilai;
     }
     if (bagian === "bagan") {
